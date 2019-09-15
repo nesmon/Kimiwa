@@ -1,0 +1,19 @@
+{
+  "name": "kimiwa_eris",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "eris": "^0.10.1",
+    "eris-reactions": "^0.1.2",
+    "fs": "0.0.1-security",
+    "fs-readdir-recursive": "^1.1.0",
+    "klaw": "^3.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nesmon",
+  "license": "ISC"
+}
