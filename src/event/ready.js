@@ -10,7 +10,7 @@ module.exports = class Ready {
             name: "Hello"
         });
         this.client.editSelf({
-            avatar: kimiwaHelp.toBase64('./src/assets/img/logo_kimiwa.png')
+            avatar: kimiwaHelp.toBase64URI('./src/assets/img/logo_kimiwa.png')
         })
     }
 };
