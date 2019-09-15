@@ -25,16 +25,24 @@ Read [this](https://github.com/nesmon/Kimiwa/blob/master/LICENSE) for more infor
 
 # Contribution
 Kimiwa is happy if you offer her ideas so you can make issue for offer your idea, offer on discord **OR** make your own fork make your command and create a pull request.
-Bear in mind to use syntax of Kimiwa, you can look basic commands like [ping](./src/commands/Miscellaneous/ping.js) and (base)[./src/base/Command.js] for know how work Kimiwa.
-You need to create run methode, 
-otherwise the command can not be executed by Kimiwa.
-Commands like `nsfw`or `owner` are categorically refused and deleted.
+Bear in mind to **use syntax** of Kimiwa, you can look basic commands like [ping](./src/commands/Miscellaneous/ping.js) and [base](./src/base/Command.js) for know how work Kimiwa.
+You need to create ``run`` methode, otherwise the command can not be executed by Kimiwa.
+Commands like `nsfw` **or** `owner` **are categorically refused and deleted.**
 
 # Community
-Kimiwa has not own discord server community but has own category on the official [Nesmon_ Community](https://discord.gg/REs8eXK) server.
+Kimiwa has not own discord server community but has own category on the official **[Nesmon_ Community](https://discord.gg/REs8eXK)** server.
 You can come talk with other user of Kimiwa, developper or view changement of kimiwa befor other user.
 
 # License
 Kimiwa is under the **[GNU AGPL v3](https://www.gnu.org/licenses/agpl-3.0.html)** license.
 
-This bot makes use of the **Discord API** library **Eris** provided by **[abalabahaha](https://github.com/abalabahaha/eris)**, licensed under the **[MIT License.](https://opensource.org/licenses/MIT)**
+Kimiwa logo [full](./src/assets/img/kimiwa_full_logo.png), [normal](./src/assets/img/logo_kimiwa.png) or [with text](./src/assets/img/kimiwa_repo.png) he made by **me** you are not allowe to use this without my permision.
+
+
+This bot makes use of the **Discord API** library **Eris** provided by **[abalabahaha](https://github.com/abalabahaha/eris)**, licensed under the **[MIT License](https://opensource.org/licenses/MIT)**.
+
+# External Link : 
+- **Twitch** : [nesmon_](https://twitch.tv/nesmon_) I go sometimes on the project.
+- **Youtube** : [nesmon](https://www.youtube.com/channel/UCWEeSvuBaOIV-MTzNwptkIA)
+- **Twitter** : [Nesmon_](https://twitter.com/nesmon_)
+- **Other Discord** : [La Hype](https://thomasbnt.fr/discord)
