@@ -7,7 +7,6 @@ const {
 const readdir = promisify(require("fs").readdir);
 const klaw = require("klaw");
 const path = require("path");
-const ModuleController = require('./src/moduleController');
 
 class KimiwaCore extends Eris.Client {
   constructor() {
@@ -17,7 +16,6 @@ class KimiwaCore extends Eris.Client {
     this.aliases = new Eris.Collection();
     this.config = KimiwaConfig;
     this.reactionHandler = ReactionHandler;
-    this.moduleHandler = new ModuleController(this);
 
     this.prefix = KimiwaConfig.prefix;
     this.modules.clear();
@@ -25,7 +23,6 @@ class KimiwaCore extends Eris.Client {
     this._addEventListeners();
     this._registerCommands();
     this._catchUnhandledRejections();
-
 
     this.connect();
   }
@@ -117,6 +114,22 @@ class KimiwaCore extends Eris.Client {
       this.client.levelCache[thisLevel.name] = thisLevel.level;
     }
   }
+
+  async clean(client, text) {
+    if (text && text.constructor.name == "Promise")
+      text = await text;
+    if (typeof evaled !== "string")
+      text = require("util").inspect(text, {
+        depth: 1
+      });
+
+    text = text
+      .replace(/`/g, "`" + String.fromCharCode(8203))
+      .replace(/@/g, "@" + String.fromCharCode(8203))
+      .replace(client.config.token, "mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0");
+
+    return text;
+  };
 
 }
 
