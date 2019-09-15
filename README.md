@@ -1,5 +1,5 @@
 <div align="center">
-    <p><img src="./src/assets/img/kimiwa_repo.png" alt="kimiwa" ></p>
+    <p><img src="./src/assets/img/kimiwa_repo.png" alt="kimiwa"></p>
     <a href="https://discord.gg/REs8eXK"><img src="https://discordapp.com/api/guilds/600661937608720404/embed.png" alt="Discord Server"/></a>
     <a href="https://www.gnu.org/licenses/agpl-3.0.html"><img src="https://img.shields.io/badge/license-AGPL%20v3-BE93FD.svg"></a>
     <a href="https://abal.moe/Eris/"><img src="https://img.shields.io/badge/library-Eris-A178DF.svg"></a>
@@ -22,6 +22,17 @@ Read [this](https://github.com/nesmon/Kimiwa/blob/master/LICENSE) for more infor
 - **Anime/Manga search engine** : [Kitsu](https://kitsu.io) with [Anifetch](https://www.npmjs.com/package/anifetch) by **intrnl**
 - **Osu! API** : [node-osu](https://www.npmjs.com/package/node-osu) by **brussell98**
 - **Database** : [mysql2](https://www.npmjs.com/package/mysql2) by **sidorares**
+
+# Contribution
+Kimiwa is happy if you offer her ideas so you can make issue for offer your idea, offer on discord **OR** make your own fork make your command and create a pull request.
+Bear in mind to use syntax of Kimiwa, you can look basic commands like [ping](./src/commands/Miscellaneous/ping.js) and (base)[./src/base/Command.js] for know how work Kimiwa.
+You need to create run methode, 
+otherwise the command can not be executed by Kimiwa.
+Commands like `nsfw`or `owner` are categorically refused and deleted.
+
+# Community
+Kimiwa has not own discord server community but has own category on the official [Nesmon_ Community](https://discord.gg/REs8eXK) server.
+You can come talk with other user of Kimiwa, developper or view changement of kimiwa befor other user.
 
 # License
 Kimiwa is under the **[GNU AGPL v3](https://www.gnu.org/licenses/agpl-3.0.html)** license.
