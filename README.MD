@@ -14,7 +14,7 @@
 # Usage
 This Repository is not made for self-hosting due to usage of some other external service that is not present in this repository.
 Moreover bear in mind the license of Kimiwa if you use some part of the code present in this repository for personal project.
-Read [this](https://github.com/nesmon/Kimiwa/blob/master/LICENSE)
+Read [this](https://github.com/nesmon/Kimiwa/blob/master/LICENSE) for more information about the license of the project.
 
 # Librairy and service used
 - **Discord API** : [Eris.js](https://abal.moe/Eris/) by **abalabahaha**
