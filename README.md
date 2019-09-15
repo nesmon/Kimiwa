@@ -8,7 +8,7 @@
 </div>
 
 # What is Kimiwa
-**Kimiwa** is discord bot made with [Node.js](https://nodejs.org/) and use [Eris.js librairy](https://abal.moe/Eris/).
+**Kimiwa** is discord bot made with [Node.js](https://nodejs.org/) and use [Eris.js library](https://abal.moe/Eris/).
 **Kimiwa** has some some usefull functionality like [osu!](https://osu.ppy.sh) (profil, beatmap, score and more), anime search using [Kitsu](https://kitsu.io) API for get information and some other things that you can discover.
 
 # Usage
@@ -16,7 +16,7 @@ This Repository is not made for self-hosting due to usage of some other external
 Moreover bear in mind the license of Kimiwa if you use some part of the code present in this repository for personal project.
 Read [this](./LICENSE) for more information about the license of the project.
 
-# Librairy and service used
+# Library and service used
 - **Discord API** : [Eris.js](https://abal.moe/Eris/) by **abalabahaha**
 - **Reaction Message** : [eris-reaction](https://www.npmjs.com/package/eris-reactions) by **Riyacchi**
 - **Anime/Manga search engine** : [Kitsu](https://kitsu.io) with [Anifetch](https://www.npmjs.com/package/anifetch) by **intrnl**
@@ -36,7 +36,7 @@ You can come talk with other user of Kimiwa, developper or view changement of ki
 # License
 Kimiwa is under the **[GNU AGPL v3](https://www.gnu.org/licenses/agpl-3.0.html)** license.
 
-Kimiwa logo **[full](./src/assets/img/kimiwa_full_logo.png), [normal](./src/assets/img/logo_kimiwa.png)** or **[with text](./src/assets/img/kimiwa_repo.png)** he made by **me** you are not allowe to use this without my authorization.
+Kimiwa logo **[full](./src/assets/img/kimiwa_full_logo.png), [normal](./src/assets/img/logo_kimiwa.png)** or **[with text](./src/assets/img/kimiwa_repo.png)** he made by **me** you are not allowed to use this without my authorization.
 
 
 This bot makes use of the **Discord API** library **Eris** provided by **[abalabahaha](https://github.com/abalabahaha/eris)**, licensed under the **[MIT License](https://opensource.org/licenses/MIT)**.
@@ -45,4 +45,4 @@ This bot makes use of the **Discord API** library **Eris** provided by **[abalab
 - **Twitch** : [nesmon_](https://twitch.tv/nesmon_) I go sometimes on the project.
 - **Youtube** : [nesmon](https://www.youtube.com/channel/UCWEeSvuBaOIV-MTzNwptkIA)
 - **Twitter** : [Nesmon_](https://twitter.com/nesmon_)
-- **Other Discord** : [La Hype](https://thomasbnt.fr/discord)
+- **Other Discord** : [La Hype_](https://thomasbnt.fr/discord)
