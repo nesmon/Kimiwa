@@ -1,7 +1,7 @@
 {
-  "name": "kimiwa_eris",
+  "name": "kimiwa",
   "version": "1.0.0",
-  "description": "",
+  "description": "Kimiwa is discord bot made with node.js and eris.js librairy.",
   "main": "app.js",
   "dependencies": {
     "eris": "^0.10.1",
@@ -15,5 +15,22 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "nesmon",
-  "license": "ISC"
+  "license": "AGPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nesmon/Kimiwa.git"
+  },
+  "keywords": [
+    "discordbot",
+    "eris",
+    "eris.js",
+    "discord",
+    "js",
+    "javascript",
+    "nesmon"
+  ],
+  "bugs": {
+    "url": "https://github.com/nesmon/Kimiwa/issues"
+  },
+  "homepage": "https://github.com/nesmon/Kimiwa#readme"
 }
