@@ -14,7 +14,7 @@
 # Usage
 This Repository is not made for self-hosting due to usage of some other external service that is not present in this repository.
 Moreover bear in mind the license of Kimiwa if you use some part of the code present in this repository for personal project.
-Read [this](https://github.com/nesmon/Kimiwa/blob/master/LICENSE) for more information about the license of the project.
+Read [this](./LICENSE) for more information about the license of the project.
 
 # Librairy and service used
 - **Discord API** : [Eris.js](https://abal.moe/Eris/) by **abalabahaha**
@@ -36,7 +36,7 @@ You can come talk with other user of Kimiwa, developper or view changement of ki
 # License
 Kimiwa is under the **[GNU AGPL v3](https://www.gnu.org/licenses/agpl-3.0.html)** license.
 
-Kimiwa logo [full](./src/assets/img/kimiwa_full_logo.png), [normal](./src/assets/img/logo_kimiwa.png) or [with text](./src/assets/img/kimiwa_repo.png) he made by **me** you are not allowe to use this without my permision.
+Kimiwa logo **[full](./src/assets/img/kimiwa_full_logo.png), [normal](./src/assets/img/logo_kimiwa.png)** or **[with text](./src/assets/img/kimiwa_repo.png)** he made by **me** you are not allowe to use this without my permision.
 
 
 This bot makes use of the **Discord API** library **Eris** provided by **[abalabahaha](https://github.com/abalabahaha/eris)**, licensed under the **[MIT License](https://opensource.org/licenses/MIT)**.
