@@ -30,6 +30,7 @@ class Kitsu extends Command {
         let animeSearch = await kitsu.searchAnime(name, 0);
         let results = [];
         let syn = [];
+        let rm = [];
 
         try {
             for (let i = 0; i < 5; i++) {
@@ -54,7 +55,7 @@ class Kitsu extends Command {
                 showPageNumbers: false
             });
 
-            const last = message.channel.lastMessageID;
+            rm.push(message.channel.lastMessageID);
 
             const filter = (m) => message.author.id === m.author.id;
             const waitingMesage = await message.channel.awaitMessages(filter, {
@@ -70,7 +71,10 @@ class Kitsu extends Command {
                     .setTitle(`Please retry and send a numerical choice...`)
                 );
             }
-            this.client.deleteMessage(message.channel.id, last);
+
+            rm.push(message.channel.lastMessageID);
+            
+            this.client.deleteMessages(message.channel.id, rm);
 
         } catch (error) {
             console.log(error);
