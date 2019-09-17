@@ -19,9 +19,9 @@ Read [this](./LICENSE) for more information about the license of the project.
 # Library and service used
 - **Discord API** : [Eris.js](https://abal.moe/Eris/) by **abalabahaha**
 - **Reaction Message** : [eris-reaction](https://www.npmjs.com/package/eris-reactions) by **Riyacchi**
-- **Anime/Manga search engine** : [Kitsu](https://kitsu.io) with [Anifetch](https://www.npmjs.com/package/anifetch) by **intrnl**
+- **Anime/Manga search engine** : [Kitsu](https://kitsu.io) with [node-kitsu](https://www.npmjs.com/package/node-kitsu) by **theconceptionist**
 - **Osu! API** : [node-osu](https://www.npmjs.com/package/node-osu) by **brussell98**
-- **Database** : [mysql2](https://www.npmjs.com/package/mysql2) by **sidorares**
+- **Database** : [mysql](https://www.npmjs.com/package/mysql) by **mysqljs**
 
 # Contribution
 Kimiwa is happy if you offer her ideas so you can make issue for offer your idea, offer on discord **OR** make your own fork make your command and create a pull request.

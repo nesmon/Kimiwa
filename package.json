@@ -6,11 +6,15 @@
   "dependencies": {
     "anifetch": "^3.0.0",
     "eris": "^0.10.1",
+    "eris-additions": "^1.3.0",
+    "eris-pagination": "^0.2.2",
     "eris-reactions": "^0.1.2",
     "fs": "0.0.1-security",
     "fs-readdir-recursive": "^1.1.0",
     "klaw": "^3.0.0",
     "moment": "^2.24.0",
+    "mysql": "^2.17.1",
+    "node-kitsu": "^1.1.1",
     "node-osu": "^1.3.3"
   },
   "devDependencies": {},

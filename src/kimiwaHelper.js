@@ -1,10 +1,10 @@
 const fs = require('fs');
-
+const Embed = require('./extensions/Embed');
 
 
 class kimiwaHelper {
     constructor() {
-
+        this.Embed = Embed;
     }
 
     pngToBase64URI (path) {

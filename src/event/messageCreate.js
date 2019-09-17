@@ -1,6 +1,3 @@
-// The MESSAGE event runs anytime a message is received
-// Note that due to the binding of client to every event, every event
-// goes `client, other, args` when this function is run.
 const Eris = require("eris");
 
 
@@ -10,15 +7,13 @@ module.exports = class {
     this.cooldown = new Eris.Collection();
   }
 
-
-
   async run(message) {
 
     if (message.author.bot) return;
 
     let id = message.channel.id;
 
-    if (message.guild && !message.channel.permissionsFor(message.guild.me).missing("SEND_MESSAGES")) return;
+    if (message.guild && !message.channel.memberHasPermission(this.client.user.id, "sendMessages")) return;
 
     const prefixMention = new RegExp(`^<@!?${this.client.user.id}>( |)$`);
     if (message.content.match(prefixMention)) {

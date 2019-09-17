@@ -1,10 +1,12 @@
-const Eris = require("eris");
+const Eris = require('eris-additions')(require('eris'));
 const ReactionHandler = require('eris-reactions');
-const KimiwaConfig = require('./config')
+const EmbedPaginator = require('eris-pagination');
+const KimiwaConfig = require('./config/config')
 const {
   promisify
 } = require("util");
 const readdir = promisify(require("fs").readdir);
+const mysql = require('mysql');
 const klaw = require("klaw");
 const path = require("path");
 
@@ -16,10 +18,13 @@ class KimiwaCore extends Eris.Client {
     this.aliases = new Eris.Collection();
     this.config = KimiwaConfig;
     this.reactionHandler = ReactionHandler;
+    this.embedPaginator = EmbedPaginator;
+    
 
     this.prefix = KimiwaConfig.prefix;
-    this.modules.clear();
+    this.db = mysql.createConnection(KimiwaConfig.mysqlConfig);
 
+    this.db.connect(this._initDatabase)
     this._addEventListeners();
     this._registerCommands();
     this._catchUnhandledRejections();
@@ -106,6 +111,14 @@ class KimiwaCore extends Eris.Client {
     }
     return permlvl;
   }
+
+  _initDatabase(connectionError) {
+    if (connectionError) {
+        console.log(`DATABASE ERROR \nA connection error surfaced: ${connectionError}`);
+    }
+
+    console.log("DATABASE CONNECTION \nSuccessfully connected to the database!");
+}
 
   levelCache() {
     this.client.levelCache = {};
