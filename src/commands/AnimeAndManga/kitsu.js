@@ -30,7 +30,6 @@ class Kitsu extends Command {
         let animeSearch = await kitsu.searchAnime(name, 0);
         let results = [];
         let syn = [];
-        let rm = [];
 
         try {
             for (let i = 0; i < 5; i++) {
@@ -51,11 +50,10 @@ class Kitsu extends Command {
             }
 
             search.delete();
-            await this.client.embedPaginator.createPaginationEmbed(message, myEmbeds, {
+            const e = await kimiwaHelper.PaginationEmbed.createPaginationEmbed(message, myEmbeds, {
                 showPageNumbers: false
             });
 
-            rm.push(message.channel.lastMessageID);
 
             const filter = (m) => message.author.id === m.author.id;
             const waitingMesage = await message.channel.awaitMessages(filter, {
@@ -72,22 +70,24 @@ class Kitsu extends Command {
                 );
             }
 
-            rm.push(message.channel.lastMessageID);
-            
-            this.client.deleteMessages(message.channel.id, rm);
+            e.delete();
+            this.client.deleteMessage(message.channel.id, message.channel.lastMessageID);
+
+            message.channel.createEmbed(new kimiwaHelper.Embed()
+                .setColor('BLUE')
+                .setTitle(animeSearch[select - 1].attributes.canonicalTitle)
+                .setDescription(animeSearch[select - 1].attributes.synopsis)
+            )
 
         } catch (error) {
             console.log(error);
         }
-
-
     }
 }
 
 
 module.exports = Kitsu;
 
-// let name = args.splice(0).join(' ');
 
 // this.utility.kitsuFindAll(name, 'Sorry this anime/manga doesn\'t exist', (err, resp) => {
 
