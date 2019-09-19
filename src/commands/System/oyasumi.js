@@ -47,7 +47,7 @@ class Oyasumi extends Command {
       "embed": {
         "description": content,
         "color": 12238334,
-        "timestamp": "2019-09-02T18:18:31.175Z",
+        "timestamp": new Date(),
         "footer": {
           "icon_url": message.author.avatarURL,
           "text": "Kimiwa"
