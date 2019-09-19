@@ -1,4 +1,6 @@
 const Command = require("../../base/Command.js");
+const kimiwaHelper = require('./../../kimiwaHelper');
+
 
 class Oyasumi extends Command {
   constructor(client) {
@@ -18,7 +20,7 @@ class Oyasumi extends Command {
     this.client.addMessageReaction(message.channel.id, react.id, '❌');
 
 
-    const reactionListener = new this.client.reactionHandler.continuousReactionStream(
+    const reactionListener = new kimiwaHelper.ReactionHandler.continuousReactionStream(
       react,
       (userID) => userID === message.author.id,
       false, {

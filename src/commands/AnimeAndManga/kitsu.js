@@ -67,6 +67,7 @@ class Kitsu extends Command {
                 return message.channel.createEmbed(new kimiwaHelper.Embed()
                     .setColor('RED')
                     .setTitle(`Please retry and send a numerical choice...`)
+                    .setTimestamp()
                 );
             }
 
@@ -77,6 +78,7 @@ class Kitsu extends Command {
                 .setColor('BLUE')
                 .setTitle(animeSearch[select - 1].attributes.canonicalTitle)
                 .setDescription(animeSearch[select - 1].attributes.synopsis)
+
             )
 
         } catch (error) {

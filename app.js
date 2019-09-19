@@ -1,6 +1,4 @@
 const Eris = require('eris-additions')(require('eris'));
-const ReactionHandler = require('eris-reactions');
-const EmbedPaginator = require('eris-pagination');
 const KimiwaConfig = require('./config/config')
 const {
   promisify
@@ -17,8 +15,6 @@ class KimiwaCore extends Eris.Client {
     this.modules = new Eris.Collection();
     this.aliases = new Eris.Collection();
     this.config = KimiwaConfig;
-    this.reactionHandler = ReactionHandler;
-    this.embedPaginator = EmbedPaginator;
     
 
     this.prefix = KimiwaConfig.prefix;

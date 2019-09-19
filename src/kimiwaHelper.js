@@ -1,11 +1,13 @@
 const fs = require('fs');
 const Embed = require('./extensions/Embed');
-
+const ReactionHandler = require('eris-reactions');
+const EmbedPaginator = require('eris-pagination');
 
 class kimiwaHelper {
     constructor() {
         this.Embed = Embed;
-        this.PaginationEmbed = this.client.PaginationEmbed;
+        this.PaginationEmbed = EmbedPaginator;
+        this.ReactionHandler = ReactionHandler;
     }
 
     pngToBase64URI (path) {
