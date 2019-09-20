@@ -33,7 +33,7 @@ class Kitsu extends Command {
 
         try {
             for (let i = 0; i < 5; i++) {
-                results.push(`**${animeSearch[i].attributes.canonicalTitle}**`);
+                results.push(`**${i + 1}.** **${animeSearch[i].attributes.canonicalTitle}**`);
                 let sin = animeSearch[i].attributes.synopsis;
                 sin = `${sin.split(".")[0]}.`;
                 syn.push(`${sin}`);
@@ -51,7 +51,8 @@ class Kitsu extends Command {
 
             search.delete();
             const e = await kimiwaHelper.PaginationEmbed.createPaginationEmbed(message, myEmbeds, {
-                showPageNumbers: false
+                showPageNumbers: false,
+                cycling: true
             });
 
 
@@ -68,6 +69,7 @@ class Kitsu extends Command {
                     .setColor('RED')
                     .setTitle(`Please retry and send a numerical choice...`)
                     .setTimestamp()
+                    .setFooter("s")
                 );
             }
 
@@ -76,13 +78,18 @@ class Kitsu extends Command {
 
             message.channel.createEmbed(new kimiwaHelper.Embed()
                 .setColor('BLUE')
-                .setTitle(animeSearch[select - 1].attributes.canonicalTitle)
-                .setDescription(animeSearch[select - 1].attributes.synopsis)
-
+                .setAuthor(`${animeSearch[select - 1].attributes.canonicalTitle}`, this.client.user.avatarURL, `https://kitsu.io/anime/${animeSearch[select - 1].attributes.slug}`)
+                .setThumbnail(animeSearch[select - 1].attributes.posterImage.original)
+                .addField('Number of episode :', `${animeSearch[select - 1].attributes.episodeCount || "n/a"} of ${animeSearch[select - 1].attributes.episodeLength + "min" || "n/a"}`, true)
+                .addField('Status :', animeSearch[select - 1].attributes.status || "n/a", true)
+                .addField('Age Rating :', animeSearch[select - 1].attributes.ageRatingGuide || 'n/a', true)
+                .addField('Type :', `${animeSearch[select - 1].attributes.subtype.charAt(0).toUpperCase() + animeSearch[select - 1].attributes.subtype.slice(1)}` || "N/A", true)
             )
 
         } catch (error) {
-            console.log(error);
+            search.edit({
+                embed: new kimiwaHelper.Embed().setColor('RED').setTitle(`Find any anime with this title`).setTimestamp().setFooter("\u200B")
+            });
         }
     }
 }
