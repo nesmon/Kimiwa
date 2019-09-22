@@ -16,11 +16,10 @@ class KimiwaCore extends Eris.Client {
     this.aliases = new Eris.Collection();
     this.config = KimiwaConfig;
     
-
     this.prefix = KimiwaConfig.prefix;
-    // this.db = mysql.createConnection(KimiwaConfig.mysqlConfig);
+    this.db = mysql.createConnection(KimiwaConfig.mysqlConfig);
 
-    // this.db.connect(this._initDatabase)
+    this.db.connect(this._initDatabase)
     this._addEventListeners();
     this._registerCommands();
     this._catchUnhandledRejections();

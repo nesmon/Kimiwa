@@ -1,4 +1,5 @@
 const Command = require("../../base/Command.js");
+const kimiwaHelper = require('./../../kimiwaHelper');
 
 class Kitsuboard extends Command {
   constructor(client) {
@@ -13,6 +14,17 @@ class Kitsuboard extends Command {
 
   async run(message, args, level) { // eslint-disable-line no-unused-vars
 
+    const getQuery = await kimiwaHelper.query(this.client.db, 'SELECT * FROM anime ORDER BY search_time DESC LIMIT 10')
+
+    const e = await new kimiwaHelper.Embed()
+      .setDescription(`Our top 10 of most searched anime`)
+      .setColor(kimiwaHelper.getRandomColor())
+
+    for (const data of await getQuery) {
+      e.addField(`${data.title}`, `Searched ${data.search_time} time\n[${data.title} page.](${data.url})`)
+    }
+
+    message.channel.createEmbed(e);
   }
 }
 

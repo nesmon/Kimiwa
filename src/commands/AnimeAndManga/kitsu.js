@@ -10,7 +10,7 @@ class Kitsu extends Command {
             description: "Find anime or manga information",
             category: "Anime and manga",
             usage: "kitsu [anime/manga] [Title]",
-            aliases: ["kitsu", "k"]
+            aliases: ["kitsu", "k", "kistu"]
         });
     }
 
@@ -20,6 +20,8 @@ class Kitsu extends Command {
         if (!name) return message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor('RED')
             .setDescription('Sorry but, this commands need a anime name for work.')
+            .setTimestamp()
+            .setFooter("\u200B")
         );
 
         const search = await message.channel.createEmbed(new kimiwaHelper.Embed()
@@ -35,8 +37,7 @@ class Kitsu extends Command {
             for (let i = 0; i < 5; i++) {
                 results.push(`**${i + 1}.** **${animeSearch[i].attributes.canonicalTitle}**`);
                 let sin = animeSearch[i].attributes.synopsis;
-                sin = `${sin.split(".")[0]}.`;
-                syn.push(`${sin}`);
+                syn.push(`${sin.split(".")[0]}.`);
             }
 
             const myEmbeds = [];
@@ -69,7 +70,7 @@ class Kitsu extends Command {
                     .setColor('RED')
                     .setTitle(`Please retry and send a numerical choice...`)
                     .setTimestamp()
-                    .setFooter("s")
+                    .setFooter("\u200B")
                 );
             }
 
@@ -80,11 +81,18 @@ class Kitsu extends Command {
                 .setColor('BLUE')
                 .setAuthor(`${animeSearch[select - 1].attributes.canonicalTitle}`, this.client.user.avatarURL, `https://kitsu.io/anime/${animeSearch[select - 1].attributes.slug}`)
                 .setThumbnail(animeSearch[select - 1].attributes.posterImage.original)
+                .setDescription((animeSearch[select - 1].attributes.synopsis.length > 1900) ? `${animeSearch[select - 1].attributes.synopsis.substring(0, 1900)}...\n[Read More](https://kitsu.io/anime/${animeSearch[select - 1].attributes.slug})` : (animeSearch[select - 1].attributes.synopsis === null || animeSearch[select - 1].attributes.synopsis === "") ? "No synopsi for this anime :/" : animeSearch[select - 1].attributes.synopsis)
                 .addField('Number of episode :', `${animeSearch[select - 1].attributes.episodeCount || "n/a"} of ${animeSearch[select - 1].attributes.episodeLength + "min" || "n/a"}`, true)
                 .addField('Status :', animeSearch[select - 1].attributes.status || "n/a", true)
                 .addField('Age Rating :', animeSearch[select - 1].attributes.ageRatingGuide || 'n/a', true)
+                .addField("Rating :", animeSearch[select - 1].attributes.averageRating || "n/a", true)
                 .addField('Type :', `${animeSearch[select - 1].attributes.subtype.charAt(0).toUpperCase() + animeSearch[select - 1].attributes.subtype.slice(1)}` || "N/A", true)
+                .addField('NSFW :', (animeSearch[select - 1].attributes.nsfw === true) ? "This anime is NSFW" : "This anime is not NSFW", true)
+                .setTimestamp()
+                .setFooter("\u200B")
             )
+
+            this.addPoint(animeSearch[select - 1].attributes.canonicalTitle, animeSearch[select - 1].id, `https://kitsu.io/anime/${animeSearch[select - 1].attributes.slug}`)
 
         } catch (error) {
             search.edit({
@@ -92,30 +100,45 @@ class Kitsu extends Command {
             });
         }
     }
+
+
+    async addPoint(title, id, url) {
+        try {
+            let find;
+
+            const getQuery = await kimiwaHelper.preparedQuery(this.client.db, `SELECT * FROM anime WHERE title = ?`, [title]);
+
+            if (getQuery.length > 0) {
+                find = {
+                    'aid': getQuery[0].aid,
+                    'title': getQuery[0].title,
+                    'url': getQuery[0].url,
+                    'search_time': getQuery[0].search_time
+                };
+                find.search_time++;
+
+                kimiwaHelper.preparedQuery(this.client.db, `UPDATE anime SET ? WHERE aid = ${find.aid}`, find)
+            } else {
+                find = {
+                    'aid': id,
+                    'title': title,
+                    'url': url,
+                    'search_time': 1
+                };
+                
+                kimiwaHelper.preparedQuery(this.client.db, 'INSERT INTO anime SET ?', find);
+            };
+    
+            console.log('nice work');
+        } catch (error) {
+            console.log(error)
+        };
+        
+
+
+        
+    }
 }
 
 
 module.exports = Kitsu;
-
-
-// this.utility.kitsuFindAll(name, 'Sorry this anime/manga doesn\'t exist', (err, resp) => {
-
-//     const embed = new Discord.RichEmbed()
-//         .setColor(resp.color)
-//         .setTitle(`${resp.title}`)
-//         .setURL(`${resp.url}`)
-//         .setDescription(`${resp.desc}`)
-//         .setThumbnail(`${resp.cover}`)
-//         .addField('Anime status', `${resp.anime.status}`)
-//         .addField('Number of episode', `${resp.anime.episode}`, true)
-//         .addField('Type', `${resp.anime.format}`, true)
-//         .addField('Manga status', `${resp.manga.status}`)
-//         .addField('Number of volume', `${resp.manga.volume}`, true)
-//         .addField('Number of chapter', `${resp.manga.chapter}`, true)
-//         .setTimestamp()
-//         .setFooter('Made by nesmon powered with kitsu', message.author.avatarURL)
-
-
-//     this.utility.findPoint(resp.title, resp.id, resp.url, 'anime', message);
-//     this.utility.addSearchProfil(message.author.id, message.author.avatarURL, message.author.username)
-//})
