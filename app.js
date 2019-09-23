@@ -15,11 +15,11 @@ class KimiwaCore extends Eris.Client {
     this.modules = new Eris.Collection();
     this.aliases = new Eris.Collection();
     this.config = KimiwaConfig;
-    
+
     this.prefix = KimiwaConfig.prefix;
     this.db = mysql.createConnection(KimiwaConfig.mysqlConfig);
 
-    this.db.connect(this._initDatabase)
+    this.db.connect(this._initKimiwaDB)
     this._addEventListeners();
     this._registerCommands();
     this._catchUnhandledRejections();
@@ -107,13 +107,21 @@ class KimiwaCore extends Eris.Client {
     return permlvl;
   }
 
-  _initDatabase(connectionError) {
+  async _initKimiwaDB(connectionError) {
     if (connectionError) {
-        console.log(`DATABASE ERROR \nA connection error surfaced: ${connectionError}`);
+      console.log(`DATABASE ERROR \nA connection error surfaced: ${connectionError}`);
+    } else {
+      console.log("DATABASE CONNECTION \nSuccessfully connected to the database!");
     }
 
-    console.log("DATABASE CONNECTION \nSuccessfully connected to the database!");
-}
+  }
+
+  async _reloadKimiwaDB() {
+    console.log("------RELOADING MYSQL------");
+    this.db.end();
+    await this.db.connect(this._initKimiwaDB);
+    console.log("------RELOADING END------")
+  }
 
   levelCache() {
     this.client.levelCache = {};

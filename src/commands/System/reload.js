@@ -14,6 +14,11 @@ class Reload extends Command {
   async run (message, args, level, id) { // eslint-disable-line no-unused-vars
     if (!args || args.size < 1) return this.client.createMessage(id, "Must provide a command to reload. Derp.");
     
+    if (args[0] === "mysql") {
+      this.client._reloadKimiwaDB();
+      return this.client.createMessage(id, "MYSQL reload");
+    }
+    
     const commands = this.client.commands.get(args[0]) || this.client.commands.get(this.client.aliases.get(args[0]));
     if (!commands) return this.client.createMessage(id, `The command \`${args[0]}\` does not exist, nor is it an alias.`);
 
