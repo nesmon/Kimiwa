@@ -7,6 +7,7 @@ const readdir = promisify(require("fs").readdir);
 const mysql = require('mysql');
 const klaw = require("klaw");
 const path = require("path");
+const Nodesu = require('nodesu');
 
 class KimiwaCore extends Eris.Client {
   constructor() {
@@ -18,6 +19,7 @@ class KimiwaCore extends Eris.Client {
 
     this.prefix = KimiwaConfig.prefix;
     this.db = mysql.createConnection(KimiwaConfig.mysqlConfig);
+    this.osu = new Nodesu.Client(KimiwaConfig.osu_apikey);
 
     this.db.connect(this._initKimiwaDB)
     this._addEventListeners();
@@ -114,13 +116,6 @@ class KimiwaCore extends Eris.Client {
       console.log("DATABASE CONNECTION \nSuccessfully connected to the database!");
     }
 
-  }
-
-  async _reloadKimiwaDB() {
-    console.log("------RELOADING MYSQL------");
-    this.db.end();
-    await this.db.connect(this._initKimiwaDB);
-    console.log("------RELOADING END------")
   }
 
   levelCache() {

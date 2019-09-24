@@ -20,6 +20,19 @@ class kimiwaHelper {
         return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
     }
 
+    normalizeSecondsToDHMS(time) {
+        let value = Number(time);
+        let hours = Math.floor(value / 3600);
+        let minutes = Math.floor(value % 3600 / 60);
+        let seconds = Math.floor(value % 3600 % 60);
+        
+        let normalizeHours = (hours > 0) ? hours + (hours === 1 ? ' Hour, ' : ' Hours, ') : ''; 
+        let normalizeMinutes = (minutes > 0) ? `${minutes}m, ` : '';
+        let normalizeSeconds = (seconds > 0) ? `${seconds}s` : '';
+
+        return normalizeHours + normalizeMinutes + normalizeSeconds;
+    }
+
     query(database, userQuery) {
         return new Promise((resolve, reject) => {
             database.query(userQuery, (error, results, field) => {

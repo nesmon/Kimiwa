@@ -84,6 +84,6 @@ module.exports = class {
     }
 
 
-    cmd.run(message, args, level, id);
+    cmd.run(message, args, this.client, id);
   };
 };

@@ -11,24 +11,19 @@ class Reload extends Command {
     });
   }
 
-  async run (message, args, level, id) { // eslint-disable-line no-unused-vars
-    if (!args || args.size < 1) return this.client.createMessage(id, "Must provide a command to reload. Derp.");
+  async run (message, args, kimiwa, id) { // eslint-disable-line no-unused-vars
+    if (!args || args.size < 1) return kimiwa.createMessage(id, "Must provide a command to reload. Derp.");
     
-    if (args[0] === "mysql") {
-      this.client._reloadKimiwaDB();
-      return this.client.createMessage(id, "MYSQL reload");
-    }
-    
-    const commands = this.client.commands.get(args[0]) || this.client.commands.get(this.client.aliases.get(args[0]));
-    if (!commands) return this.client.createMessage(id, `The command \`${args[0]}\` does not exist, nor is it an alias.`);
+    const commands = kimiwa.commands.get(args[0]) || kimiwa.commands.get(this.client.aliases.get(args[0]));
+    if (!commands) return kimiwa.createMessage(id, `The command \`${args[0]}\` does not exist, nor is it an alias.`);
 
-    let response = await this.client._unloadCommand(commands.conf.location, commands.help.name);
-    if (response) return this.client.createMessage(id, `Error Unloading: ${response}`);
+    let response = await kimiwa._unloadCommand(commands.conf.location, commands.help.name);
+    if (response) return kimiwa.createMessage(id, `Error Unloading: ${response}`);
 
-    response = this.client._loadCommand(commands.conf.location, commands.help.name);
-    if (response) return this.client.createMessage(id, `Error loading: ${response}`);
+    response = kimiwa._loadCommand(commands.conf.location, commands.help.name);
+    if (response) return kimiwa.createMessage(id, `Error loading: ${response}`);
 
-    this.client.createMessage(id, `The command \`${commands.help.name}\` has been reloaded`);
+    kimiwa.createMessage(id, `The command \`${commands.help.name}\` has been reloaded`);
   }
 }
 module.exports = Reload;
