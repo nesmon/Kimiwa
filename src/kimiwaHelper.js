@@ -10,8 +10,10 @@ class kimiwaHelper {
         this.ReactionHandler = ReactionHandler;
     }
 
-    pngToBase64URI (path) {
-        let bitmap = fs.readFileSync(path, {encoding: null});
+    pngToBase64URI(path) {
+        let bitmap = fs.readFileSync(path, {
+            encoding: null
+        });
         let URI = `data:image/png;base64,${bitmap.toString('base64')}`
         return URI;
     }
@@ -25,12 +27,30 @@ class kimiwaHelper {
         let hours = Math.floor(value / 3600);
         let minutes = Math.floor(value % 3600 / 60);
         let seconds = Math.floor(value % 3600 % 60);
-        
-        let normalizeHours = (hours > 0) ? hours + (hours === 1 ? ' Hour, ' : ' Hours, ') : ''; 
+
+        let normalizeHours = (hours > 0) ? hours + (hours === 1 ? ' Hour, ' : ' Hours, ') : '';
         let normalizeMinutes = (minutes > 0) ? `${minutes}m, ` : '';
         let normalizeSeconds = (seconds > 0) ? `${seconds}s` : '';
 
         return normalizeHours + normalizeMinutes + normalizeSeconds;
+    }
+
+    osuGetMode(mode, kimiwa) {
+
+        switch (mode) {
+            case 'standard' || 'std' || 'clasic':
+                return mode = 0
+                break;
+            case 'taiko':
+                return mode = 1
+                break;
+            case 'catch' || 'ctb':
+                return mode = 2
+                break;
+            case 'mania':
+                return mode = 3
+                break;
+        }
     }
 
     query(database, userQuery) {
@@ -38,7 +58,7 @@ class kimiwaHelper {
             database.query(userQuery, (error, results, field) => {
                 if (error) {
                     reject(error);
-                    
+
                 }
 
                 resolve(results);
