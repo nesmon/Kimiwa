@@ -6,7 +6,7 @@ class Osu extends Command {
         super(client, {
             name: "osu",
             category: "Osu",
-            description: "Latency and API response times.",
+            description: "Get osu information about player",
             usage: "osu [standard/mania/taiko/catch] [name of user]",
             aliases: ["osu", "ctb", "std", "mania", "catch", "taiko"]
         });
@@ -17,20 +17,8 @@ class Osu extends Command {
         let mode = args[0];
         let name = args.splice(1).join(' ');
 
-        if (mode === 'standard') {
-            mode = 0;
-        } else if (mode === 'taiko') {
-            mode = 1;
-        } else if (mode === 'catch') {
-            mode = 2;
-        } else if (mode === 'mania') {
-            mode = 3;
-        } else {
-            return message.channel.createMessage('Thanks to use correct mode! (standard/mania/taiko/catch)')
-        }
-
         kimiwa.osu.user
-            .get(name, mode)
+            .get(name, kimiwaHelper.osuGetMode(mode))
             .then(data => {
                 let country = data.country.toLowerCase();
                 message.channel.createEmbed(new kimiwaHelper.Embed()
@@ -42,7 +30,7 @@ class Osu extends Command {
                     .setFooter('Made by nesmon', message.author.avatarURL)
                 )
             }).catch((error) => {
-                message.channel.createMessage("Sorry this user not exist or is ban :/");
+                message.channel.createMessage("Sorry a error has been find :/ Thanks to verify the usage command.");
             })
     };
 };

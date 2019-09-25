@@ -128,15 +128,9 @@ class Kitsu extends Command {
                 
                 kimiwaHelper.preparedQuery(this.client.db, 'INSERT INTO anime SET ?', find);
             };
-    
-            console.log('nice work');
         } catch (error) {
             console.log(error)
         };
-        
-
-
-        
     }
 }
 
