@@ -3,6 +3,7 @@ const Embed = require('./extensions/Embed');
 const ReactionHandler = require('eris-reactions');
 const EmbedPaginator = require('eris-pagination');
 const ojsama = require("ojsama");
+const fetch = require('node-fetch');
 
 class kimiwaHelper {
     constructor() {
@@ -54,46 +55,63 @@ class kimiwaHelper {
         }
     }
 
-    numberToMod(givenNumber) {
-        const number = parseInt(givenNumber);
-        let modList = [];
+    
+    numberToMod(modNumber) {
+        const number = parseInt(modNumber);
+        let mods = [];
 
-        if (number & 1 << 0) modList.push('NF');
-        if (number & 1 << 1) modList.push('EZ');
-        if (number & 1 << 3) modList.push('HD');
-        if (number & 1 << 4) modList.push('HR');
-        if (number & 1 << 5) modList.push('SD');
-        if (number & 1 << 9) modList.push('NC');
-        if (number & 1 << 6) modList.push('DT');
-        if (number & 1 << 7) modList.push('RX');
-        if (number & 1 << 8) modList.push('HT');
-        if (number & 1 << 10) modList.push('FL');
-        if (number & 1 << 12) modList.push('SO');
-        if (number & 1 << 14) modList.push('PF');
+        if (number & 1 << 0) mods.push('NF');
+        if (number & 1 << 1) mods.push('EZ');
+        if (number & 1 << 3) mods.push('HD');
+        if (number & 1 << 4) mods.push('HR');
+        if (number & 1 << 5) mods.push('SD');
+        if (number & 1 << 9) mods.push('NC');
+        if (number & 1 << 6) mods.push('DT');
+        if (number & 1 << 7) mods.push('RX');
+        if (number & 1 << 8) mods.push('HT');
+        if (number & 1 << 10) mods.push('FL');
+        if (number & 1 << 12) mods.push('SO');
+        if (number & 1 << 14) mods.push('PF');
 
-        if (modList.includes('NC')) {
-            let dtIndex = modList.indexOf('DT');
+        if (mods.includes('NC')) {
+            let dtToNC = mods.indexOf('DT');
 
-            if (dtIndex > -1) {
-                modList.splice(dtIndex, 1);
+            if (tdToNC > -1) {
+                mods.splice(dtToNC, 1);
             }
         }
 
-        return modList;
+        return mods;
     }
 
-    getOsuFileCache() {
-        
+    async getOsuBeatmapCache(id) {
+        const file = `${__dirname}/../data/beatmap/${id}.osu`;
+
+        if (fs.existsSync(file)) {
+            const result = fs.readFileSync(file, 'utf8');
+            return result;
+        } else {
+            const cache = await fetch(`https://osu.ppy.sh/osu/${id}`);
+            const result = await cache.text();
+
+            fs.writeFile(file, result, (err) => {
+                if (err) {
+                    console.log(`A error has been find when try to get osu file : \n${err}`);
+                } else {
+                    console.log('Successfully cached a new osu! Beatmap file!');
+                }
+            });
+            return result;
+        }
     }
 
+    
     query(database, userQuery) {
         return new Promise((resolve, reject) => {
             database.query(userQuery, (error, results, field) => {
                 if (error) {
                     reject(error);
-
                 }
-
                 resolve(results);
             });
         });
@@ -105,7 +123,6 @@ class kimiwaHelper {
                 if (error) {
                     reject(error);
                 }
-
                 resolve(results);
             });
         });

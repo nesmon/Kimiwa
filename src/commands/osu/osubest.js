@@ -20,20 +20,24 @@ class OsuBest extends Command {
         const best = [];
         let userbest = await kimiwa.osu.user.getBest(name, kimiwaHelper.osuGetMode(mode), 5)
 
-        //console.log(userbest)
         for (let i = 0; i < 5; i++) {
             let maps = await kimiwa.osu.beatmaps.getByBeatmapId(userbest[i].beatmap_id)
+            let getMap = await kimiwaHelper.getOsuBeatmapCache(userbest[i].beatmap_id)
             let parse = new kimiwaHelper.ojsama.parser();
-                beatmapParser.feed(maps);
-            let beatmapMap = beatmapParser.map;
-            let beatmapStars = new kimiwaHelper.ojsama.diff().calc({ map: beatmapMap, mods: kimiwaHelper.numberToMod(userbest[i].enabled_mods) });
-            
-            console.log(beatmapStars)
+            parse.feed(getMap);
+            let beatmap = parse.map;
+            let beatmapStars = new kimiwaHelper.ojsama.diff().calc({
+                map: beatmap,
+                mods: parseInt(userbest[i].enabled_mods)
+            });
 
+            let scorebest = userbest[i];
+            
             best.push(new kimiwaHelper.Embed()
                 .setColor('BLUE')
-                .setAuthor(`${maps[0].title} +${kimiwaHelper.numberToMod(userbest[i].enabled_mods)} []`)
-                .setDescription("n")
+                .setAuthor(`${maps[0].title} [${beatmapStars.toString().split(" ", 1)[0]}]`, null, `https://osu.ppy.sh/beatmapsets/${maps[0].beatmapset_id}`)
+                .addField("Score information : ", `**Rank : **${scorebest.rank}\n**Score : **${scorebest.score}[${scorebest.count300 + "/" + scorebest.count100 + "/" + scorebest.count50 +"/" + scorebest.countmiss}]`)
+                .addField("Mod used : ", (kimiwaHelper.numberToMod(scorebest.enabled_mods).length > 0) ? "+" + kimiwaHelper.numberToMod(scorebest.enabled_mods).join(',') : "Nomod", true)
             )
         }
 
