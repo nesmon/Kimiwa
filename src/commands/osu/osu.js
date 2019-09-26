@@ -18,7 +18,7 @@ class Osu extends Command {
         let name = args.splice(1).join(' ');
 
         kimiwa.osu.user
-            .get(name, kimiwaHelper.osuGetMode(mode))
+            .get(name, kimiwaHelper.osuGetModeNumberByName(mode))
             .then(data => {
                 let country = data.country.toLowerCase();
                 message.channel.createEmbed(new kimiwaHelper.Embed()

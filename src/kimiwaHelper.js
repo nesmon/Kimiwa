@@ -38,7 +38,7 @@ class kimiwaHelper {
         return normalizeHours + normalizeMinutes + normalizeSeconds;
     }
 
-    osuGetMode(mode) {
+    osuGetModeNumberByName(mode) {
         switch (mode) {
             case 'standard' || 'std' || 'clasic':
                 return mode = 0
@@ -55,8 +55,44 @@ class kimiwaHelper {
         }
     }
 
-    
-    numberToMod(modNumber) {
+    osuGetModeNameByNumber(mode) {
+        switch (mode) {
+            case 0:
+                return "standard"
+                break;
+            case 1:
+                return "taiko"
+                break;
+            case 2:
+                return "ctb"
+                break;
+            case 3:
+                return "mania"
+                break;
+        }
+    }
+
+    osuGetAcu(h300, h100, h50, hm) {
+        let parse = parseFloat((((
+                (parseInt(h300) * 300) +
+                (parseInt(h100) * 100) +
+                (parseInt(h50) * 50) +
+                (parseInt(hm) * 0)) /
+            ((
+                parseInt(h300) +
+                parseInt(h100) +
+                parseInt(h50) +
+                parseInt(hm)
+            ) * 300)) * 100));
+
+        return parse.toFixed(2)
+    }
+
+    secToMin(s) {
+        return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
+    }
+
+    getModByNumber(modNumber) {
         const number = parseInt(modNumber);
         let mods = [];
 
@@ -105,7 +141,7 @@ class kimiwaHelper {
         }
     }
 
-    
+
     query(database, userQuery) {
         return new Promise((resolve, reject) => {
             database.query(userQuery, (error, results, field) => {
