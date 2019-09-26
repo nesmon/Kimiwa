@@ -91,15 +91,3 @@ class OsuBest extends Command {
 };
 
 module.exports = OsuBest;
-
-
-
-
-// for (let i = 0; i < 5; i++) {
-//     best.push(new kimiwaHelper.Embed()
-//         .setColor('BLUE')
-//         .setAuthor(`${maps[0].title} [${beatmapStars.toString().split(" ", 1)[0]}]`, null, `https://osu.ppy.sh/beatmapsets/${maps[0].beatmapset_id}`)
-//         .addField("Score information : ", `**Rank : **${scorebest.rank}\n**Score : **${scorebest.score}[${scorebest.count300 + "/" + scorebest.count100 + "/" + scorebest.count50 +"/" + scorebest.countmiss}]`)
-//         .addField("Mod used : ", , true)
-//     )
-// }
