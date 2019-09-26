@@ -49,6 +49,11 @@ class OsuBest extends Command {
                     url: "https://b.ppy.sh/thumb/" + maps[0].beatmapset_id + "l.jpg?uts=" + Math.floor(new Date() / 1000)
                 },
                 fields: [{
+                        name: "Beatmap Information",
+                        value: `Length: **${kimiwaHelper.secToMin(maps[0].total_length)}** Mapper : **${maps[0].creator}**\n` +
+                            `AR: **${maps[0].diff_approach}**, BPM: **${maps[0].bpm}**`
+                    }, 
+                    {
                         name: "Play Score",
                         value: beatmapStars.toString().split(" ", 1)[0] + "▸ " + bestScore.rank + "▸ **" + bestScore.score + "**\n" +
                             `**Total Hits:** ▸ ` +
@@ -57,18 +62,13 @@ class OsuBest extends Command {
                             `${kimiwaHelper.osuGetAcu(bestScore.count300, bestScore.count100, bestScore.count50, bestScore.countmiss)}%`
                     },
                     {
-                        name: "Beatmap Information",
-                        value: `Length: **${kimiwaHelper.secToMin(maps[0].total_length)}** Mapper : **${maps[0].creator}**\n` +
-                            `AR: **${maps[0].diff_approach}**, BPM: **${maps[0].bpm}**`
+                        name: "Combo",
+                        value: "**" + bestScore.maxcombo + "x** / *" + beatmap.max_combo() + "x*",
+                        inline: true
                     },
                     {
                         name: "Performance",
                         value: "**" + bestScore.pp + "pp**",
-                        inline: true
-                    },
-                    {
-                        name: "Combo",
-                        value: "**" + bestScore.maxcombo + "x** / *" + beatmap.max_combo() + "x*",
                         inline: true
                     }
                 ],
