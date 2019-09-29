@@ -14,7 +14,7 @@ class Kitsu extends Command {
         });
     }
 
-    async run(message, args, level) { // eslint-disable-line no-unused-vars
+    async run(message, args, kimiwa) { // eslint-disable-line no-unused-vars
 
         let name = args.splice(0).join(' ');
         if (!name) return message.channel.createEmbed(new kimiwaHelper.Embed()
@@ -92,7 +92,7 @@ class Kitsu extends Command {
                 .setFooter("\u200B")
             )
 
-            this.addPoint(animeSearch[select - 1].attributes.canonicalTitle, animeSearch[select - 1].id, `https://kitsu.io/anime/${animeSearch[select - 1].attributes.slug}`)
+            kimiwaHelper.addPoint(animeSearch[select - 1].attributes.canonicalTitle, animeSearch[select - 1].id, `https://kitsu.io/anime/${animeSearch[select - 1].attributes.slug}`, kimiwa.db)
 
         } catch (error) {
             search.edit({

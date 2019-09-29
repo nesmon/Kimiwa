@@ -1,5 +1,6 @@
 const fs = require('fs');
 const Embed = require('./extensions/Embed');
+const kFlags = require('./kimiwaFlags');
 const ReactionHandler = require('eris-reactions');
 const EmbedPaginator = require('eris-pagination');
 const ojsama = require("ojsama");
@@ -8,9 +9,23 @@ const fetch = require('node-fetch');
 class kimiwaHelper {
     constructor() {
         this.Embed = Embed;
+        this.kFlag = kFlags;
         this.PaginationEmbed = EmbedPaginator;
         this.ReactionHandler = ReactionHandler;
         this.ojsama = ojsama;
+    }
+
+    flags(value, key) {
+        let str = value;
+
+        if (str.indexOf(key) === -1) {
+            return false;
+        }
+
+        str = str.split(key + " ")[1]
+        str = str.split("--")[0]
+        
+        return str;
     }
 
     pngToBase64URI(path) {
@@ -23,6 +38,37 @@ class kimiwaHelper {
 
     getRandomColor() {
         return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+    }
+
+    async addPoint(title, id, url, coreDB) {
+        try {
+            let find;
+
+            const getQuery = await this.preparedQuery(coreDB, `SELECT * FROM anime WHERE title = ?`, [title]);
+
+            if (getQuery.length > 0) {
+                find = {
+                    'aid': getQuery[0].aid,
+                    'title': getQuery[0].title,
+                    'url': getQuery[0].url,
+                    'search_time': getQuery[0].search_time
+                };
+                find.search_time++;
+
+                this.preparedQuery(coreDB, `UPDATE anime SET ? WHERE aid = ${find.aid}`, find)
+            } else {
+                find = {
+                    'aid': id,
+                    'title': title,
+                    'url': url,
+                    'search_time': 1
+                };
+
+                this.preparedQuery(coreDB, 'INSERT INTO anime SET ?', find);
+            };
+        } catch (error) {
+            console.log(error)
+        };
     }
 
     normalizeSecondsToDHMS(time) {
@@ -140,7 +186,6 @@ class kimiwaHelper {
             return result;
         }
     }
-
 
     query(database, userQuery) {
         return new Promise((resolve, reject) => {

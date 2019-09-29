@@ -1,7 +1,5 @@
 class kimiwaFlags {
-    constructor(){
-
+    constructor() {
+        
     }
-
-    
 }

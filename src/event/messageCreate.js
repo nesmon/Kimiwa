@@ -83,6 +83,15 @@ module.exports = class {
       message.flags.push(args.shift().slice(1));
     }
 
+    // Update for messageCreate file
+    // let name = args[0].toString()
+    // for (let i = 0; i < cmd.length; i++) {
+    //     if (cmd[i].command.name === args[0]) {
+    //         console.log(cmd[i].command.value)
+    //     } else {
+    //         console.log('dsl')
+    //     }
+    // }
 
     cmd.run(message, args, this.client, id);
   };

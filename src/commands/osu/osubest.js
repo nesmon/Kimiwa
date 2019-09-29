@@ -21,6 +21,10 @@ class OsuBest extends Command {
         let getUserBestScore = await kimiwa.osu.user.getBest(name, kimiwaHelper.osuGetModeNumberByName(mode), 5)
         let getUserInformation = await kimiwa.osu.user.get(name, kimiwaHelper.osuGetModeNumberByName(mode), undefined, 'string');
 
+        if (!getUserInformation) {
+            return message.channel.createMessage('Sorry but this username dosne\'t exist :/');
+        }
+
         let osuName = getUserInformation.username;
 
         for (let i = 0; i < getUserBestScore.length; i++) {
@@ -63,7 +67,7 @@ class OsuBest extends Command {
                     },
                     {
                         name: "Combo",
-                        value: "**" + bestScore.maxcombo + "x** / *" + beatmap.max_combo() + "x*",
+                        value: "**" + bestScore.maxcombo + "x** / " + beatmap.max_combo() + "x",
                         inline: true
                     },
                     {
