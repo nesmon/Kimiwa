@@ -56,23 +56,20 @@ class OsuBest extends Command {
                         name: "Beatmap Information",
                         value: `Length: **${kimiwaHelper.secToMin(maps[0].total_length)}** Mapper : **${maps[0].creator}**\n` +
                             `AR: **${maps[0].diff_approach}**, BPM: **${maps[0].bpm}**`
-                    }, 
-                    {
-                        name: "Play Score",
-                        value: beatmapStars.toString().split(" ", 1)[0] + "▸ " + bestScore.rank + "▸ **" + bestScore.score + "**\n" +
-                            `**Total Hits:** ▸ ` +
-                            `[${bestScore.count300 + "/" + bestScore.count100 + "/" + bestScore.count50 +"/" + bestScore.countmiss}]▸ ` +
-                            `**Accuracy : ** ▸ ` +
-                            `${kimiwaHelper.osuGetAcu(bestScore.count300, bestScore.count100, bestScore.count50, bestScore.countmiss)}%`
                     },
                     {
-                        name: "Combo",
-                        value: "**" + bestScore.maxcombo + "x** / " + beatmap.max_combo() + "x",
+                        name: "Play Score",
+                        value: beatmapStars.toString().split(" ", 1)[0] + "★ ▸ " + bestScore.rank + "▸ **" + bestScore.score + "**\n" +
+                            `**Total Hits:** ▸ ` +
+                            `[${bestScore.count300 + "/" + bestScore.count100 + "/" + bestScore.count50 +"/" + bestScore.countmiss}]\n` +
+                            `**Accuracy : ** ▸ ` +
+                            `${kimiwaHelper.osuGetAcu(bestScore.count300, bestScore.count100, bestScore.count50, bestScore.countmiss)}%`,
                         inline: true
                     },
                     {
-                        name: "Performance",
-                        value: "**" + bestScore.pp + "pp**",
+                        name: "\u200B",
+                        value: `**${bestScore.maxcombo}x** / ${beatmap.max_combo()}x\n` +
+                            `**${bestScore.pp}pp**`,
                         inline: true
                     }
                 ],
