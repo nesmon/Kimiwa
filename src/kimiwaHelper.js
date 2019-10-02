@@ -25,7 +25,7 @@ class kimiwaHelper {
         str = str.split(key + " ")[1]
         str = str.split("--")[0]
         
-        return str;
+        return str.trimEnd();
     }
 
     pngToBase64URI(path) {
@@ -71,7 +71,7 @@ class kimiwaHelper {
         };
     }
 
-    normalizeSecondsToDHMS(time) {
+    normalizeSecondsToHMS(time) {
         let value = Number(time);
         let hours = Math.floor(value / 3600);
         let minutes = Math.floor(value % 3600 / 60);
@@ -158,7 +158,7 @@ class kimiwaHelper {
         if (mods.includes('NC')) {
             let dtToNC = mods.indexOf('DT');
 
-            if (tdToNC > -1) {
+            if (dtToNC > -1) {
                 mods.splice(dtToNC, 1);
             }
         }

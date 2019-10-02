@@ -33,6 +33,8 @@ class Oyasumi extends Command {
       if (event.emoji.name === '✅') {
         await react.edit(this.embed(message, "Bot will now disconnect"));
         await react.removeReactions();
+        this.client.commands.clear()
+        this.client.aliases.clear()
         this.client.disconnect();
         process.exit(1);
       } else if (event.emoji.name === '❌') {

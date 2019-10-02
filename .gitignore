@@ -1,6 +1,7 @@
 config.js
 data/
 .DS_Store
+test.js
 
 # Logs
 logs

@@ -9,6 +9,7 @@ module.exports = class Ready {
         this.client.editStatus('online', {
             name: "Hello"
         });
+
         // this.client.editSelf({
         //     avatar: kimiwaHelp.pngToBase64URI('./src/assets/img/logo_kimiwa.png')
         // })
