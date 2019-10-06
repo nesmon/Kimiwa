@@ -1,15 +1,15 @@
 const Command = require("../../base/Command.js");
 const kimiwaHelper = require('./../../kimiwaHelper');
 
-class addCommand extends Command {
+class editCommand extends Command {
     constructor(client) {
         super(client, {
-            name: "addcommand",
-            description: "Add you own custom textual command",
+            name: "editcommand",
+            description: "edit you own custom textual command",
             category: "Server",
-            usage: "addcommand --name [name of command --value [value]",
+            usage: "editcommand --name [name of command --value [new value]",
             permLevel: "Owner",
-            aliases: ["acm"]
+            aliases: ["ecm"]
         });
     }
 
@@ -22,33 +22,36 @@ class addCommand extends Command {
         if (value === false) return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks to asigne value to your command with --value [value of command]`));
 
         try {
+            console.log(name)
             const id = `${message.channel.guild.id}`;
+
+            const getServer = await kimiwaHelper.query(kimiwa.db, `SELECT * FROM customcmdserver WHERE guildID = '${id}' AND name = '${name}'`);
+
+            if (getServer.length === 0) {
+                return message.channel.createEmbed(new kimiwaHelper.Embed()
+                    .setColor('RED')
+                    .setAuthor("ERROR", message.author.avatarURL)
+                    .setDescription(`Sorry but this command dosn't exist on this server.`)
+                );
+            }
+
             let cmd = {
                 guildID: id,
                 createBy: message.author.id,
-                name: name.replace(/ +/g, ""),
+                name: getServer[0].name,
                 value: value
             }
 
-            const getServer = await kimiwaHelper.preparedQuery(kimiwa.db, 'SELECT name FROM customcmdserver WHERE guildID = ?', id);
-
-            for (let i = 0; i < getServer.length; i++) {
-                if (getServer[i].name === name) {
-                    return message.channel.createEmbed(new kimiwaHelper.Embed()
-                        .setColor('RED')
-                        .setAuthor("ERROR", message.author.avatarURL)
-                        .setDescription(`Sorry but this command already exist on this server.`)
-                    );
-                }
-            }
-
-            kimiwaHelper.preparedQuery(kimiwa.db, `INSERT INTO customcmdserver SET ?`, cmd);
+            kimiwaHelper.preparedQuery(kimiwa.db, `UPDATE customcmdserver SET ? WHERE name = ${getServer[0].name}`, cmd);
             message.channel.createEmbed(new kimiwaHelper.Embed()
                 .setColor('GREEN')
                 .setAuthor("New command added :", message.author.avatarURL)
-                .setDescription(`The command **${name.replace(/ +/g, "")}** has creat for this server`)
+                .setDescription(`The command **${getServer[0].name}** has edit for this server`)
+                .addField("Old value : ", `${getServer[0].value}`, true)
+                .addField("New value : ", `${value}`, true)
             )
         } catch (error) {
+            console.log(error)
             return message.channel.createEmbed(new kimiwaHelper.Embed()
                 .setColor('RED')
                 .setAuthor("ERROR", message.author.avatarURL)
@@ -59,4 +62,4 @@ class addCommand extends Command {
 }
 
 
-module.exports = addCommand;
+module.exports = editCommand;

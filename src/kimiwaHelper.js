@@ -1,8 +1,9 @@
-const fs = require('fs');
 const Embed = require('./extensions/Embed');
+const KCategory= require('./constants/Category')
 const kFlags = require('./kimiwaFlags');
 const ReactionHandler = require('eris-reactions');
 const EmbedPaginator = require('eris-pagination');
+const fs = require('fs');
 const ojsama = require("ojsama");
 const fetch = require('node-fetch');
 
@@ -10,20 +11,20 @@ class kimiwaHelper {
     constructor() {
         this.Embed = Embed;
         this.kFlag = kFlags;
+        this.KCategory = KCategory;
         this.PaginationEmbed = EmbedPaginator;
         this.ReactionHandler = ReactionHandler;
         this.ojsama = ojsama;
     }
 
-    flags(value, key) {
+    flags(value, key, limiter = "--") {
         let str = value;
 
-        if (str.indexOf(key) === -1) {
-            return false;
-        }
-
+        if (str.indexOf(key) === -1) return false;
+        
         str = str.split(key + " ")[1]
-        str = str.split("--")[0]
+        if (str === undefined) return false;
+        str = str.split(limiter)[0]
         
         return str.trimEnd();
     }

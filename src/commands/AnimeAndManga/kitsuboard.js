@@ -7,7 +7,7 @@ class Kitsuboard extends Command {
       name: "kitsuboard",
       description: "Scoreboard",
       category: "Anime and manga",
-      usage: "kitsuboard [anime/manga]",
+      usage: "kitsuboard",
       aliases: ["kitsuboard", "kb"]
     });
   }

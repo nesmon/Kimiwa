@@ -4,18 +4,23 @@ const kimiwaHelper = require('./../../kimiwaHelper');
 class OsuBest extends Command {
     constructor(client) {
         super(client, {
-            name: "OsuBest",
+            name: "osubest",
             category: "Osu",
             description: "get best play of osu user",
-            usage: "getbest [standard/mania/taiko/catch] [name of user]",
+            usage: "osubest --name [name of user] --mode [standard/mania/taiko/catch optional, by default std is select]",
             aliases: ["osubest", "Osubest", "osuBest", "ob"]
         });
     }
 
     async run(message, args, kimiwa) { // eslint-disable-line no-unused-vars
 
-        let mode = args[0];
-        let name = args.splice(1).join(' ');
+
+        let name = kimiwaHelper.flags(message.content, "--name");
+        let mode = kimiwaHelper.flags(message.content, "--mode");
+
+        if (name === false) return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks to asigne name to your command with --name [name of command]`));
+        if (mode === false) mode = 'std';
+
 
         let embedBest = [];
         let getUserBestScore = await kimiwa.osu.user.getBest(name, kimiwaHelper.osuGetModeNumberByName(mode), 5)

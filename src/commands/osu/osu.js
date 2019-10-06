@@ -7,16 +7,19 @@ class Osu extends Command {
             name: "osu",
             category: "Osu",
             description: "Get osu information about player",
-            usage: "osu [standard/mania/taiko/catch] [name of user]",
+            usage: "osu --name [name of user] --mode [standard/mania/taiko/catch optional, by default std is select]",
             aliases: ["osu", "ctb", "std", "mania", "catch", "taiko"]
         });
     }
 
     async run(message, args, kimiwa) { // eslint-disable-line no-unused-vars
+        
+        let name = kimiwaHelper.flags(message.content, "--name");
+        let mode = kimiwaHelper.flags(message.content, "--mode");
 
-        let mode = args[0];
-        let name = args.splice(1).join(' ');
-
+        if (name === false) return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks to asigne name to your command with --name [name of command]`));
+        if (mode === false) mode = 'std';
+        
         kimiwa.osu.user
             .get(name, kimiwaHelper.osuGetModeNumberByName(mode))
             .then(data => {

@@ -100,6 +100,6 @@ module.exports = class {
       message.flags.push(args.shift().slice(1));
     }
 
-    cmd.run(message, args, this.kimiwa, id);
+    cmd.run(message, args, this.kimiwa, level);
   };
 };

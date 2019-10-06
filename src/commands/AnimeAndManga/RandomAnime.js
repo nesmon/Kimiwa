@@ -8,7 +8,7 @@ class RandomAnime extends Command {
             name: "randomanime",
             description: "Find random anime select into search anime with kimiwa",
             category: "Anime and manga",
-            usage: "randomanime ",
+            usage: "randomanime",
             aliases: ["ra", "ranime", "kitsurandom"]
         });
     }
