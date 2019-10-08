@@ -22,10 +22,12 @@ class kimiwaHelper {
 
         if (str.indexOf(key) === -1) return false;
         
-        str = str.split(key + " ")[1]
+        str = str.split(key + " ")[1];
         if (str === undefined) return false;
-        str = str.split(limiter)[0]
+        str = str.split(limiter)[0];
         
+        if (str.trimEnd() === "") return false;
+
         return str.trimEnd();
     }
 

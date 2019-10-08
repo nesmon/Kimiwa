@@ -12,7 +12,7 @@ class Command {
       aliases = new Array(),
       permLevel = "User"
     }) {
-      //this.client = client;
+      this.client = client;
       this.conf = { nsfw, enabled, cooldown, guildOnly, aliases, permLevel };
       this.help = { name, description, category, usage, nsfw };
       this.name = name;
