@@ -18,6 +18,7 @@ Read [this](./LICENSE) for more information about the license of the project.
 
 # Library and service used
 - **Discord API** : [Eris.js](https://abal.moe/Eris/) by **abalabahaha**
+- **Embed Part** : by **Riyacchi**
 - **Reaction Message** : [eris-reaction](https://www.npmjs.com/package/eris-reactions) by **Riyacchi**
 - **Embed Pagination** : [eris-reaction](https://www.npmjs.com/package/eris-pagination) by **Riyacchi** updated by me for the cycling part
 - **Anime/Manga search engine** : [Kitsu](https://kitsu.io) with [node-kitsu](https://www.npmjs.com/package/node-kitsu) by **theconceptionist**

@@ -29,13 +29,12 @@ class Help extends Command {
       const sorted = Array.from(myCommands.values()).sort((p, c) => p.help.category > c.help.category ? 1 : p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1);
 
       let em = new kimiwaHelper.Embed()
-      console.log(kimiwaHelper.KCategory)
 
       for (let i = 0; i < kimiwaHelper.KCategory.length; i++) {
         let cmd = sorted.filter(cate => cate.help.category === kimiwaHelper.KCategory[i])
 
         if (currentCategory !== cmd[0].help.category) {
-          em.setTitle(`Command List \n${cmd[0].help.category}`)
+          em.setTitle(`Command List : `)
           em.setTimestamp();
           em.setFooter(`Use ${kimiwa.prefix}help <commandname> for details`)
           em.setColor('BLUE')
@@ -50,7 +49,7 @@ class Help extends Command {
         em.addField(`${cmd[0].help.category}`, `${desc.join("\n")}`, true)
       }
 
-      if (kimiwaHelper.KCategory / 3) {} else {
+      if (Number.isInteger(kimiwaHelper.KCategory.length / 3)) {} else {
         em.addBlankField(true)
       }
 
