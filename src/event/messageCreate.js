@@ -21,7 +21,6 @@ module.exports = class {
       this.kimiwa.createMessage(message.channel.id, `My prefix on this guild is \`${this.kimiwa.prefix}\``);
     }
 
-
     if (message.content.indexOf(this.kimiwa.prefix) !== 0) return;
 
     const args = message.content.slice(this.kimiwa.prefix.length).trim().split(/ +/g);
@@ -48,7 +47,6 @@ module.exports = class {
       } else {
         return;
       }
-
     }
 
     // Verify nsfw

@@ -13,8 +13,8 @@ class KimiwaCore extends Eris.Client {
   constructor() {
     super(KimiwaConfig.token);
     this.commands = new Eris.Collection();
-    this.modules = new Eris.Collection();
     this.aliases = new Eris.Collection();
+    this.modules = new Eris.Collection();
     this.config = KimiwaConfig;
 
     this.prefix = KimiwaConfig.prefix;
@@ -29,8 +29,6 @@ class KimiwaCore extends Eris.Client {
     this.connect();
   }
 
-
-  // Make individual event in this function like kirameki
   async _addEventListeners() {
     const evtFiles = await readdir("./src/event/");
     console.log(`Loading a total of ${evtFiles.length} events.`);
@@ -145,30 +143,3 @@ class KimiwaCore extends Eris.Client {
 }
 
 module.exports = new KimiwaCore()
-
-
-// client.on("messageCreate", (msg) => {
-
-//     if (msg.content === "!ping") {
-//         client.editChannel(msg.channel.id, {
-//             name: "eris-test",
-//             topic: `erisjs`
-//         }, "some test")
-//         client.createMessage(msg.channel.id, "Pong!").then((data) => {
-//             setTimeout(() => {
-//                 client.addMessageReaction(msg.channel.id, data.id, '😄')
-//             }, 500);
-//         })
-
-//     }
-// });
-
-// client.on("messageDelete", (msg) => {
-//     console.log("A message as remove")
-// });
-
-// client.on("messageReactionAdd", (message, emoji, userID) => {
-//     //client.addGuildMemberRole(message.channel.guild.id, userID, "601380709625626624")
-// })
-
-// client.connect();

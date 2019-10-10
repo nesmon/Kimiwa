@@ -45,7 +45,7 @@ class cache extends Command {
                 }
             }
         } else {
-            message.channel.createMessage("Please select a categori to cache data");
+            message.channel.createMessage("Please select a category to cache data");
         }
     }
 }
