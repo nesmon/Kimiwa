@@ -1,6 +1,5 @@
 const Eris = require("eris");
-const kimiwaHelper = require('./../kimiwaHelper')
-
+const kimiwaHelper = require('./../kimiwaHelper');
 
 module.exports = class {
   constructor(client) {
@@ -57,7 +56,7 @@ module.exports = class {
 
     // Cooldown part :
     if (!this.cooldown.has(cmd.name)) {
-      this.cooldown.set(cmd.name,new Eris.Collection());
+      this.cooldown.set(cmd.name, new Eris.Collection());
     }
 
     const now = Date.now();
@@ -75,7 +74,7 @@ module.exports = class {
     }
     timestamps.set(message.author.id, now);
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-    
+
     // Perm level part
     const level = this.kimiwa._permlevel(message);
 
@@ -101,3 +100,10 @@ module.exports = class {
     cmd.run(message, args, this.kimiwa, level);
   };
 };
+
+// // This part is underbuild
+// if (message.content.indexOf(this.kimiwa.prefix) !== 0) {
+//   let ia = this.kimiwa.commands.filter(c => c.test === message.content);
+//   ia = this.kimiwa.commands.get(ia[0].help.name);
+//   return ia.run(message, args, this.kimiwa)
+// }

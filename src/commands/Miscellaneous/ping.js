@@ -9,6 +9,7 @@ class Ping extends Command {
       cooldown: 4,
       aliases: ["pong"]
     });
+    this.test = 'hello world'
   }
 
   async run (message, args) { // eslint-disable-line no-unused-vars
