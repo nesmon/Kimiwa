@@ -1,5 +1,5 @@
 const Embed = require('./extensions/Embed');
-const KCategory= require('./constants/Category')
+const KCategory = require('./constants/Category')
 const kFlags = require('./kimiwaFlags');
 const ReactionHandler = require('eris-reactions');
 const EmbedPaginator = require('eris-pagination');
@@ -21,14 +21,33 @@ class kimiwaHelper {
         let str = value;
 
         if (str.indexOf(key) === -1) return false;
-        
-        str = str.split(key + " ")[1];
-        if (str === undefined) return false;
+
+        str = str.split(key + ' ')[1];
+        if (str === void 0) return false;
+
         str = str.split(limiter)[0];
-        
-        if (str.trimEnd() === "") return false;
+
+        if (str.trimEnd() === '') return false;
 
         return str.trimEnd();
+    }
+
+    removeUselessSpace (str) {
+        str = str.replace(/[\s]{2,}/g, " ");
+        return str.trim();
+    }
+
+    cleanArray(array) {
+        var i, j, len = array.length,
+            out = [],
+            obj = {};
+        for (i = 0; i < len; i++) {
+            obj[array[i]] = 0;
+        }
+        for (j in obj) {
+            out.push(j);
+        }
+        return out;
     }
 
     pngToBase64URI(path) {

@@ -1,7 +1,6 @@
 const Command = require("../../base/Command.js");
 const kimiwaHelper = require('./../../kimiwaHelper');
 const kitsu = require('node-kitsu');
-const moment = require('moment');
 
 class Kitsu extends Command {
     constructor(client) {
@@ -14,10 +13,17 @@ class Kitsu extends Command {
         });
     }
 
-    async run(message, args, kimiwa) { // eslint-disable-line no-unused-vars
+    async run(message, args, kimiwa, level, IA) { // eslint-disable-line no-unused-vars
 
-        let name = args.splice(0).join(' ');
-        
+        let name;
+
+        if (IA == true) {
+            name = args[0];
+        } else {
+            name = args.splice(0).join(' ');
+        }
+
+
         if (!name) return message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor('RED')
             .setDescription('Sorry but, this commands need a anime name for work.')
@@ -57,16 +63,26 @@ class Kitsu extends Command {
                 cycling: true
             });
 
-
             const filter = (m) => message.author.id === m.author.id;
             const waitingMesage = await message.channel.awaitMessages(filter, {
                 time: 60000,
                 maxMatches: 1
             });
 
+            if (waitingMesage.length === 0) {
+                e.delete();
+                return message.channel.createEmbed(new kimiwaHelper.Embed()
+                    .setColor('RED')
+                    .setTitle(`Please enter a value`)
+                    .setTimestamp()
+                    .setFooter("\u200B")
+                );
+            }
+
             const select = parseInt(waitingMesage[0].content.replace(/[^0-9\.]+/g, ''));
 
-            if (select > select.length || select < 1 || !select) {
+            if (select > syn.length || select < 1 || !select) {
+                e.delete();
                 return message.channel.createEmbed(new kimiwaHelper.Embed()
                     .setColor('RED')
                     .setTitle(`Please retry and send a numerical choice...`)

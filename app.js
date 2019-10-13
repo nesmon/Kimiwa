@@ -1,5 +1,6 @@
 const Eris = require('eris-additions')(require('eris'));
-const KimiwaConfig = require('./config/config')
+const KimiwaConfig = require('./config/config');
+const kimiwaIA = require('./src/extensions/KimiwaIA');
 const {
   promisify
 } = require("util");
@@ -15,6 +16,7 @@ class KimiwaCore extends Eris.Client {
     this.commands = new Eris.Collection();
     this.aliases = new Eris.Collection();
     this.modules = new Eris.Collection();
+    this.ia = new kimiwaIA(this)
     this.config = KimiwaConfig;
 
     this.prefix = KimiwaConfig.prefix;
@@ -139,7 +141,6 @@ class KimiwaCore extends Eris.Client {
 
     return text;
   };
-
 }
 
 module.exports = new KimiwaCore()

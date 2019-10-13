@@ -17,14 +17,22 @@ module.exports = class {
 
     const prefixMention = new RegExp(`^<@!?${this.kimiwa.user.id}>( |)$`);
     if (message.content.match(prefixMention)) {
-      this.kimiwa.createMessage(message.channel.id, `My prefix on this guild is \`${this.kimiwa.prefix}\``);
+      return this.kimiwa.createMessage(message.channel.id, `My prefix on this guild is \`${this.kimiwa.prefix}\``);
     }
 
+    // This part is underbuild
+    if (message.content.indexOf(`<@${this.kimiwa.user.id}>`) !== -1) {
+      if (message.content.indexOf(this.kimiwa.prefix) !== 0 ) {
+        this.kimiwa.ia.preconditionned(message.content, message)
+      }
+    }
+
+
+    // Detect if message contain prefix of Kimiwa 
     if (message.content.indexOf(this.kimiwa.prefix) !== 0) return;
 
     const args = message.content.slice(this.kimiwa.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
-
 
     if (message.guild && !message.member) await message.guild.fetchMember(message.author);
 
@@ -97,13 +105,6 @@ module.exports = class {
       message.flags.push(args.shift().slice(1));
     }
 
-    cmd.run(message, args, this.kimiwa, level);
+    cmd.run(message, args, this.kimiwa, level, false);
   };
 };
-
-// // This part is underbuild
-// if (message.content.indexOf(this.kimiwa.prefix) !== 0) {
-//   let ia = this.kimiwa.commands.filter(c => c.test === message.content);
-//   ia = this.kimiwa.commands.get(ia[0].help.name);
-//   return ia.run(message, args, this.kimiwa)
-// }

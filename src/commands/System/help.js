@@ -14,7 +14,6 @@ class Help extends Command {
   }
 
   async run(message, args, kimiwa, level) {
-    let desc = [];
 
     let levelCache = {};
     for (let i = 0; i < kimiwa.config.permLevels.length; i++) {
@@ -23,37 +22,47 @@ class Help extends Command {
     }
 
     if (!args[0]) {
-      const myCommands = message.guild ? kimiwa.commands.filter(cmd => levelCache[cmd.conf.permLevel] <= level) : kimiwa.commands.filter(cmd => levelCache[cmd.conf.permLevel] <= level && cmd.conf.guildOnly !== true);
+      try {
+        let desc = [];
+        let categoryF = [];
 
-      let currentCategory = "";
-      const sorted = Array.from(myCommands.values()).sort((p, c) => p.help.category > c.help.category ? 1 : p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1);
+        const myCommands = message.guild ? kimiwa.commands.filter(cmd => levelCache[cmd.conf.permLevel] <= level) : kimiwa.commands.filter(cmd => levelCache[cmd.conf.permLevel] <= level && cmd.conf.guildOnly !== true);
+        let currentCategory = "";
+        const sorted = Array.from(myCommands.values()).sort((p, c) => p.help.category > c.help.category ? 1 : p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1);
+        let em = new kimiwaHelper.Embed()
 
-      let em = new kimiwaHelper.Embed()
+        em.setTitle(`Command List : `)
+        em.setTimestamp();
+        em.setFooter(`Use ${kimiwa.prefix}help <commandname> for details`)
+        em.setColor('BLUE')
 
-      for (let i = 0; i < kimiwaHelper.KCategory.length; i++) {
-        let cmd = sorted.filter(cate => cate.help.category === kimiwaHelper.KCategory[i])
+        for (let i = 0; i < sorted.length; i++) {
+          categoryF.push(sorted[i].help.category)
+        }
+        
+        for (let i = 0; i < kimiwaHelper.cleanArray(categoryF).length; i++) {
+          let cmd = sorted.filter(cate => cate.help.category === `${kimiwaHelper.cleanArray(categoryF)[i]}`)
+          
+          if (currentCategory !== cmd[0].help.category) {
+            desc = []
+            currentCategory = cmd[0].help.category;
+          }
 
-        if (currentCategory !== cmd[0].help.category) {
-          em.setTitle(`Command List : `)
-          em.setTimestamp();
-          em.setFooter(`Use ${kimiwa.prefix}help <commandname> for details`)
-          em.setColor('BLUE')
-          desc = []
-          currentCategory = cmd[0].help.category;
+          for (let i = 0; i < cmd.length; i++) {
+            desc.push(`-${kimiwa.config.prefix}${cmd[i].help.name}`)
+          }
+
+          em.addField(`${cmd[0].help.category}`, `${desc.join("\n")}`, true)
         }
 
-        for (let i = 0; i < cmd.length; i++) {
-          desc.push(`-${kimiwa.config.prefix}${cmd[i].help.name}`)
+        if (Number.isInteger(kimiwaHelper.cleanArray(categoryF).length / 3)) {} else {
+          em.addBlankField(true)
         }
 
-        em.addField(`${cmd[0].help.category}`, `${desc.join("\n")}`, true)
+        message.channel.createEmbed(em)
+      } catch (error) {
+        console.log(error)
       }
-
-      if (Number.isInteger(kimiwaHelper.KCategory.length / 3)) {} else {
-        em.addBlankField(true)
-      }
-
-      message.channel.createEmbed(em)
     } else {
       let command = args[0];
       if (kimiwa.commands.has(command)) {

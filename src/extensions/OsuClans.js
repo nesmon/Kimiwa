@@ -1,0 +1,5 @@
+class OsuClan {
+    constructor () {
+        
+    }
+}

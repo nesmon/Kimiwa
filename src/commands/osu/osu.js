@@ -12,11 +12,18 @@ class Osu extends Command {
         });
     }
 
-    async run(message, args, kimiwa) { // eslint-disable-line no-unused-vars
-        
-        let name = kimiwaHelper.flags(message.content, "--name");
-        let mode = kimiwaHelper.flags(message.content, "--mode");
+    async run(message, args, kimiwa, level, IA) { // eslint-disable-line no-unused-vars
+        let name;
+        let mode;
 
+        if (IA == true) {
+            name = args[0];
+            mode = args[1] || 'standard';
+        } else {
+            name = kimiwaHelper.flags(message.content, "--name");
+            mode = kimiwaHelper.flags(message.content, "--mode");
+        }
+        
         if (name === false) return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks to asigne name to your command with --name [name of command]`));
         if (mode === false) mode = 'std';
         
