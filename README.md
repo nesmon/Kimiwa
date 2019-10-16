@@ -8,13 +8,13 @@
 </div>
 
 # What is Kimiwa
-**Kimiwa** is discord bot made with [Node.js](https://nodejs.org/) and use [Eris.js librairy](https://abal.moe/Eris/).
-**Kimiwa** has some some usefull functionality like [osu!](https://osu.ppy.sh) (profil, beatmap, score and more), anime search using [Kitsu](https://kitsu.io) API for get information and some other things that you can discover.
+**Kimiwa** is a Discord bot made with [Node.js](https://nodejs.org/) and uses the [Eris library](https://abal.moe/Eris/).
+**Kimiwa** has some some usefull functionality like [osu!](https://osu.ppy.sh) (profil, beatmap, score and more), anime search using [Kitsu](https://kitsu.io) API for getting information and some other things that you can discover.
 
 # Usage
-This Repository is not made for self-hosting due to usage of some other external service that is not present in this repository.
-Moreover bear in mind the license of Kimiwa if you use some part of the code present in this repository for personal project.
-Read [this](./LICENSE) for more information about the license of the project.
+This Repository is not meant for self-hosting due to usage of some other external service that is not present in this repository.
+Moreover bear in mind the license of Kimiwa if you use some part of the code present in this repository for personal projects.
+Read [this](./LICENSE) for more information about the license of this project.
 
 # Library and service used
 - **Discord API** : [Eris.js](https://abal.moe/Eris/) by **abalabahaha**
@@ -27,13 +27,13 @@ Read [this](./LICENSE) for more information about the license of the project.
 
 # Contribution
 Kimiwa is happy if you offer her ideas so you can make issue for offer your idea, offer on discord **OR** make your own fork make your command and create a pull request.
-Bear in mind to **use syntax** of Kimiwa, you can look basic commands like [ping](./src/commands/Miscellaneous/ping.js) and [base](./src/base/Command.js) for know how work Kimiwa.
-You need to create ``run`` methode, otherwise the command can not be executed by Kimiwa.
+Bear in mind to **use syntax** of Kimiwa, you can look basic commands like [ping](./src/commands/Miscellaneous/ping.js) and [base](./src/base/Command.js) to know how to work with Kimiwa.
+You need to create ``run`` method, otherwise the command can not be executed by Kimiwa.
 Commands like `nsfw` **or** `owner` **are categorically refused and deleted.**
 
 # Community
-Kimiwa has not own discord server community but has own category on the official **[Nesmon_ Community](https://discord.gg/REs8eXK)** server.
-You can come talk with other user of Kimiwa, developper or view changement of kimiwa befor other user.
+Kimiwa has not got its own Discord server community but has its own category on the official **[Nesmon_ Community](https://discord.gg/REs8eXK)** server.
+You can come talk with other users of Kimiwa, developpers or view changes of Kimiwa befor other users.
 
 # License
 Kimiwa is under the **[GNU AGPL v3](https://www.gnu.org/licenses/agpl-3.0.html)** license.
