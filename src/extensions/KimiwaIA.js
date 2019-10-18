@@ -3,7 +3,7 @@ const IA = require('./../constants/IAcmd')
 
 class kimiwaIA {
     constructor(client) {
-        this.kimiwa = client
+        this.kimiwa = client;
     }
 
     preconditionned(str, message) {
@@ -18,6 +18,11 @@ class kimiwaIA {
         }
 
         str = str.replace(`<@${this.kimiwa.user.id}>`, '').trim();
+        
+        if (str.includes('cmd') || str.includes('commands') || str.includes('command')) {
+            str = str.replace(/(\w*command)|(\w*cmd)|(\w*commands)/, '');
+        }
+
         str = str.replace(/[\s]{2,}/g, " ");
         str = str.toLowerCase();
 
@@ -34,8 +39,6 @@ class kimiwaIA {
         }
 
         this.selectFunc(out, func, str, message, level, levelCache)
-
-        //this.run(str, message, level, levelCache);
     }
 
     selectFunc(out, func, str, message, level, levelCache) {
@@ -78,11 +81,14 @@ class kimiwaIA {
     }
 
     help(out, str, message, level, levelCache) {
-        let args = []
-        let cmdName;
+        let args = [];
+        let cmdName; 
 
-        if (out === 'help3') {cmdName = 'help';
+        if (out === 'help1') {
+            cmdName = 'help'
+        }
         
+        if (out === 'help4') cmdName = 'help';
 
         this.run(cmdName, args, message, level, levelCache);
     }
