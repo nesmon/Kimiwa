@@ -13,7 +13,8 @@ class clear extends Command {
         });
     }
 
-    async run(message, args, kimiwa) { // eslint-disable-line no-unused-vars
+    async run(message, args, kimiwa, level) { // eslint-disable-line no-unused-vars
+
         let limit = args.splice(0).join(' ');
         limit = parseInt(limit);
 

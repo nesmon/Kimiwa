@@ -12,7 +12,7 @@ class Kitsuboard extends Command {
     });
   }
 
-  async run(message, args, level) { // eslint-disable-line no-unused-vars
+  async run(message, args, kimiwa) { // eslint-disable-line no-unused-vars
 
     const getQuery = await kimiwaHelper.query(this.client.db, 'SELECT * FROM anime ORDER BY search_time DESC LIMIT 10')
 

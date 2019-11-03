@@ -1,5 +1,5 @@
 const Command = require("../../base/Command.js");
-const kimiwaHelper = require('./../../kimiwaHelper');
+const kimiwaHelper = require('../../kimiwaHelper');
 
 class Osu extends Command {
     constructor(client) {
@@ -16,7 +16,7 @@ class Osu extends Command {
         let name;
         let mode;
 
-        if (IA == true) {
+        if (IA === true) {
             name = args[0];
             mode = args[1] || 'standard';
         } else {

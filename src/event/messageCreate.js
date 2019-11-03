@@ -1,15 +1,21 @@
 const Eris = require("eris");
 const kimiwaHelper = require('./../kimiwaHelper');
 
-module.exports = class {
+module.exports = class MessageCreate {
   constructor(client) {
     this.kimiwa = client;
     this.cooldown = new Eris.Collection();
+    this.user = this.kimiwa.user;
   }
 
   async run(message) {
 
     if (message.author.bot) return;
+
+    let user = await this.user.verifyUser(message);
+    if (user !== false) {
+      this.user.addMessage(message);
+    }
 
     let id = message.channel.id;
 
@@ -20,13 +26,15 @@ module.exports = class {
       return this.kimiwa.createMessage(message.channel.id, `My prefix on this guild is \`${this.kimiwa.prefix}\``);
     }
 
-    // This part is underbuild
     if (message.content.indexOf(`<@${this.kimiwa.user.id}>`) !== -1) {
-      if (message.content.indexOf(this.kimiwa.prefix) !== 0 ) {
-        this.kimiwa.ia.preconditionned(message.content, message)
+      if (user === false) {
+        return kimiwaHelper.flashMessage(message, 'You are ban :', 'Sorry but you are **ban** by an operator.\nYou can\'t use part of this bot.\nTry to contact an operator for unban or more information', 'RED', 10000);
+      } else {
+        if (message.content.indexOf(this.kimiwa.prefix) !== 0 ) {
+          this.kimiwa.human.preconditionned(message.content, message);
+        }
       }
     }
-
 
     // Detect if message contain prefix of Kimiwa 
     if (message.content.indexOf(this.kimiwa.prefix) !== 0) return;
@@ -38,13 +46,16 @@ module.exports = class {
 
     const cmd = this.kimiwa.commands.get(command) || this.kimiwa.commands.get(this.kimiwa.aliases.get(command));
 
+    if (user === false) {
+      return kimiwaHelper.flashMessage(message, 'You are ban :', 'Sorry but you are **ban** by an operator.\nYou can\'t use part of this bot.\nTry to contact an operator for unban or more information', 'RED', 10000);
+    }
+
     // If command not found, try find this command in custom command database
     if (!cmd) {
-      const cmdName = message.content.slice(this.kimiwa.prefix.length).split(" ")
-      const getCustomCommand = await kimiwaHelper.preparedQuery(this.kimiwa.db, 'SELECT * FROM customcmdserver WHERE guildID = ?', [message.channel.guild.id])
+      const cmdName = message.content.slice(this.kimiwa.prefix.length).split(" ");
+      const getCustomCommand = await kimiwaHelper.preparedQuery(this.kimiwa.db, 'SELECT * FROM customcmdserver WHERE guildID = ?', [message.channel.guild.id]);
 
       if (getCustomCommand.length > 0) {
-        console.log(cmdName[0])
         for (let i = 0; i < getCustomCommand.length; i++) {
           if (cmdName[0] === getCustomCommand[i].name) {
             return message.channel.createMessage(getCustomCommand[i].value)

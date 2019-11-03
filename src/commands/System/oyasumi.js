@@ -14,7 +14,7 @@ class Oyasumi extends Command {
     });
   }
 
-  async run(message, args, level, id) { // eslint-disable-line no-unused-vars
+  async run(message, args, kimiwa, level) { // eslint-disable-line no-unused-vars
     const react = await message.channel.createMessage(this.embed(message, "Would you stop the bot ?"))
     this.client.addMessageReaction(message.channel.id, react.id, '✅')
     this.client.addMessageReaction(message.channel.id, react.id, '❌');

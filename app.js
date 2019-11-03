@@ -1,29 +1,29 @@
-const Eris = require('eris-additions')(require('eris'));
+const {Client, Collection} = require('eris-additions')(require('eris'));
 const KimiwaConfig = require('./config/config');
-const kimiwaIA = require('./src/extensions/KimiwaIA');
-const {
-  promisify
-} = require("util");
+const kimiwaHuman = require('./src/extensions/KimiwaHuman');
+const kimiwaUser = require('./src/extensions/KimiwaUser');
+const {promisify} = require("util");
 const readdir = promisify(require("fs").readdir);
 const mysql = require('mysql');
 const klaw = require("klaw");
 const path = require("path");
 const Nodesu = require('nodesu');
 
-class KimiwaCore extends Eris.Client {
+class KimiwaCore extends Client {
   constructor() {
-    super(KimiwaConfig.token);
-    this.commands = new Eris.Collection();
-    this.aliases = new Eris.Collection();
-    this.modules = new Eris.Collection();
-    this.ia = new kimiwaIA(this)
+    super(KimiwaConfig.token, {restMode: true});
+    this.commands = new Collection();
+    this.aliases = new Collection();
+    this.modules = new Collection();
+    this.human = new kimiwaHuman(this);
+    this.user = new kimiwaUser(this);
     this.config = KimiwaConfig;
 
     this.prefix = KimiwaConfig.prefix;
     this.db = mysql.createConnection(KimiwaConfig.mysqlConfig);
     this.osu = new Nodesu.Client(KimiwaConfig.osu_apikey);
 
-    this.db.connect(this._initKimiwaDB)
+    this.db.connect(this._initKimiwaDB);
     this._addEventListeners();
     this._registerCommands();
     this._catchUnhandledRejections();
@@ -93,7 +93,7 @@ class KimiwaCore extends Eris.Client {
     })
   }
 
-  _permlevel(message) {
+   _permlevel(message) {
     let permlvl = 0;
 
     const permOrder = this.config.permLevels.slice(0).sort((p, c) => p.level < c.level ? 1 : -1);
@@ -115,7 +115,6 @@ class KimiwaCore extends Eris.Client {
     } else {
       console.log("DATABASE CONNECTION \nSuccessfully connected to the database!");
     }
-
   }
 
   levelCache() {
@@ -143,4 +142,4 @@ class KimiwaCore extends Eris.Client {
   };
 }
 
-module.exports = new KimiwaCore()
+module.exports = new KimiwaCore();

@@ -2,11 +2,11 @@ const kimiwaHelp = require('./../kimiwaHelper');
 
 module.exports = class Ready {
     constructor(client) {
-        this.client = client;
+        this.kimiwa = client;
     }
 
     async run() {
-        this.client.editStatus('online', {
+        this.kimiwa.editStatus('online', {
             name: "Hello"
         });
 

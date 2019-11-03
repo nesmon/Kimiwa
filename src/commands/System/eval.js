@@ -14,11 +14,11 @@ class Eval extends Command {
     });
   }
 
-  async run (message, args, level) { 
+  async run (message, args, kimiwa) { 
     const code = args.join(" ");
     try {
       const evaled = eval(code);
-      const clean = await this.client.clean(this.client, evaled);
+      const clean = await kimiwa.clean(this.client, evaled);
       // sends evaled output as a file if it exceeds the maximum character limit
       // 6 graves, and 2 characters for "js"
       const MAX_CHARS = 3 + 2 + clean.length + 3;
@@ -27,7 +27,7 @@ class Eval extends Command {
       }
       message.channel.createMessage(`\`\`\`js\n${clean}\n\`\`\``);
     } catch (err) {
-      message.channel.createMessage(`\`ERROR\` \`\`\`xl\n${await this.client.clean(this.client, err)}\n\`\`\``);
+      message.channel.createMessage(`\`ERROR\` \`\`\`xl\n${await kimiwa.clean(this.client, err)}\n\`\`\``);
     }
   }
 }

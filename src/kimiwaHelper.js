@@ -1,6 +1,4 @@
 const Embed = require('./extensions/Embed');
-const KCategory = require('./constants/Category')
-const kFlags = require('./kimiwaFlags');
 const ReactionHandler = require('eris-reactions');
 const EmbedPaginator = require('eris-pagination');
 const fs = require('fs');
@@ -10,8 +8,6 @@ const fetch = require('node-fetch');
 class kimiwaHelper {
     constructor() {
         this.Embed = Embed;
-        this.kFlag = kFlags;
-        this.KCategory = KCategory;
         this.PaginationEmbed = EmbedPaginator;
         this.ReactionHandler = ReactionHandler;
         this.ojsama = ojsama;
@@ -37,25 +33,27 @@ class kimiwaHelper {
         return str.trim();
     }
 
-    cleanArray(array) {
-        var i, j, len = array.length,
-            out = [],
-            obj = {};
-        for (i = 0; i < len; i++) {
-            obj[array[i]] = 0;
-        }
-        for (j in obj) {
-            out.push(j);
-        }
-        return out;
-    }
-
     pngToBase64URI(path) {
         let bitmap = fs.readFileSync(path, {
             encoding: null
         });
-        let URI = `data:image/png;base64,${bitmap.toString('base64')}`
-        return URI;
+        return `data:image/png;base64,${bitmap.toString('base64')}`;
+    }
+
+    async flashMessage(message, title = null, description = null, color = 'RANDOM',time) {
+        const e = new this.Embed();
+        e.setColor(color);
+        e.setTimestamp();
+        e.setFooter('\u200B');
+
+        if (title !== null) e.setTitle(title);
+        if (description !== null) e.setDescription(description)
+
+        const flash = await message.channel.createEmbed(e)
+
+        setTimeout(() => {
+            flash.delete();
+        }, time)
     }
 
     getRandomColor() {
@@ -77,7 +75,7 @@ class kimiwaHelper {
                 };
                 find.search_time++;
 
-                this.preparedQuery(coreDB, `UPDATE anime SET ? WHERE aid = ${find.aid}`, find)
+                this.preparedQuery(coreDB, `UPDATE anime SET ? WHERE aid = ${find.aid}`, find);
             } else {
                 find = {
                     'aid': id,
@@ -87,10 +85,10 @@ class kimiwaHelper {
                 };
 
                 this.preparedQuery(coreDB, 'INSERT INTO anime SET ?', find);
-            };
+            }
         } catch (error) {
-            console.log(error)
-        };
+            console.log(error);
+        }
     }
 
     normalizeSecondsToHMS(time) {
@@ -109,34 +107,26 @@ class kimiwaHelper {
     osuGetModeNumberByName(mode) {
         switch (mode) {
             case 'standard' || 'std' || 'clasic':
-                return mode = 0
-                break;
+                return mode = 0;
             case 'taiko':
-                return mode = 1
-                break;
+                return mode = 1;
             case 'catch' || 'ctb':
-                return mode = 2
-                break;
+                return mode = 2;
             case 'mania':
-                return mode = 3
-                break;
+                return mode = 3;
         }
     }
 
     osuGetModeNameByNumber(mode) {
         switch (mode) {
             case 0:
-                return "standard"
-                break;
+                return "standard";
             case 1:
-                return "taiko"
-                break;
+                return "taiko";
             case 2:
-                return "ctb"
-                break;
+                return "ctb";
             case 3:
-                return "mania"
-                break;
+                return "mania";
         }
     }
 
@@ -153,7 +143,7 @@ class kimiwaHelper {
                 parseInt(hm)
             ) * 300)) * 100));
 
-        return parse.toFixed(2)
+        return parse.toFixed(2);
     }
 
     secToMin(s) {
@@ -192,8 +182,7 @@ class kimiwaHelper {
         const file = `${__dirname}/../data/beatmap/${id}.osu`;
 
         if (fs.existsSync(file)) {
-            const result = fs.readFileSync(file, 'utf8');
-            return result;
+            return fs.readFileSync(file, 'utf8');
         } else {
             const cache = await fetch(`https://osu.ppy.sh/osu/${id}`);
             const result = await cache.text();

@@ -12,7 +12,7 @@ class Roll extends Command {
         });
     }
 
-    async run(message, args, level) { // eslint-disable-line no-unused-vars
+    async run(message, args, kimiwa) { // eslint-disable-line no-unused-vars
         let min = Math.ceil(1);
         let max = Math.floor(100);
         let roll = Math.floor(Math.random() * (max - min + 1)) + min;
