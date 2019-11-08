@@ -7,7 +7,7 @@ module.exports = class Ready {
 
     async run() {
         this.kimiwa.editStatus('online', {
-            name: "Hello"
+            name: "First beta : type k!help"
         });
 
         // this.client.editSelf({
