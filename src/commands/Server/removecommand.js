@@ -8,7 +8,7 @@ class removeCommand extends Command {
             description: "Remove command on you server",
             category: "Server",
             usage: "removecommand --name [name of command]",
-            permLevel: "Server Owner",
+            permLevel: "SOwner",
             aliases: ["rcm"]
         });
     }

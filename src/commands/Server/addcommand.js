@@ -8,7 +8,7 @@ class addCommand extends Command {
             description: "Add you own custom textual command",
             category: "Server",
             usage: "addcommand --name [name of command --value [value]",
-            permLevel: "Server Owner",
+            permLevel: "SOwner",
             aliases: ["acm"]
         });
     }
