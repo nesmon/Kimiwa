@@ -29,12 +29,12 @@ class Help extends Command {
         const myCommands = message.guild ? kimiwa.commands.filter(cmd => levelCache[cmd.conf.permLevel] <= level) : kimiwa.commands.filter(cmd => levelCache[cmd.conf.permLevel] <= level && cmd.conf.guildOnly !== true);
         let currentCategory = "";
         const sorted = Array.from(myCommands.values()).sort((p, c) => p.help.category > c.help.category ? 1 : p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1);
-        let em = new kimiwaHelper.Embed()
+        let em = new kimiwaHelper.Embed();
 
-        em.setTitle(`Command List : `)
+        em.setTitle(`Command List : `);
         em.setTimestamp();
-        em.setFooter(`Use ${kimiwa.prefix}help <commandname> for details`)
-        em.setColor('BLUE')
+        em.setFooter(`Use ${kimiwa.prefix}help <commandname> for details`);
+        em.setColor('BLUE');
 
         for (let i = 0; i < sorted.length; i++) {
           categoryF.push(sorted[i].help.category)
@@ -44,7 +44,7 @@ class Help extends Command {
           let cmd = sorted.filter(cate => cate.help.category === `${kimiwaHelper.cleanArray(categoryF)[i]}`)
           
           if (currentCategory !== cmd[0].help.category) {
-            desc = []
+            desc = [];
             currentCategory = cmd[0].help.category;
           }
 
@@ -53,10 +53,6 @@ class Help extends Command {
           }
 
           em.addField(`${cmd[0].help.category}`, `${desc.join("\n")}`, true)
-        }
-
-        if (Number.isInteger(kimiwaHelper.cleanArray(categoryF).length / 3)) {} else {
-          em.addBlankField(true)
         }
 
         message.channel.createEmbed(em)
