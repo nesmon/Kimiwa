@@ -10,7 +10,7 @@ class Oyasumi extends Command {
       category: "System",
       usage: "oyasumi",
       nsfw: false,
-      permLevel: "Owner"
+      permLevel: "owner"
     });
   }
 

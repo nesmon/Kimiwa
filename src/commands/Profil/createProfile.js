@@ -8,7 +8,7 @@ class createProfile extends Command {
             description: "Create your own profile",
             category: "Profile",
             usage: "createprofile",
-            permLevel: "User",
+            permLevel: "user",
             aliases: ["cp"]
         });
     }

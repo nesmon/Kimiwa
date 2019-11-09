@@ -8,7 +8,7 @@ class editProfile extends Command {
             description: "Edit your own profile",
             category: "Profile",
             usage: "editprofile",
-            permLevel: "User",
+            permLevel: "user",
             aliases: ["ep"]
         });
     }

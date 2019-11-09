@@ -10,7 +10,7 @@ class cache extends Command {
             category: "System",
             usage: "cache [anime/beatmap] [array]",
             nsfw: false,
-            permLevel: "Bot Support"
+            permLevel: "owner"
         });
     }
 

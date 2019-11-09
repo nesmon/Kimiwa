@@ -8,7 +8,7 @@ class profile extends Command {
             description: "Look your profile or profile af any people",
             category: "Profile",
             usage: "profile",
-            permLevel: "User",
+            permLevel: "user",
             aliases: []
         });
     }

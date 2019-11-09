@@ -10,7 +10,7 @@ class Command {
     cooldown = 3,
     guildOnly = false,
     aliases = new Array(),
-    permLevel = 'User'
+    permLevel = 'user'
   }) {
     this.client = client;
     this.conf = { nsfw, enabled, cooldown, guildOnly, aliases, permLevel };

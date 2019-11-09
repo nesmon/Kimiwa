@@ -10,7 +10,7 @@ class Eval extends Command {
       cooldown: 0,
       enabled: false,
       aliases: ["ev"],
-      permLevel: "Owner"
+      permLevel: "owner"
     });
   }
 

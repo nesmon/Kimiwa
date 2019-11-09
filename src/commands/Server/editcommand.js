@@ -8,7 +8,7 @@ class editCommand extends Command {
             description: "edit you own custom textual command",
             category: "Server",
             usage: "editcommand --name [name of command --value [new value]",
-            permLevel: "SOwner",
+            permLevel: "serverowner",
             aliases: ["ecm"]
         });
     }
