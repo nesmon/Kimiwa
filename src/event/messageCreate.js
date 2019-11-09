@@ -116,6 +116,7 @@ module.exports = class MessageCreate {
       message.flags.push(args.shift().slice(1));
     }
 
+    console.log(levelCache);
     cmd.run(message, args, this.kimiwa, level, false);
   };
 };
