@@ -8,7 +8,7 @@ class clear extends Command {
             description: "Clear message (between 1 and 99)",
             category: "Server",
             usage: "clear [number of message]",
-            permLevel: "Owner",
+            permLevel: "Server Owner",
             aliases: ["rm", "purge", 'bulk']
         });
     }
