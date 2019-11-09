@@ -21,6 +21,8 @@ class Help extends Command {
       levelCache[thisLevel.name] = thisLevel.level;
     }
 
+    console.log(levelCache);
+
     if (!args[0]) {
       try {
         let desc = [];
