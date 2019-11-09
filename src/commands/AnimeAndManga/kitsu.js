@@ -54,6 +54,8 @@ class Kitsu extends Command {
                     .setColor('BLUE')
                     .setTitle(results[i])
                     .setDescription(syn[i])
+                    .setFooter('For select your anime, just send the position of anime')
+                    .setTimestamp()
                 )
             }
 

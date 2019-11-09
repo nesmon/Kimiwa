@@ -34,7 +34,7 @@ class kimiwaHelper {
     }
 
     cleanArray(array) {
-        var i, j, len = array.length,
+        let i, j, len = array.length,
             out = [],
             obj = {};
         for (i = 0; i < len; i++) {
