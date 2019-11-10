@@ -12,6 +12,7 @@ module.exports = class MessageCreate {
 
     if (message.author.bot) return;
 
+
     let user = await this.user.verifyUser(message);
     if (user !== false) {
       this.user.addMessage(message);
@@ -116,7 +117,6 @@ module.exports = class MessageCreate {
       message.flags.push(args.shift().slice(1));
     }
 
-    console.log(levelCache);
     cmd.run(message, args, this.kimiwa, level, false);
   };
 };

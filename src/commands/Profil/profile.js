@@ -45,9 +45,10 @@ class profile extends Command {
 
 
         const getProfile = await kimiwaHelper.preparedQuery(kimiwa.db, 'SELECT * FROM profile WHERE user_ID = ?', profileID);
-        const getAvatar = await kimiwa.getRESTUser(getProfile[0].user_ID);
 
         if (getProfile.length > 0) {
+            const getAvatar = await kimiwa.getRESTUser(getProfile[0].user_ID);
+
             const e = new kimiwaHelper.Embed()
                 .setTitle(`Profile of ${profileName}`)
                 .setColor('BLUE')

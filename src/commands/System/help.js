@@ -55,6 +55,10 @@ class Help extends Command {
           em.addField(`${cmd[0].help.category}`, `${desc.join("\n")}`, true)
         }
 
+        if (Number.isInteger(kimiwaHelper.cleanArray(categoryF).length / 3)) {} else {
+          em.addBlankField(true)
+        }
+
         message.channel.createEmbed(em)
       } catch (error) {
         console.log(error)
