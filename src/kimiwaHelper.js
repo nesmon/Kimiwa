@@ -120,13 +120,13 @@ class kimiwaHelper {
     osuGetModeNumberByName(mode) {
         switch (mode) {
             case 'standard' || 'std' || 'clasic':
-                return mode = 'osu';
+                return mode = 0;
             case 'taiko':
-                return mode = 'taiko';
+                return mode = 1;
             case 'catch' || 'ctb':
-                return mode = 'ctb';
+                return mode = 2;
             case 'mania':
-                return mode = 'mania';
+                return mode = 3;
         }
     }
 
