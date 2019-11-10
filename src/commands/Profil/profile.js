@@ -18,8 +18,6 @@ class profile extends Command {
         let profileName;
         let profileID;
 
-        console.log(message)
-
 
         if (!mentionedProfile) {
             args = message.content.split(' ');

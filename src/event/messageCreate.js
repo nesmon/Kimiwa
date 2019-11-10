@@ -11,6 +11,8 @@ module.exports = class MessageCreate {
   async run(message) {
 
     if (message.author.bot) return;
+    console.log(message)
+
 
     let user = await this.user.verifyUser(message);
     if (user !== false) {
