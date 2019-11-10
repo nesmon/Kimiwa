@@ -27,6 +27,7 @@ class KimiwaCore extends Client {
     this._addEventListeners();
     this._registerCommands();
     this._catchUnhandledRejections();
+    console.log('1')
 
     this.connect();
   }
