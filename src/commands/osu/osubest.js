@@ -28,7 +28,7 @@ class OsuBest extends Command {
         if (mode === false) mode = 'std';
 
         let embedBest = [];
-        let getUserBestScore = await kimiwa.osu.user.getBest(name, kimiwaHelper.osuGetModeNumberByName(mode), 5)
+        let getUserBestScore = await kimiwa.osu.user.getBest(name, kimiwaHelper.osuGetModeNumberByName(mode), 5);
         let getUserInformation = await kimiwa.osu.user.get(name, kimiwaHelper.osuGetModeNumberByName(mode), undefined, 'string');
 
         if (!getUserInformation) {
@@ -50,7 +50,7 @@ class OsuBest extends Command {
             let beatmapStars = await new kimiwaHelper.ojsama.diff().calc({
                 map: beatmap,
                 mods: parseInt(bestScore.enabled_mods)
-            })
+            });
             beatmapStars = beatmapStars.toString().split(" ", 1)[0];
             let beatmapUsedMods = (kimiwaHelper.getModByNumber(bestScore.enabled_mods).length > 0) ? "+" + kimiwaHelper.getModByNumber(bestScore.enabled_mods).join(',') : "Nomod";
 
@@ -88,7 +88,7 @@ class OsuBest extends Command {
                     text: osuName + " #" + getUserInformation.pp_rank + " Global"
                 }
             })
-        };
+        }
 
         if (embedBest.length === 1) {
             message.channel.createEmbed(embedBest[0])
@@ -99,6 +99,6 @@ class OsuBest extends Command {
             });
         }
     };
-};
+}
 
 module.exports = OsuBest;
