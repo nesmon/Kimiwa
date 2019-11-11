@@ -84,7 +84,7 @@ class OsuBest extends Command {
             })
         }
 
-
+        
         if (embedBest.length === 1) {
             message.channel.createEmbed(embedBest[0])
         } else {
