@@ -24,12 +24,6 @@ class addCommand extends Command {
         try {
             const id = `${message.channel.guild.id}`;
 
-            if (name.includes(/[\u0800-\uFFFF]/g)) {
-                console.log("test")
-            }
-
-            name.replace(/[\u0800-\uFFFF]/g, '');
-
             let cmd = {
                 guildID: id,
                 createBy: message.author.id,
@@ -59,7 +53,7 @@ class addCommand extends Command {
             return message.channel.createEmbed(new kimiwaHelper.Embed()
                 .setColor('RED')
                 .setAuthor("ERROR", message.author.avatarURL)
-                .setDescription(`An error has been occured, please try again.`))
+                .setDescription(`An error has been occured, it's probably due to ussage of emoji in your name or value, please remove this and try again.`))
         }
 
     }
