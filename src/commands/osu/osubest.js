@@ -18,7 +18,7 @@ class OsuBest extends Command {
         if (IA === true) {
             name = args[0];
         } else {
-            name = kimiwaHelper.flags(message.content, "--name");
+            return console.log(args)
         }
 
         if (name === false) return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks specify a username with --name [username]`));

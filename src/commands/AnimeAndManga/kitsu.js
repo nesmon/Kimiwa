@@ -17,7 +17,7 @@ class Kitsu extends Command {
 
         let name;
 
-        if (IA == true) {
+        if (IA === true) {
             name = args[0];
         } else {
             name = args.splice(0).join(' ');
