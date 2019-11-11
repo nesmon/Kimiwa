@@ -14,7 +14,7 @@ class OsuBest extends Command {
 
     async run(message, args, kimiwa, level, IA) { // eslint-disable-line no-unused-vars
         let name;
-        return console.log(args);
+        console.log(args, "321");
 
         if (IA === true) {
             name = args[0];
