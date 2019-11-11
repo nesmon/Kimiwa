@@ -15,8 +15,8 @@ class addCommand extends Command {
 
     async run(message, args, kimiwa) { // eslint-disable-line no-unused-vars
 
-        let name = kimiwaHelper.flags(message.content, "--name")
-        let value = kimiwaHelper.flags(message.content, "--value")
+        let name = kimiwaHelper.flags(message.content, "--name");
+        let value = kimiwaHelper.flags(message.content, "--value");
 
         if (name === false) return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks to asigne name to your command with --name [name of command]`));
         if (value === false) return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks to asigne value to your command with --value [value of command]`));
