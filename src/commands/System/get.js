@@ -1,13 +1,13 @@
 const Command = require("../../base/Command.js");
 const kimiwaHelper = require('./../../kimiwaHelper');
 
-class cache extends Command {
+class get extends Command {
     constructor(client) {
         super(client, {
-            name: "cache",
-            description: "Cache some information like beatmap file or anime data",
+            name: "get",
+            description: "get some information for stats",
             category: "System",
-            usage: "cache [anime/beatmap] [array]",
+            usage: "get parameter here",
             nsfw: false,
             permLevel: "owner"
         });
@@ -33,4 +33,4 @@ class cache extends Command {
 
     }
 }
-module.exports = cache;
+module.exports = get;
