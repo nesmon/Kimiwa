@@ -14,8 +14,8 @@ class get extends Command {
     }
 
     async run(message, args, kimiwa) { // eslint-disable-line no-unused-vars
-        let type = kimiwaHelper.flags(message, '--type');
-        let off = kimiwaHelper.flags(message, '--of');
+        let type = kimiwaHelper.flags(message.content, '--type');
+        let off = kimiwaHelper.flags(message.content, '--of');
 
         if (type === false) return message.channel.createMessage('Please specify a type');
         if (off === false) return message.channel.createMessage('Please specify a value');
