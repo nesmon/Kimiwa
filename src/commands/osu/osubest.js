@@ -34,7 +34,7 @@ class OsuBest extends Command {
         for (let i = 0; i < getUserBestScore.length; i++) {
             let bestScore = getUserBestScore[i];
             let maps = await kimiwa.osu.beatmaps.getByBeatmapId(bestScore.beatmap_id);
-            let renderBeatmapName = maps[0].artist + "-" + maps[0].title + "[" + maps[0].version + "]"
+            let renderBeatmapName = maps[0].artist + "-" + maps[0].title + "[" + maps[0].version + "]";
 
             let getMap = await kimiwaHelper.getOsuBeatmapCache(bestScore.beatmap_id);
             let parseBeatmap = new kimiwaHelper.ojsama.parser();
@@ -44,7 +44,7 @@ class OsuBest extends Command {
             let beatmapStars = await new kimiwaHelper.ojsama.diff().calc({
                 map: beatmap,
                 mods: parseInt(bestScore.enabled_mods)
-            })
+            });
             beatmapStars = beatmapStars.toString().split(" ", 1)[0];
             let beatmapUsedMods = (kimiwaHelper.getModByNumber(bestScore.enabled_mods).length > 0) ? "+" + kimiwaHelper.getModByNumber(bestScore.enabled_mods).join(',') : "Nomod";
 
@@ -82,7 +82,7 @@ class OsuBest extends Command {
                     text: osuName + " #" + getUserInformation.pp_rank + " Global"
                 }
             })
-        };
+        }
 
         if (embedBest.length === 1) {
             message.channel.createEmbed(embedBest[0])
@@ -93,6 +93,6 @@ class OsuBest extends Command {
             });
         }
     };
-};
+}
 
 module.exports = OsuBest;
