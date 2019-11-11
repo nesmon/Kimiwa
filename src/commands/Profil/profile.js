@@ -25,7 +25,7 @@ class profile extends Command {
 
             if (Number.isInteger(id)) {
                 try {
-                    const getName = await kimiwa.getRESTUser(args[1])
+                    const getName = await kimiwa.getRESTUser(args[1]);
                     profileName = getName.username;
                     profileID = id;
                 } catch (error) {
