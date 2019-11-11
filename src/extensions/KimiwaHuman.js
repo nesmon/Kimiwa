@@ -78,7 +78,8 @@ class kimiwaHuman {
 
         if (out === 'osubest') {
             str = str.split(inp);
-            console.log(str);
+            str = kimiwaHelper.removeUselessSpace(str[1]);
+
             args.push(str);
 
             cmdName = 'osubest';
