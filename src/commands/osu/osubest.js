@@ -7,7 +7,7 @@ class OsuBest extends Command {
             name: "osubest",
             category: "Osu",
             description: "get best play of osu user",
-            usage: "osubest --name [name of user]",
+            usage: "osubest [name of user]",
             aliases: ["osubest", "Osubest", "osuBest", "ob"]
         });
     }
