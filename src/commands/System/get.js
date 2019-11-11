@@ -15,20 +15,20 @@ class get extends Command {
 
     async run(message, args, kimiwa) { // eslint-disable-line no-unused-vars
         let type = kimiwaHelper.flags(message.content, '--type');
-        let off = kimiwaHelper.flags(message.content, '--of');
+        let of = kimiwaHelper.flags(message.content, '--of');
 
         if (type === false) return message.channel.createMessage('Please specify a type');
-        if (off === false) return message.channel.createMessage('Please specify a value');
+        if (of === false) return message.channel.createMessage('Please specify a value');
 
         if (type === 'message') {
-            const getMessage = await kimiwaHelper.preparedQuery(this.client.db, 'SELECT * FROM user WHERE user_ID = ?', [off]);
-            const user = await kimiwa.getRESTUser(off);
+            const getMessage = await kimiwaHelper.preparedQuery(this.client.db, 'SELECT * FROM user WHERE user_ID = ?', [of]);
+            const user = await kimiwa.getRESTUser(of);
 
             message.channel.createEmbed(new kimiwaHelper.Embed()
                 .setColor('GREEN')
                 .setTitle('Number of message')
-                .setDescription(`${user.username} send ${getMessage[0].messagesend}`)
-            )
+                .setDescription(`${user.username} send ${getMessage[0].messagesend} message`)
+            );
         }
 
     }
