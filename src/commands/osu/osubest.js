@@ -14,14 +14,13 @@ class OsuBest extends Command {
 
     async run(message, args, kimiwa, level, IA) { // eslint-disable-line no-unused-vars
         let name;
-        console.log(args, "321");
 
         if (IA === true) {
             name = args[0];
+        } else {
+            name = args.splice(0).join(' ');
         }
-
-        if (name === false) return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks specify a username with --name [username]`));
-
+        
         let embedBest = [];
         let getUserBestScore = await kimiwa.osu.user.getBest(name, 0, 5);
         let getUserInformation = await kimiwa.osu.user.get(name, 0, undefined);
