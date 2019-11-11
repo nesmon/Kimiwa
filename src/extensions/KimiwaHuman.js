@@ -78,6 +78,7 @@ class kimiwaHuman {
 
         if (out === 'osubest') {
             str = str.split(inp);
+            console.log(str);
             args.push(str);
 
             cmdName = 'osubest';
