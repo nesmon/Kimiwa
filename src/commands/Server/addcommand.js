@@ -23,12 +23,19 @@ class addCommand extends Command {
 
         try {
             const id = `${message.channel.guild.id}`;
+
+            if (name.includes(/[\u0800-\uFFFF]/g)) {
+                console.log("test")
+            }
+
+            name.replace(/[\u0800-\uFFFF]/g, '');
+
             let cmd = {
                 guildID: id,
                 createBy: message.author.id,
                 name: name.replace(/ +/g, ""),
                 value: value
-            }
+            };
 
             const getServer = await kimiwaHelper.preparedQuery(kimiwa.db, 'SELECT name FROM customcmdserver WHERE guildID = ?', id);
 

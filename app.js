@@ -11,7 +11,7 @@ const Nodesu = require('nodesu');
 
 class KimiwaCore extends Client {
   constructor() {
-    super(KimiwaConfig.token, {restMode: true});
+    super(KimiwaConfig.token, {"restMode": true});
     this.commands = new Collection();
     this.aliases = new Collection();
     this.modules = new Collection();
