@@ -78,21 +78,8 @@ class kimiwaHuman {
 
         if (out === 'osubest') {
             str = str.split(inp);
+            args.push(str);
 
-            if (str[1].includes('in osu')) {
-                str = str[1].replace('in osu', '');
-                str = str.split('  ');
-
-                args.push(str[0].trim());
-
-                str = str[1].split(' ');
-                args.push(str[0]);
-            } else {
-                args.push(str[1]);
-                args.push('standard');
-            }
-
-            console.log(args);
             cmdName = 'osubest';
         }
 

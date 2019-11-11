@@ -7,29 +7,25 @@ class OsuBest extends Command {
             name: "osubest",
             category: "Osu",
             description: "get best play of osu user",
-            usage: "osubest --name [name of user] --mode [standard/mania/taiko/catch optional, by default std is select]",
+            usage: "osubest --name [name of user]",
             aliases: ["osubest", "Osubest", "osuBest", "ob"]
         });
     }
 
     async run(message, args, kimiwa, level, IA) { // eslint-disable-line no-unused-vars
         let name;
-        let mode;
 
         if (IA === true) {
             name = args[0];
-            mode = args[1];
         } else {
             name = kimiwaHelper.flags(message.content, "--name");
-            mode = kimiwaHelper.flags(message.content, "--mode");
         }
 
         if (name === false) return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks specify a username with --name [username]`));
-        if (mode === false) mode = 'std';
 
         let embedBest = [];
-        let getUserBestScore = await kimiwa.osu.user.getBest(name, kimiwaHelper.osuGetModeNumberByName(mode), 5)
-        let getUserInformation = await kimiwa.osu.user.get(name, kimiwaHelper.osuGetModeNumberByName(mode), undefined, 'string');
+        let getUserBestScore = await kimiwa.osu.user.getBest(name, 0, 5);
+        let getUserInformation = await kimiwa.osu.user.get(name, 0, undefined);
 
         if (!getUserInformation) {
             return message.channel.createMessage('Sorry but this username dosne\'t exist :/');
@@ -44,7 +40,7 @@ class OsuBest extends Command {
 
             let getMap = await kimiwaHelper.getOsuBeatmapCache(bestScore.beatmap_id);
             let parseBeatmap = new kimiwaHelper.ojsama.parser();
-            parseBeatmap.feed(getMap)
+            parseBeatmap.feed(getMap);
 
             let beatmap = parseBeatmap.map;
             let beatmapStars = await new kimiwaHelper.ojsama.diff().calc({
