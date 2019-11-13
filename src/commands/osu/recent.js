@@ -1,14 +1,14 @@
 const Command = require("../../base/Command.js");
 const kimiwaHelper = require('../../kimiwaHelper');
 
-class Osu extends Command {
+class Recentu extends Command {
     constructor(client) {
         super(client, {
-            name: "osu",
+            name: "recent",
             category: "Osu",
-            description: "Get osu information about player",
-            usage: "osu --name [name of user] --mode [standard/mania/taiko/catch optional, by default std is select]",
-            aliases: ["osu", "ctb", "std", "mania", "catch", "taiko"]
+            description: "Get osu information about last play of player",
+            usage: "rs --name [name of user] --mode [standard/mania/taiko/catch optional, by default std is select]",
+            aliases: ["rs"]
         });
     }
 
@@ -39,4 +39,4 @@ class Osu extends Command {
 
 
 
-module.exports = Osu;
+module.exports = recent;
