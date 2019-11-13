@@ -27,12 +27,10 @@ class Osu extends Command {
         if (name === false) {
             name = args.splice(0).join(' ');
             if (name === '') {
-                return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks to asigne name to your command with --name [name of command]`));
+                return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks to asigne name to your command with --name [name of command] or just put your name if you search in std`));
             }
-            return console.log(name)
         }
 
-        if (name === false) return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks to asigne name to your command with --name [name of command]`));
         if (mode === false) mode = 'std';
         
         kimiwa.osu.user
