@@ -23,7 +23,12 @@ class Osu extends Command {
             name = kimiwaHelper.flags(message.content, "--name");
             mode = kimiwaHelper.flags(message.content, "--mode");
         }
-        
+
+        if (name === false) {
+            name = args.splice(0).join(' ');
+            return console.log(name);
+        }
+
         if (name === false) return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks to asigne name to your command with --name [name of command]`));
         if (mode === false) mode = 'std';
         
