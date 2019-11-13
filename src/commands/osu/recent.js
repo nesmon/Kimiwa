@@ -1,7 +1,7 @@
 const Command = require("../../base/Command.js");
 const kimiwaHelper = require('../../kimiwaHelper');
 
-class Recentu extends Command {
+class Recent extends Command {
     constructor(client) {
         super(client, {
             name: "recent",
@@ -39,4 +39,4 @@ class Recentu extends Command {
 
 
 
-module.exports = recent;
+module.exports = Recent;

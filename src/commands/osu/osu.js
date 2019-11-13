@@ -27,14 +27,9 @@ class Osu extends Command {
         if (name === false) {
             name = args.splice(0).join(' ');
             if (name === '') {
-                console.log(1);
                 const osuName = await kimiwaHelper.preparedQuery(kimiwa.db, 'SELECT * FROM profile WHERE user_ID = ?', message.author.id);
-                console.log(1);
-                console.log(osuName);
-                console.log(1);
                 name = osuName[0].osu_username;
-                console.log(1);
-                if (name === '') {
+                if (name === '' || name === null) {
                     return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks to asigne name to your command with --name [name of command] or just put your name if you search in std`));
                 }
             }
