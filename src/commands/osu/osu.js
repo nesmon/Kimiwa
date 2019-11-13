@@ -27,7 +27,7 @@ class Osu extends Command {
         if (name === false) {
             name = args.splice(0).join(' ');
             if (name === '') {
-                let osuName = await kimiwaHelper.preparedQuery(kimiwa.db, 'SELECT * FROM profile WHERE user_ID = ?', message.author.id);
+                const osuName = await kimiwaHelper.preparedQuery(kimiwa.db, 'SELECT * FROM profile WHERE user_ID = ?', message.author.id);
                 console.log(osuName);
                 name = osuName[0].osu_username;
                 if (name === '') {
