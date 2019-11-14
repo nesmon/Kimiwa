@@ -37,6 +37,12 @@ class Recent extends Command {
 
         if (mode === false) mode = 'std';
 
+        kimiwa.osu.user
+            .getRecent(name, mode, 1)
+            .then(data => {
+                console.log(data)
+            })
+
 
     };
 }
