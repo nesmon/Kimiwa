@@ -224,8 +224,8 @@ class kimiwaHelper {
             case 'getRecent':
                 kimiwaCore.osu.user
                     .getRecent(id, mode, limit, lookup)
-                    .then(async data => {
-                        await data;
+                    .then(data => {
+                        return data;
                     });
                 break;
             default :
