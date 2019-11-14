@@ -222,10 +222,10 @@ class kimiwaHelper {
             case 'getBeatpmap':
                 break;
             case 'getRecent':
-                await kimiwaCore.osu.user
+                kimiwaCore.osu.user
                     .getRecent(id, mode, limit, lookup)
-                    .then(data => {
-                        console.log(data)
+                    .then(async (data) => {
+                        data = await data;
                         return data;
                     });
                 break;
