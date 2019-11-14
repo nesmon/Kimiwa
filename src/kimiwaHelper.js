@@ -222,12 +222,7 @@ class kimiwaHelper {
             case 'getBeatpmap':
                 break;
             case 'getRecent':
-                kimiwaCore.osu.user
-                    .getRecent(id, mode, limit, lookup)
-                    .then(data => {
-                        return data;
-                    });
-                break;
+                return kimiwaCore.osu.user.getRecent(id, mode, limit, lookup);
             default :
                 return console.log('Thanks to give good option.');
 
