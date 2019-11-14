@@ -225,6 +225,7 @@ class kimiwaHelper {
                 await kimiwaCore.osu.user
                     .getRecent(id, mode, limit, lookup)
                     .then(data => {
+                        console.log(data)
                         return data;
                     });
                 break;
