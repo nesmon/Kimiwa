@@ -220,7 +220,7 @@ class kimiwaHelper {
                 // Probably use HTTP (native module of node.js
                 break;
             case 'getBeatpmapId':
-                console.log(kimiwaCore.osu.beatmaps.getByBeatmapId(id));
+                return kimiwaCore.osu.beatmaps.getByBeatmapId(id);
             case 'getRecent':
                 return kimiwaCore.osu.user.getRecent(id, mode, limit, lookup);
             default :
