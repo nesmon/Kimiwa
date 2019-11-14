@@ -212,6 +212,7 @@ class kimiwaHelper {
     }
 
     async osuAPI (kimiwaCore, type, id, mode, limit = 5, lookup = undefined) {
+        mode = this.osuGetModeNumberByName(mode);
         switch (type) {
             case 'getUser' :
                 break;
