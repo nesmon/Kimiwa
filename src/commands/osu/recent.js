@@ -37,11 +37,8 @@ class Recent extends Command {
 
         if (mode === false) mode = 'std';
 
-        kimiwa.osu.user
-            .getRecent(name, mode, 1)
-            .then(data => {
-                console.log(data)
-            })
+        const getRecent = await kimiwaHelper.osuAPI(kimiwa, 'getRecent', name, mode, 1, 'string');
+        console.log(getRecent);
 
 
     };
