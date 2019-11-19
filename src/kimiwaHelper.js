@@ -134,7 +134,8 @@ class kimiwaHelper {
         parsebeatmap.objects.forEach(singleObject => beatmapHitObjects.push(parseInt(singleObject.time)));
         const timing = parseInt(beatmapHitObjects[globalCount - 1]) - parseInt(beatmapHitObjects[0]);
         const point = parseInt(beatmapHitObjects[parseHit - 1]) - parseInt(beatmapHitObjects[0]);
-
+    console.log(point);
+    console.log(timing);
         return (point / timing) * 100;
     }
 
