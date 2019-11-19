@@ -58,10 +58,11 @@ class Recent extends Command {
             .setColor(16016293)
             .setTitle(`${renderBeatmapName}+${beatmapUsedMods}`)
             .setThumbnail(`https://b.ppy.sh/thumb/${getBeatmap[0].beatmapset_id}l.jpg?uts=${Math.floor(new Date() / 1000)}`)
-            .addField('Score :',
+            .addField('Play score :',
                  `${beatmapStars.toString().split(" ", 1)[0]}★ ▸${getRecent[0].rank} ▸${getRecent[0].score}\n` +
                 `**Total hits** ▸[${getRecent[0].count300 + "/" + getRecent[0].count100 + "/" + getRecent[0].count50 +"/" + getRecent[0].countmiss}]\n` +
-                `**Accuracy : ** ▸ ${kimiwaHelper.osuGetAcu(getRecent[0].count300, getRecent[0].count100, getRecent[0].count50, getRecent[0].countmiss)}%`
+                `**Accuracy : ** ▸ ${kimiwaHelper.osuGetAcu(getRecent[0].count300, getRecent[0].count100, getRecent[0].count50, getRecent[0].countmiss)}%`,
+                true
             )
         );
         console.log(getRecent);
