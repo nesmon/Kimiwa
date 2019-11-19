@@ -57,7 +57,8 @@ class Recent extends Command {
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor(16016293)
             .setTitle(`${renderBeatmapName}]+${beatmapUsedMods}`)
-            .setDescription("test")
+            .setThumbnail(`https://b.ppy.sh/thumb/${getBeatmap[0].beatmapset_id}l.jpg?uts=${Math.floor(new Date() / 1000)}`)
+            .setDescription()
         );
         console.log(getRecent);
         console.log(getBeatmap);
