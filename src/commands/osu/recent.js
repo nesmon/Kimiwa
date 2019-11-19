@@ -64,8 +64,8 @@ class Recent extends Command {
             .setTitle(`${renderBeatmapName}+${beatmapUsedMods}`)
             .setThumbnail(`https://b.ppy.sh/thumb/${getBeatmap[0].beatmapset_id}l.jpg?uts=${Math.floor(new Date() / 1000)}`)
             .addField('Play score :',
-                 `${beatmapStars.toString().split(" ", 1)[0]}★ ▸${getRecent[0].rank} ▸${getRecent[0].score}\n` +
-                `**Total hits : ** ▸[${getRecent[0].count300 + "/" + getRecent[0].count100 + "/" + getRecent[0].count50 +"/" + getRecent[0].countmiss}]\n` +
+                `${beatmapStars.toString().split(" ", 1)[0]}★ ▸${getRecent[0].rank} ▸${getRecent[0].score}\n` +
+                `**Total hits : ** ▸[${getRecent[0].count300 + "/" + getRecent[0].count100 + "/" + getRecent[0].count50 + "/" + getRecent[0].countmiss}]\n` +
                 `**Accuracy : ** ▸ ${kimiwaHelper.osuGetAcu(getRecent[0].count300, getRecent[0].count100, getRecent[0].count50, getRecent[0].countmiss)}%\n` +
                 true
             )
@@ -76,7 +76,6 @@ class Recent extends Command {
         );
         console.log(getRecent);
         console.log(getBeatmap);
-
 
     }
 }
