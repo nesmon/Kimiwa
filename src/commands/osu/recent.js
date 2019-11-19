@@ -55,11 +55,11 @@ class Recent extends Command {
 
         let beatmapHitObjects = [];
         let totalHits = getRecent[0].count300 + getRecent[0].count100 + getRecent[0].count50 + getRecent[0].countmiss;
-        let parseHit = (!totalHits) ? parseInt(parseBeatmap.objects.length) : parseInt(totalHits);
-        return console.log(beatmap.objects.length);
-        let globalCount = parseInt(parseBeatmap.objects.length);
+        let parseHit = (!totalHits) ? parseInt(beatmap.objects.length) : parseInt(totalHits);
 
-        parseBeatmap.objects.forEach(singleObject => beatmapHitObjects.push(parseInt(singleObject.time)));
+        let globalCount = parseInt(beatmap.objects.length);
+
+        beatmap.objects.forEach(singleObject => beatmapHitObjects.push(parseInt(singleObject.time)));
 
         const timing     = parseInt(beatmapHitObjects[globalCount - 1]) - parseInt(beatmapHitObjects[0]);
         const point      = parseInt(beatmapHitObjects[parseHit - 1]) - parseInt(beatmapHitObjects[0]);
