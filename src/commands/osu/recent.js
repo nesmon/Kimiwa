@@ -58,7 +58,7 @@ class Recent extends Command {
             .setColor(16016293)
             .setTitle(`${renderBeatmapName}]+${beatmapUsedMods}`)
             .setThumbnail(`https://b.ppy.sh/thumb/${getBeatmap[0].beatmapset_id}l.jpg?uts=${Math.floor(new Date() / 1000)}`)
-            .setDescription()
+            .setDescription("test")
         );
         console.log(getRecent);
         console.log(getBeatmap);
