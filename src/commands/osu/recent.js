@@ -54,7 +54,7 @@ class Recent extends Command {
         let beatmapUsedMods = (kimiwaHelper.getModByNumber(getBeatmap[0].enabled_mods).length > 0) ? "+" + kimiwaHelper.getModByNumber(getBeatmap[0].enabled_mods).join(',') : "Nomod";
 
         let completion = kimiwaHelper.osuCompletion(getMap, getRecent[0].count300 + getRecent[0].count100 + getRecent[0].count50 + getRecent[0].countmiss);
-        let TimeRecent = parseFloat(completion);
+    console.log(completion)
 
         let TimeRecentSecond = TimeRecent * getBeatmap[0].total_lenght / 100;
 
@@ -66,11 +66,11 @@ class Recent extends Command {
             .addField('Play score :',
                 `${beatmapStars.toString().split(" ", 1)[0]}★ ▸${getRecent[0].rank} ▸${getRecent[0].score}\n` +
                 `**Total hits : ** ▸[${getRecent[0].count300 + "/" + getRecent[0].count100 + "/" + getRecent[0].count50 + "/" + getRecent[0].countmiss}]\n` +
-                `**Accuracy : ** ▸ ${kimiwaHelper.osuGetAcu(getRecent[0].count300, getRecent[0].count100, getRecent[0].count50, getRecent[0].countmiss)}%\n` +
+                `**Accuracy : ** ▸ ${kimiwaHelper.osuGetAcu(getRecent[0].count300, getRecent[0].count100, getRecent[0].count50, getRecent[0].countmiss)}%\n`,
                 true
             )
             .addField('\u200B',
-                `**Completion : ${TimeRecent}:${kimiwaHelper.normalizeSecondsToHMS(TimeRecentSecond)}/${kimiwaHelper.normalizeSecondsToHMS(getBeatmap[0].total_lenght)}**`,
+                `**Completion : ${completion}:${kimiwaHelper.normalizeSecondsToHMS(TimeRecentSecond)}/${kimiwaHelper.normalizeSecondsToHMS(getBeatmap[0].total_lenght)}**`,
                 true
             )
         );
