@@ -117,6 +117,10 @@ class kimiwaHelper {
         return normalizeHours + normalizeMinutes + normalizeSeconds;
     }
 
+    normalizeSecToMin(s) {
+        return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
+    }
+
     osuCompletion(beatmapdata, hitsGlobal) {
         let beatmap = new ojsama.parser();
         beatmap.feed(beatmapdata);
