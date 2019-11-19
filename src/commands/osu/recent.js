@@ -56,6 +56,7 @@ class Recent extends Command {
         let completion = kimiwaHelper.osuCompletion(getMap, parseInt(getRecent[0].count300) + parseInt(getRecent[0].count100) + parseInt(getRecent[0].count50) + parseInt(getRecent[0].countmiss));
 
         let TimeRecentSecond = completion * getBeatmap[0].total_length / 100;
+        TimeRecentSecond = parseInt(TimeRecentSecond);
 
 
         message.channel.createEmbed(new kimiwaHelper.Embed()
@@ -69,7 +70,7 @@ class Recent extends Command {
                 true
             )
             .addField('\u200B',
-                `**Completion :** ${completion}%\n**Length :** ${parseInt(kimiwaHelper.normalizeSecToMin(TimeRecentSecond))}/${kimiwaHelper.normalizeSecToMin(getBeatmap[0].total_length)}`,
+                `**Completion :** ${completion}%\n**Length :** ${kimiwaHelper.normalizeSecToMin(TimeRecentSecond)}/${kimiwaHelper.normalizeSecToMin(getBeatmap[0].total_length)}`,
                 true
             )
         );
