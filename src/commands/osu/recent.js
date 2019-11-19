@@ -54,14 +54,28 @@ class Recent extends Command {
         let beatmapUsedMods = (kimiwaHelper.getModByNumber(getBeatmap[0].enabled_mods).length > 0) ? "+" + kimiwaHelper.getModByNumber(getBeatmap[0].enabled_mods).join(',') : "Nomod";
 
 
+        let beatmapHitObjects   = [];
+        let parsedHits          = (!totalHits) ? parseInt(parseBeatmap.objects.length) : parseInt(totalHits);
+        let generalCount        = parseInt(parseBeatmap.objects.length);
+
+        parseBeatmap.objects.forEach(singleObject => beatmapHitObjects.push(parseInt(singleObject.time)));
+
+        const hitTiming     = parseInt(beatmapHitObjects[generalCount - 1]) - parseInt(beatmapHitObjects[0]);
+        const hitPoint      = parseInt(beatmapHitObjects[parsedHits - 1]) - parseInt(beatmapHitObjects[0]);
+
+        let TimeRecent = (hitPoint / hitTiming) * 100;
+        let TimeRecentSecond = TimeRecent * getBeatmap[0].total_lenght / 100;
+
+
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor(16016293)
             .setTitle(`${renderBeatmapName}+${beatmapUsedMods}`)
             .setThumbnail(`https://b.ppy.sh/thumb/${getBeatmap[0].beatmapset_id}l.jpg?uts=${Math.floor(new Date() / 1000)}`)
             .addField('Play score :',
                  `${beatmapStars.toString().split(" ", 1)[0]}★ ▸${getRecent[0].rank} ▸${getRecent[0].score}\n` +
-                `**Total hits** ▸[${getRecent[0].count300 + "/" + getRecent[0].count100 + "/" + getRecent[0].count50 +"/" + getRecent[0].countmiss}]\n` +
-                `**Accuracy : ** ▸ ${kimiwaHelper.osuGetAcu(getRecent[0].count300, getRecent[0].count100, getRecent[0].count50, getRecent[0].countmiss)}%`,
+                `**Total hits : ** ▸[${getRecent[0].count300 + "/" + getRecent[0].count100 + "/" + getRecent[0].count50 +"/" + getRecent[0].countmiss}]\n` +
+                `**Accuracy : ** ▸ ${kimiwaHelper.osuGetAcu(getRecent[0].count300, getRecent[0].count100, getRecent[0].count50, getRecent[0].countmiss)}%\n` +
+                `**Completion : ${kimiwaHelper.normalizeSecondsToHMS(TimeRecentSecond)}/${kimiwaHelper.normalizeSecondsToHMS(getBeatmap[0].total_lenght)}**`,
                 true
             )
         );
