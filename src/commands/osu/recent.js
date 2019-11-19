@@ -42,6 +42,7 @@ class Recent extends Command {
 
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor(16016293)
+            .setDescription("test")
         );
         console.log(getRecent);
         console.log(getBeatmap);
