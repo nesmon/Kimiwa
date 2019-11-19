@@ -53,8 +53,7 @@ class Recent extends Command {
         beatmapStars = beatmapStars.toString().split(" ", 1)[0];
         let beatmapUsedMods = (kimiwaHelper.getModByNumber(getBeatmap[0].enabled_mods).length > 0) ? "+" + kimiwaHelper.getModByNumber(getBeatmap[0].enabled_mods).join(',') : "Nomod";
 
-        let completion = kimiwaHelper.osuCompletion(getMap, getRecent[0].count300 + getRecent[0].count100 + getRecent[0].count50 + getRecent[0].countmiss);
-
+        let completion = kimiwaHelper.osuCompletion(getMap, parseInt(getRecent[0].count300 + getRecent[0].count100 + getRecent[0].count50 + getRecent[0].countmiss));
 
         let TimeRecentSecond = completion * getBeatmap[0].total_length / 100;
 
