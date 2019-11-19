@@ -119,7 +119,7 @@ class kimiwaHelper {
 
     osuCompletion(beatmapdata, hitsGlobal) {
         let beatmap = new ojsama.parser();
-        beatmap.feed(data);
+        beatmap.feed(beatmapdata);
         let parsebeatmap = beatmap.map;
 
         let beatmapHitObjects = [];
