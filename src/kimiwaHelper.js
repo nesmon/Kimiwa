@@ -117,6 +117,19 @@ class kimiwaHelper {
         return normalizeHours + normalizeMinutes + normalizeSeconds;
     }
 
+    osuCompletion(beatmap, hitsGlobal) {
+        let beatmapHitObjects = [];
+        let parseHit = (!hitsGlobal) ? parseInt(beatmap.objects.length) : parseInt(hitsGlobal);
+
+        let globalCount = parseInt(beatmap.objects.length);
+
+        beatmap.objects.forEach(singleObject => beatmapHitObjects.push(parseInt(singleObject.time)));
+        const timing = parseInt(beatmapHitObjects[globalCount - 1]) - parseInt(beatmapHitObjects[0]);
+        const point = parseInt(beatmapHitObjects[parseHit - 1]) - parseInt(beatmapHitObjects[0]);
+
+        return (point / timing) * 100;
+    }
+
     osuGetModeNumberByName(mode) {
         switch (mode) {
             case 'standard' || 'std' || 'clasic':
