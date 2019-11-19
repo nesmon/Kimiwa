@@ -117,13 +117,17 @@ class kimiwaHelper {
         return normalizeHours + normalizeMinutes + normalizeSeconds;
     }
 
-    osuCompletion(beatmap, hitsGlobal) {
+    osuCompletion(beatmapdata, hitsGlobal) {
+        let beatmap = new ojsama.parser();
+        beatmap.feed(data);
+        let parsebeatmap = beatmap.map;
+
         let beatmapHitObjects = [];
-        let parseHit = (!hitsGlobal) ? parseInt(beatmap.objects.length) : parseInt(hitsGlobal);
+        let parseHit = (!hitsGlobal) ? parseInt(parsebeatmap.objects.length) : parseInt(hitsGlobal);
 
-        let globalCount = parseInt(beatmap.objects.length);
+        let globalCount = parseInt(parsebeatmap.objects.length);
 
-        beatmap.objects.forEach(singleObject => beatmapHitObjects.push(parseInt(singleObject.time)));
+        parsebeatmap.objects.forEach(singleObject => beatmapHitObjects.push(parseInt(singleObject.time)));
         const timing = parseInt(beatmapHitObjects[globalCount - 1]) - parseInt(beatmapHitObjects[0]);
         const point = parseInt(beatmapHitObjects[parseHit - 1]) - parseInt(beatmapHitObjects[0]);
 
