@@ -56,9 +56,13 @@ class Recent extends Command {
 
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor(16016293)
-            .setTitle(`${renderBeatmapName}]+${beatmapUsedMods}`)
+            .setTitle(`${renderBeatmapName}+${beatmapUsedMods}`)
             .setThumbnail(`https://b.ppy.sh/thumb/${getBeatmap[0].beatmapset_id}l.jpg?uts=${Math.floor(new Date() / 1000)}`)
-            .setDescription("test")
+            .addField('Score :',
+                 `${beatmapStars.toString().split(" ", 1)[0]}★ \n▸${getRecent[0].rank} \n▸${getRecent[0].score}\n` +
+                `**Total hits** ▸[${getBeatmap[0].count300 + "/" + getBeatmap[0].count100 + "/" + getBeatmap[0].count50 +"/" + getBeatmap[0].countmiss}]\n` +
+                `**Accuracy : ** ▸ ${kimiwaHelper.osuGetAcu(getBeatmap[0].count300, getBeatmap[0].count100, getBeatmap[0].count50, getBeatmap[0].countmiss)}%`
+            )
         );
         console.log(getRecent);
         console.log(getBeatmap);
