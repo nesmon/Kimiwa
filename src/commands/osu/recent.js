@@ -70,7 +70,7 @@ class Recent extends Command {
                 true
             )
             .addField('\u200B',
-                `**Completion :** ${completion}%\n**Length :** ${kimiwaHelper.normalizeSecToMin(TimeRecentSecond)}/${kimiwaHelper.normalizeSecToMin(getBeatmap[0].total_length)}`,
+                `**Completion :** ${completion.toFixed(2)}%\n**Length :** ${kimiwaHelper.normalizeSecToMin(TimeRecentSecond)}/${kimiwaHelper.normalizeSecToMin(getBeatmap[0].total_length)}`,
                 true
             )
         );
