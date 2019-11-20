@@ -125,6 +125,7 @@ class kimiwaHelper {
         let beatmap = new ojsama.parser();
         beatmap.feed(beatmapdata);
         let parsebeatmap = beatmap.map;
+        console.log(parsebeatmap);
 
         let beatmapHitObjects = [];
         let parseHit = (!hitsGlobal) ? parseInt(parsebeatmap.objects.length) : parseInt(hitsGlobal);
