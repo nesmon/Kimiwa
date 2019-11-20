@@ -80,7 +80,6 @@ class Recent extends Command {
         let ppIfFC = beatmapppforacc.toString().split(" ", 1)[0];
         let PPmin = beatmapPP.toString().split(" ", 1)[0];
 
-
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor(16016293)
             .setTitle(`${renderBeatmapName}+${beatmapUsedMods}`)
