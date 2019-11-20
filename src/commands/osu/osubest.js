@@ -80,7 +80,7 @@ class OsuBest extends Command {
                             `**Total Hits:** ▸ ` +
                             `[${bestScore.count300 + "/" + bestScore.count100 + "/" + bestScore.count50 +"/" + bestScore.countmiss}]\n` +
                             `**Accuracy : ** ▸ ` +
-                            `${kimiwaHelper.osuGetAcu(bestScore.count300, bestScore.count100, bestScore.count50, bestScore.countmiss)}%`,
+                            `${kimiwaHelper.osuGetAcu(bestScore.count300, bestScore.count100, bestScore.count50, bestScore.countmiss).toFixed(2)}%`,
                         inline: true
                     },
                     {
