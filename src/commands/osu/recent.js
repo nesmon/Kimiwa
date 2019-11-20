@@ -40,9 +40,6 @@ class Recent extends Command {
         let getRecent = await kimiwaHelper.osuAPI(kimiwa, 'getRecent', name, mode, 1);
         let getBeatmap = await kimiwaHelper.osuAPI(kimiwa, 'getBeatpmapId', getRecent[0].beatmap_id);
 
-        console.log(getRecent);
-        console.log(getBeatmap);
-
         let renderBeatmapName = getBeatmap[0].artist + "-" + getBeatmap[0].title + "[" + getBeatmap[0].version + "]";
 
         let getMap = await kimiwaHelper.getOsuBeatmapCache(getBeatmap[0].beatmap_id);
@@ -79,6 +76,8 @@ class Recent extends Command {
             ) * 300)) * 100));
 
 
+        console.log(getRecent);
+        console.log(getBeatmap);
         let beatmapPP = new kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, combo: parseInt(getRecent[0].maxcombo), nmiss: parseInt(getRecent[0].countmiss), acc_percent: acc });
         let beatmapppforacc = new kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, combo: parseInt(getBeatmap[0].max_combo()), nmiss: 0, acc_percent: accIfFC });
         let ppIfFC = beatmapppforacc.toString().split(" ", 1)[0];
