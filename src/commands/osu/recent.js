@@ -39,6 +39,10 @@ class Recent extends Command {
 
         let getRecent = await kimiwaHelper.osuAPI(kimiwa, 'getRecent', name, mode, 1);
         let getBeatmap = await kimiwaHelper.osuAPI(kimiwa, 'getBeatpmapId', getRecent[0].beatmap_id);
+
+        console.log(getRecent);
+        console.log(getBeatmap);
+
         let renderBeatmapName = getBeatmap[0].artist + "-" + getBeatmap[0].title + "[" + getBeatmap[0].version + "]";
 
         let getMap = await kimiwaHelper.getOsuBeatmapCache(getBeatmap[0].beatmap_id);
@@ -98,8 +102,6 @@ class Recent extends Command {
                 `**${getRecent[0].maxcombo}x** / ${beatmap.max_combo()}x\n` +
                 `${PPmin}pp[${ppIfFC}pp if FC with ${accIfFC.toFixed(2)}%]`,)
         );
-        console.log(getRecent);
-        console.log(getBeatmap);
 
     }
 }
