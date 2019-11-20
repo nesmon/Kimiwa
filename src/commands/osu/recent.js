@@ -77,8 +77,8 @@ class Recent extends Command {
             ) * 300)) * 100));
 
         console.log(acc);
-        let beatmapPP = new kimiwaHelper.ojsama.ppv2({stars: beatmapStars, max_combo: Number(getRecent[0].maxcombo), nmiss: Number(getRecent[0].countmiss), acc_percent: acc });
-        let beatmapppforacc = new kimiwaHelper.ojsama.ppv2({stars: beatmapStars, max_combo: Number(getBeatmap[0].max_combo), nmiss: 0, acc_percent: accIfFC });
+        let beatmapPP = kimiwaHelper.ojsama.ppv2({stars: beatmapStars, max_combo: Number(getRecent[0].maxcombo), nmiss: Number(getRecent[0].countmiss), acc_percent: acc });
+        let beatmapppforacc = kimiwaHelper.ojsama.ppv2({stars: beatmapStars, max_combo: Number(getBeatmap[0].max_combo), nmiss: 0, acc_percent: accIfFC });
         let ppIfFC = beatmapppforacc.toString().split(" ", 1)[0];
         let PPmin = beatmapPP.toString().split(" ", 1)[0];
         console.log(beatmapPP.toString());
