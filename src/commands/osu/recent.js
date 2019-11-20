@@ -53,8 +53,7 @@ class Recent extends Command {
             map: beatmap,
             mods: parseInt(getBeatmap[0].enabled_mods)
         });
-        console.log(beatmapStars.toString());
-        beatmapStars = beatmapStars.toString().split(" ", 1)[0];
+
         let beatmapUsedMods = (kimiwaHelper.getModByNumber(getBeatmap[0].enabled_mods).length > 0) ? "+" + kimiwaHelper.getModByNumber(getBeatmap[0].enabled_mods).join(',') : "Nomod";
 
         // Time part
@@ -77,15 +76,13 @@ class Recent extends Command {
                 parseInt(getRecent[0].countmiss)
             ) * 300)) * 100));
 
-        let sliders = parseInt(beatmap.nsliders);
-        let circles = parseInt(beatmap.ncircles);
-        let objects = parseInt(beatmap.objects.length);
-        let aim = parseInt(getBeatmap[0].diff_aim);
-        let speed = parseInt(getBeatmap[0].diff_speed);
-        let beatmapPP = new kimiwaHelper.ojsama.ppv2({stars: beatmapStars, max_combo: parseInt(getRecent[0].maxcombo), aim_stars: aim, speed_stars: speed, nsliders: sliders, ncircles: circles, nobjects: objects, nmiss: parseInt(getRecent[0].countmiss), acc_percent: acc });
-        let beatmapppforacc = new kimiwaHelper.ojsama.ppv2({stars: beatmapStars, max_combo: Number(getBeatmap[0].max_combo), aim_stars: aim, speed_stars: speed, nsliders: sliders, ncircles: circles, nobjects: objects, nmiss: 0, acc_percent: accIfFC });
+
+        let beatmapPP = new kimiwaHelper.ojsama.ppv2({stars: beatmapStars, max_combo: parseInt(getRecent[0].maxcombo), nmiss: parseInt(getRecent[0].countmiss), acc_percent: acc });
+        let beatmapppforacc = new kimiwaHelper.ojsama.ppv2({stars: beatmapStars, max_combo: Number(getBeatmap[0].max_combo), nmiss: 0, acc_percent: accIfFC });
         let ppIfFC = beatmapppforacc.toString().split(" ", 1)[0];
         let PPmin = beatmapPP.toString().split(" ", 1)[0];
+
+        beatmapStars = beatmapStars.toString().split(" ", 1)[0];
 
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor(16016293)
