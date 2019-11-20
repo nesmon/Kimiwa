@@ -50,7 +50,7 @@ class Recent extends Command {
         let beatmap = parseBeatmap.map;
         let beatmapStars = await new kimiwaHelper.ojsama.diff().calc({
             map: beatmap,
-            mods: parseInt(getBeatmap[0].enabled_mods)
+            mods: parseInt(getRecent[0].enabled_mods)
         });
         beatmapStars = beatmapStars.toString().split(" ", 1)[0];
         let beatmapUsedMods = (kimiwaHelper.getModByNumber(getBeatmap[0].enabled_mods).length > 0) ? "+" + kimiwaHelper.getModByNumber(getBeatmap[0].enabled_mods).join(',') : "Nomod";
