@@ -82,11 +82,12 @@ class Recent extends Command {
         let ppIfFC = beatmapppforacc.toString().split(" ", 1)[0];
         let PPmin = beatmapPP.toString().split(" ", 1)[0];
 
+        console.log(beatmapPP.toString());
         beatmapStars = beatmapStars.toString().split(" ", 1)[0];
 
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor(16016293)
-            .setTitle(`${renderBeatmapName}+${beatmapUsedMods}`)
+            .setTitle(`${renderBeatmapName}${beatmapUsedMods}`)
             .setThumbnail(`https://b.ppy.sh/thumb/${getBeatmap[0].beatmapset_id}l.jpg?uts=${Math.floor(new Date() / 1000)}`)
             .addField('Play score :',
                 `${beatmapStars.toString().split(" ", 1)[0]}★ ▸${getRecent[0].rank} ▸${getRecent[0].score}\n` +
