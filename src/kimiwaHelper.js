@@ -177,7 +177,7 @@ class kimiwaHelper {
                 parseInt(hm)
             ) * 300)) * 100));
 
-        return parse.toFixed(2);
+        return parse;
     }
 
     secToMin(s) {
