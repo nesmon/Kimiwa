@@ -81,7 +81,7 @@ class Recent extends Command {
         let beatmapppforacc = kimiwaHelper.ojsama.ppv2({stars: beatmapStars, max_combo: Number(getBeatmap[0].max_combo), nmiss: 0, acc_percent: accIfFC });
         let ppIfFC = beatmapppforacc.toString().split(" ", 1)[0];
         let PPmin = beatmapPP.toString().split(" ", 1)[0];
-        console.log(beatmapPP.toString());
+        console.log(beatmapPP);
         console.log(beatmapppforacc.toString());
         beatmapStars = beatmapStars.toString().split(" ", 1)[0];
 
