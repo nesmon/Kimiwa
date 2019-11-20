@@ -44,6 +44,8 @@ class Recent extends Command {
         let getMap = await kimiwaHelper.getOsuBeatmapCache(getBeatmap[0].beatmap_id);
         let parseBeatmap = new kimiwaHelper.ojsama.parser();
         parseBeatmap.feed(getMap);
+        console.log(getRecent);
+        console.log(getBeatmap);
 
         // Star part
         let beatmap = parseBeatmap.map;
@@ -78,7 +80,7 @@ class Recent extends Command {
         let beatmapPP = new kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, max_combo: parseInt(getRecent[0].maxcombo), nmiss: parseInt(getRecent[0].countmiss), acc_percent: acc });
         let beatmapppforacc = new kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, max_combo: Number(getBeatmap[0].max_combo), nmiss: 0, acc_percent: accIfFC });
         let ppIfFC = beatmapppforacc.toString().split(" ", 1)[0];
-        //let PPmin = beatmapPP.toString().split(" ", 1)[0];
+        let PPmin = beatmapPP.toString().split(" ", 1)[0];
 
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor(16016293)
@@ -96,10 +98,9 @@ class Recent extends Command {
             )
             .addField('\u200B',
                 `**${getRecent[0].maxcombo}x** / ${beatmap.max_combo()}x\n` +
-                `pp[${ppIfFC}pp if FC with ${accIfFC.toFixed(2)}%]`,)
+                `${PPmin}pp[${ppIfFC}pp if FC with ${accIfFC.toFixed(2)}%]`,)
         );
-        console.log(getRecent);
-        console.log(getBeatmap);
+
 
     }
 }
