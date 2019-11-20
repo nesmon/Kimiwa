@@ -44,8 +44,6 @@ class Recent extends Command {
         let getMap = await kimiwaHelper.getOsuBeatmapCache(getBeatmap[0].beatmap_id);
         let parseBeatmap = new kimiwaHelper.ojsama.parser();
         parseBeatmap.feed(getMap);
-        console.log(getRecent);
-        console.log(getBeatmap);
 
         // Star part
         let beatmap = parseBeatmap.map;
@@ -83,7 +81,6 @@ class Recent extends Command {
         let PPmin = beatmapPP.toString().split(" ", 1)[0];
         console.log(beatmapPP);
         console.log(beatmapppforacc.toString());
-        beatmapStars = beatmapStars.toString().split(" ", 1)[0];
 
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor(16016293)
