@@ -82,7 +82,7 @@ class Recent extends Command {
         let ppIfFC = beatmapppforacc.toString().split(" ", 1)[0];
         let PPmin = beatmapPP.toString().split(" ", 1)[0];
         console.log(beatmapPP.toString());
-
+        console.log(beatmapppforacc.toString());
         beatmapStars = beatmapStars.toString().split(" ", 1)[0];
 
         message.channel.createEmbed(new kimiwaHelper.Embed()
