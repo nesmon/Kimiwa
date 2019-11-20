@@ -76,10 +76,11 @@ class Recent extends Command {
                 parseInt(getRecent[0].countmiss)
             ) * 300)) * 100));
 
-        let nslider = beatmap.nsliders;
-        let ncircles = beatmap.ncircles;
-        let beatmapPP = new kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, max_combo: parseInt(getRecent[0].maxcombo), nslider: nslider, ncircles: ncircles, nmiss: parseInt(getRecent[0].countmiss), acc_percent: acc });
-        let beatmapppforacc = new kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, max_combo: Number(getBeatmap[0].max_combo), nslider: nslider, ncircles: ncircles, nmiss: 0, acc_percent: accIfFC });
+        let nslider = parseInt(beatmap.nsliders);
+        let ncircles = parseInt(beatmap.ncircles);
+        let nobjects = parseInt(beatmap.objects.length);
+        let beatmapPP = new kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, max_combo: parseInt(getRecent[0].maxcombo), nslider: nslider, ncircles: ncircles, nobjects: nobjects, nmiss: parseInt(getRecent[0].countmiss), acc_percent: acc });
+        let beatmapppforacc = new kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, max_combo: Number(getBeatmap[0].max_combo), nslider: nslider, ncircles: ncircles, nobjects: nobjects, nmiss: 0, acc_percent: accIfFC });
         let ppIfFC = beatmapppforacc.toString().split(" ", 1)[0];
         let PPmin = beatmapPP.toString().split(" ", 1)[0];
 
