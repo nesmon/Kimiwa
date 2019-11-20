@@ -65,24 +65,24 @@ class Recent extends Command {
         // PP part
         let acc = kimiwaHelper.osuGetAcu(getRecent[0].count300, getRecent[0].count100, getRecent[0].count50, getRecent[0].countmiss);
         let accIfFC = parseFloat((((
-            (parseInt(getRecent[0].count300) * 300)  +
+            (parseInt(getRecent[0].count300) * 300) +
             ((parseInt(getRecent[0].count100) + parseInt(getRecent[0].countmiss)) * 100) +
-            (parseInt(getRecent[0].count50) * 50)    +
+            (parseInt(getRecent[0].count50) * 50) +
             (parseInt(0) * 0)) /
             ((
-                parseInt(getRecent[0].count300)      +
-                parseInt(getRecent[0].count100)      +
-                parseInt(getRecent[0].count50)       +
+                parseInt(getRecent[0].count300) +
+                parseInt(getRecent[0].count100) +
+                parseInt(getRecent[0].count50) +
                 parseInt(getRecent[0].countmiss)
             ) * 300)) * 100));
 
         let sliders = parseInt(beatmap.nsliders);
         let circles = parseInt(beatmap.ncircles);
         let objects = parseInt(beatmap.objects.length);
-        let beatmapPP = new kimiwaHelper.ojsama.ppv2({map: beatmap, stars: beatmapStars, max_combo: parseInt(getRecent[0].maxcombo), nmiss: parseInt(getRecent[0].countmiss), acc_percent: acc });
-        let beatmapppforacc = new kimiwaHelper.ojsama.ppv2({map: beatmap, stars: beatmapStars, max_combo: Number(getBeatmap[0].max_combo), nmiss: 0, acc_percent: accIfFC });
+        //let beatmapPP = new kimiwaHelper.ojsama.ppv2({stars: beatmapStars, max_combo: parseInt(getRecent[0].maxcombo), nsliders: sliders, ncircles: circles, nobjects: objects, nmiss: parseInt(getRecent[0].countmiss), acc_percent: acc });
+        let beatmapppforacc = new kimiwaHelper.ojsama.ppv2({stars: beatmapStars, max_combo: Number(getBeatmap[0].max_combo), nmiss: 0, acc_percent: accIfFC });
         let ppIfFC = beatmapppforacc.toString().split(" ", 1)[0];
-        let PPmin = beatmapPP.toString().split(" ", 1)[0];
+        //let PPmin = beatmapPP.toString().split(" ", 1)[0];
 
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor(16016293)
@@ -100,7 +100,7 @@ class Recent extends Command {
             )
             .addField('\u200B',
                 `**${getRecent[0].maxcombo}x** / ${beatmap.max_combo()}x\n` +
-                `${PPmin}pp[${ppIfFC}pp if FC with ${accIfFC.toFixed(2)}%]`,)
+                `pp[${ppIfFC}pp if FC with ${accIfFC.toFixed(2)}%]`,)
         );
 
 
