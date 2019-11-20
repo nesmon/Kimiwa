@@ -39,6 +39,7 @@ class Recent extends Command {
 
         let getRecent = await kimiwaHelper.osuAPI(kimiwa, 'getRecent', name, mode, 1);
         let getBeatmap = await kimiwaHelper.osuAPI(kimiwa, 'getBeatpmapId', getRecent[0].beatmap_id);
+
         let renderBeatmapName = getBeatmap[0].artist + "-" + getBeatmap[0].title + "[" + getBeatmap[0].version + "]";
 
         let getMap = await kimiwaHelper.getOsuBeatmapCache(getBeatmap[0].beatmap_id);
@@ -49,7 +50,7 @@ class Recent extends Command {
         let beatmap = parseBeatmap.map;
         let beatmapStars = await new kimiwaHelper.ojsama.diff().calc({
             map: beatmap,
-            mods: parseInt(getBeatmap[0].enabled_mods)
+            mods: parseInt(getRecent[0].enabled_mods)
         });
         beatmapStars = beatmapStars.toString().split(" ", 1)[0];
         let beatmapUsedMods = (kimiwaHelper.getModByNumber(getBeatmap[0].enabled_mods).length > 0) ? "+" + kimiwaHelper.getModByNumber(getBeatmap[0].enabled_mods).join(',') : "Nomod";
@@ -75,8 +76,16 @@ class Recent extends Command {
             ) * 300)) * 100));
 
 
+<<<<<<< HEAD
         //let beatmapPP = new kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, combo: parseInt(getRecent[0].maxcombo), nmiss: parseInt(getRecent[0].countmiss), acc_percent: acc });
         let beatmapppforacc = new kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, combo: parseInt(getBeatmap[0].max_combo()), nmiss: 0, acc_percent: accIfFC });
+=======
+        console.log(getRecent);
+        console.log(getBeatmap);
+
+        let beatmapPP = kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, combo: parseInt(getRecent[0].maxcombo), nmiss: Number(getRecent[0].countmiss), acc_percent: acc });
+        let beatmapppforacc = kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, combo: Number(getBeatmap[0].max_combo()), nmiss: 0, acc_percent: accIfFC });
+>>>>>>> 421ebe8a1e7abeaa836fc7a0a8af3f0afea792df
         let ppIfFC = beatmapppforacc.toString().split(" ", 1)[0];
         //let PPmin = beatmapPP.toString().split(" ", 1)[0];
 
@@ -98,8 +107,6 @@ class Recent extends Command {
                 `**${getRecent[0].maxcombo}x** / ${beatmap.max_combo()}x\n` +
                 `pp[${ppIfFC}pp if FC with ${accIfFC.toFixed(2)}%]`,)
         );
-        console.log(getRecent);
-        console.log(getBeatmap);
 
     }
 }
