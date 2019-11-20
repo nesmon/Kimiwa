@@ -79,8 +79,8 @@ class Recent extends Command {
         let sliders = parseInt(beatmap.nsliders);
         let circles = parseInt(beatmap.ncircles);
         let objects = parseInt(beatmap.objects.length);
-        let beatmapPP = new kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, max_combo: parseInt(getRecent[0].maxcombo), nsliders: sliders, ncircles: circles, nobjects: objects, nmiss: parseInt(getRecent[0].countmiss), acc_percent: acc });
-        let beatmapppforacc = new kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, max_combo: Number(getBeatmap[0].max_combo), nsliders: sliders, ncircles: circles, nobjects: objects, nmiss: 0, acc_percent: accIfFC });
+        let beatmapPP = new kimiwaHelper.ojsama.ppv2({map:beatmap stars: beatmapStars, max_combo: parseInt(getRecent[0].maxcombo), nmiss: parseInt(getRecent[0].countmiss), acc_percent: acc });
+        let beatmapppforacc = new kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, max_combo: Number(getBeatmap[0].max_combo), nmiss: 0, acc_percent: accIfFC });
         let ppIfFC = beatmapppforacc.toString().split(" ", 1)[0];
         let PPmin = beatmapPP.toString().split(" ", 1)[0];
 
