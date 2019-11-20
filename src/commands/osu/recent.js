@@ -78,12 +78,9 @@ class Recent extends Command {
 
         console.log(getRecent);
         console.log(getBeatmap);
-        let max_combo = getRecent[0].maxcombo;
-        console.log(max_combo);
-        console.log(Number(max_combo));
-        console.log(parseInt(max_combo));
+        let max_combo = parseInt(getRecent[0].maxcombo);
         let beatmapPP = kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, combo: Number(max_combo), nmiss: Number(getRecent[0].countmiss), acc_percent: acc });
-        let beatmapppforacc = kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, combo: parseInt(getBeatmap[0].max_combo()), nmiss: 0, acc_percent: accIfFC });
+        let beatmapppforacc = kimiwaHelper.ojsama.ppv2({ stars: beatmapStars, combo: Number(getBeatmap[0].max_combo()), nmiss: 0, acc_percent: accIfFC });
         let ppIfFC = beatmapppforacc.toString().split(" ", 1)[0];
         let PPmin = beatmapPP.toString().split(" ", 1)[0];
 
