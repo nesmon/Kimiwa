@@ -53,6 +53,7 @@ class Recent extends Command {
             map: beatmap,
             mods: parseInt(getBeatmap[0].enabled_mods)
         });
+        console.log(beatmapStars);
         beatmapStars = beatmapStars.toString().split(" ", 1)[0];
         let beatmapUsedMods = (kimiwaHelper.getModByNumber(getBeatmap[0].enabled_mods).length > 0) ? "+" + kimiwaHelper.getModByNumber(getBeatmap[0].enabled_mods).join(',') : "Nomod";
 
