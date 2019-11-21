@@ -57,17 +57,7 @@ class Recent extends Command {
 
         // PP part
         let recentMisses    = parseInt(getRecent[0].countmiss);
-        let recentAccuracy  = parseFloat((((
-            (parseInt(getRecent[0].count300)  * 300) +
-            (parseInt(getRecent[0].count100)  * 100) +
-            (parseInt(getRecent[0].count50)   * 50)  +
-            (parseInt(getRecent[0].countmiss) * 0))  /
-            ((
-                parseInt(getRecent[0].count300)      +
-                parseInt(getRecent[0].count100)      +
-                parseInt(getRecent[0].count50)       +
-                parseInt(getRecent[0].countmiss)
-            ) * 300)) * 100));
+        let recentAccuracy  = kimiwaHelper.osuGetAcu(getRecent[0].count300, getRecent[0].count100, getRecent[0].count50, getRecent[0].countmiss);
 
         let recentAccuracyForFC = parseFloat((((
             (parseInt(getRecent[0].count300) * 300)  +
