@@ -41,6 +41,8 @@ class Recent extends Command {
         let getBeatmap = await kimiwaHelper.osuAPI(kimiwa, 'getBeatpmapId', getRecent[0].beatmap_id);
         let renderBeatmapName = getBeatmap[0].artist + "-" + getBeatmap[0].title + "[" + getBeatmap[0].version + "]";
 
+        console.log(getBeatmap[0]);
+
         let getMap = await kimiwaHelper.getOsuBeatmapCache(getBeatmap[0].beatmap_id);
         let parseBeatmap = new kimiwaHelper.ojsama.parser();
         parseBeatmap.feed(getMap);
