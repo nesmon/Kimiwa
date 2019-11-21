@@ -1,5 +1,6 @@
 const Command = require("../../base/Command.js");
 const kimiwaHelper = require('../../kimiwaHelper');
+const ojsama = require('ojsama');
 
 class Recent extends Command {
     constructor(client) {
@@ -72,7 +73,7 @@ class Recent extends Command {
         let a = parseInt("47");
         let b = parseInt("13");
         let c = parseFloat("56,67");
-        let beatmapPP = kimiwaHelper.ojsama.ppv2({
+        let beatmapPP = ojsama.ppv2({
             stars: beatmapStars,
             max_combo: a,
             nmiss: b,
