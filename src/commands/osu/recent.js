@@ -1,5 +1,6 @@
 const Command = require("../../base/Command.js");
 const kimiwaHelper = require('../../kimiwaHelper');
+const ojsama = require('ojsama');
 
 class Recent extends Command {
     constructor(client) {
