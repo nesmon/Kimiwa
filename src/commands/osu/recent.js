@@ -71,7 +71,7 @@ class Recent extends Command {
         console.log(acc);
         let beatmapPP = kimiwaHelper.ojsama.ppv2({
             stars: beatmapStars,
-            max_combo: Number(getRecent[0].maxcombo),
+            max_combo: Number(47),
             nmiss: Number(getRecent[0].countmiss),
             acc_percent: parseFloat("56.67")
         });
