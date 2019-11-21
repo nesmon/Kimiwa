@@ -82,6 +82,8 @@ class Recent extends Command {
             n300: Number(getRecent[0].count300),
             n100: Number(getRecent[0].count100),
             n50: Number(getRecent[0].count50),
+            aim_stars: Number(getBeatmap[0].diff_aim),
+            speed_stars: Number(getBeatmap[0].diff_speed),
             acc_percent: acc
         });
         let beatmapppforacc = kimiwaHelper.ojsama.ppv2({
