@@ -56,10 +56,9 @@ class Recent extends Command {
         let beatmapUsedMods = (kimiwaHelper.getModByNumber(getRecent[0].enabled_mods).length > 0) ? "+" + kimiwaHelper.getModByNumber(getRecent[0].enabled_mods).join(',') : "Nomod";
 
         // PP part
-        let recentMisses    = parseInt(getRecent[0].countmiss);
-        let recentAccuracy  = kimiwaHelper.osuGetAcu(getRecent[0].count300, getRecent[0].count100, getRecent[0].count50, getRecent[0].countmiss);
+        let acc  = kimiwaHelper.osuGetAcu(getRecent[0].count300, getRecent[0].count100, getRecent[0].count50, getRecent[0].countmiss);
 
-        let recentAccuracyForFC = parseFloat((((
+        let accIfFC = parseFloat((((
             (parseInt(getRecent[0].count300) * 300)  +
             ((parseInt(getRecent[0].count100) + parseInt(getRecent[0].countmiss)) * 100) +
             (parseInt(getRecent[0].count50) * 50)    +
@@ -71,13 +70,13 @@ class Recent extends Command {
                 parseInt(getRecent[0].countmiss)
             ) * 300)) * 100));
 
-        let recentMaxCombo  = parseInt(getRecent[0].maxcombo);
+        let maxcomo  = parseInt(getRecent[0].maxcombo);
+        let miss = parseInt(getRecent[0].countmiss);
 
-        let beatmapPP           = ojsama.ppv2({ stars: beatmapStars, max_combo: recentMaxCombo, nmiss: recentMisses, acc_percent: recentAccuracy });
-        let beatmapACCPP        = ojsama.ppv2({ stars: beatmapStars, combo: parseInt(beatmap.max_combo()), nmiss: 0, acc_percent: recentAccuracyForFC });
-        let potentialPP         = beatmapACCPP.toString().split(" ", 1)[0];
-        let formattedPPmin      = beatmapPP.toString().split(" ", 1)[0];
-
+        let beatmapPP = ojsama.ppv2({ stars: beatmapStars, max_combo: maxcomo, nmiss: miss, acc_percent: acc });
+        let beatmapPPforFC = ojsama.ppv2({ stars: beatmapStars, combo: parseInt(beatmap.max_combo()), nmiss: 0, acc_percent: accIfFC });
+        let PPforFC = beatmapPPforFC.toString().split(" ", 1)[0];
+        let PPmin = beatmapPP.toString().split(" ", 1)[0];
 
         // Time part
         let completion = kimiwaHelper.osuCompletion(getMap, parseInt(getRecent[0].count300) + parseInt(getRecent[0].count100) + parseInt(getRecent[0].count50) + parseInt(getRecent[0].countmiss));
@@ -93,7 +92,7 @@ class Recent extends Command {
             .addField('Play score :',
                 `${beatmapStars.toString().split(" ", 1)[0]}★ ▸${getRecent[0].rank} ▸${getRecent[0].score}\n` +
                 `**Total hits : ** ▸[${getRecent[0].count300 + "/" + getRecent[0].count100 + "/" + getRecent[0].count50 + "/" + getRecent[0].countmiss}]\n` +
-                `**Accuracy : ** ▸ ${recentAccuracy.toFixed(2)}%\n`,
+                `**Accuracy : ** ▸ ${acc.toFixed(2)}%\n`,
                 true
             )
             .addField('\u200B',
@@ -102,7 +101,7 @@ class Recent extends Command {
             )
             .addField('\u200B',
                 `**x${getRecent[0].maxcombo}**/${beatmap.max_combo()}\n` +
-                `${formattedPPmin}pp[${potentialPP}pp if FC with ${recentAccuracyForFC.toFixed(2)}%]`,)
+                `${PPmin}pp[${PPforFC}pp if FC with ${accIfFC.toFixed(2)}%]`,)
         );
     }
 }
