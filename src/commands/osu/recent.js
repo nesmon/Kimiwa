@@ -69,11 +69,14 @@ class Recent extends Command {
             ) * 300)) * 100));
 
         console.log(acc);
+        let a = parseInt(47);
+        let b = parseInt(13);
+        let c = parseFloat(56,67);
         let beatmapPP = kimiwaHelper.ojsama.ppv2({
             stars: beatmapStars,
-            max_combo: Number(47),
-            nmiss: Number(13),
-            acc_percent: parseFloat("56.67")
+            max_combo: a,
+            nmiss: b,
+            acc_percent: c
         });
         let beatmapppforacc = kimiwaHelper.ojsama.ppv2({
             stars: beatmapStars,
