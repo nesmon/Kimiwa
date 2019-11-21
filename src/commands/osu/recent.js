@@ -73,7 +73,7 @@ class Recent extends Command {
 
         let recentMaxCombo  = parseInt(getRecent[0].maxcombo);
 
-        let beatmapPP           = ojsama.ppv2({ stars: beatmapStars, combo: recentMaxCombo, nmiss: recentMisses, acc_percent: recentAccuracy });
+        let beatmapPP           = ojsama.ppv2({ stars: beatmapStars, max_combo: recentMaxCombo, nmiss: recentMisses, acc_percent: recentAccuracy });
         let beatmapACCPP        = ojsama.ppv2({ stars: beatmapStars, combo: parseInt(beatmap.max_combo()), nmiss: 0, acc_percent: recentAccuracyForFC });
         let potentialPP         = beatmapACCPP.toString().split(" ", 1)[0];
         let formattedPPmin      = beatmapPP.toString().split(" ", 1)[0];
