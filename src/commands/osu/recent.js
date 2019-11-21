@@ -8,21 +8,19 @@ class Recent extends Command {
             name: "recent",
             category: "Osu",
             description: "Get osu information about last play of player",
-            usage: "rs --name [name of user] --mode [standard/mania/taiko/catch optional, by default std is select]",
+            usage: "rs --name [name of user (optional if you linked your account to your profile)]",
             aliases: ["rs"]
         });
     }
 
     async run(message, args, kimiwa, level, IA) { // eslint-disable-line no-unused-vars
         let name;
-        let mode;
 
         if (IA === true) {
             name = args[0];
-            mode = args[1] || 'standard';
         } else {
             name = kimiwaHelper.flags(message.content, "--name");
-            mode = kimiwaHelper.flags(message.content, "--mode");
+
         }
 
         if (name === false) {
@@ -36,10 +34,7 @@ class Recent extends Command {
             }
         }
 
-        if (mode === false) mode = 'std';
-
-        let getRecent = await kimiwaHelper.osuAPI(kimiwa, 'getRecent', name, kimiwaHelper.osuGetModeNumberByName(mode), 1);
-        console.log(getRecent[0])
+        let getRecent = await kimiwaHelper.osuAPI(kimiwa, 'getRecent', name, 'std', 1);
         let getBeatmap = await kimiwaHelper.osuAPI(kimiwa, 'getBeatpmapId', getRecent[0].beatmap_id);
         let renderBeatmapName = getBeatmap[0].artist + "-" + getBeatmap[0].title + "[" + getBeatmap[0].version + "]";
 
