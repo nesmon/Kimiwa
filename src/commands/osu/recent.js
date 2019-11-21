@@ -70,10 +70,10 @@ class Recent extends Command {
                 parseInt(getRecent[0].countmiss)
             ) * 300)) * 100));
 
-        let maxcomo  = parseInt(getRecent[0].maxcombo);
+        let maxcomob = parseInt(getRecent[0].maxcombo);
         let miss = parseInt(getRecent[0].countmiss);
 
-        let beatmapPP = ojsama.ppv2({ stars: beatmapStars, max_combo: maxcomo, nmiss: miss, acc_percent: acc });
+        let beatmapPP = ojsama.ppv2({ stars: beatmapStars, combo: maxcomob, nmiss: miss, acc_percent: acc });
         let beatmapPPforFC = ojsama.ppv2({ stars: beatmapStars, combo: parseInt(beatmap.max_combo()), nmiss: 0, acc_percent: accIfFC });
         let PPforFC = beatmapPPforFC.toString().split(" ", 1)[0];
         let PPmin = beatmapPP.toString().split(" ", 1)[0];
