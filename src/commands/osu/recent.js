@@ -41,8 +41,6 @@ class Recent extends Command {
         let getBeatmap = await kimiwaHelper.osuAPI(kimiwa, 'getBeatpmapId', getRecent[0].beatmap_id);
         let renderBeatmapName = getBeatmap[0].artist + "-" + getBeatmap[0].title + "[" + getBeatmap[0].version + "]";
 
-        console.log(getBeatmap[0]);
-
         let getMap = await kimiwaHelper.getOsuBeatmapCache(getBeatmap[0].beatmap_id);
         let parseBeatmap = new kimiwaHelper.ojsama.parser();
         parseBeatmap.feed(getMap);
@@ -55,12 +53,6 @@ class Recent extends Command {
         });
 
         let beatmapUsedMods = (kimiwaHelper.getModByNumber(getRecent[0].enabled_mods).length > 0) ? "+" + kimiwaHelper.getModByNumber(getRecent[0].enabled_mods).join(',') : "Nomod";
-
-        // Time part
-        let completion = kimiwaHelper.osuCompletion(getMap, parseInt(getRecent[0].count300) + parseInt(getRecent[0].count100) + parseInt(getRecent[0].count50) + parseInt(getRecent[0].countmiss));
-
-        let TimeRecentSecond = completion * getBeatmap[0].total_length / 100;
-        TimeRecentSecond = parseInt(TimeRecentSecond);
 
         // PP part
         let acc = kimiwaHelper.osuGetAcu(getRecent[0].count300, getRecent[0].count100, getRecent[0].count50, getRecent[0].countmiss);
@@ -93,6 +85,13 @@ class Recent extends Command {
         let PPmin = beatmapPP.toString().split(" ", 1)[0];
         console.log(beatmapPP);
         console.log(beatmapppforacc.toString());
+
+        // Time part
+        let completion = kimiwaHelper.osuCompletion(getMap, parseInt(getRecent[0].count300) + parseInt(getRecent[0].count100) + parseInt(getRecent[0].count50) + parseInt(getRecent[0].countmiss));
+
+        let TimeRecentSecond = completion * getBeatmap[0].total_length / 100;
+        TimeRecentSecond = parseInt(TimeRecentSecond);
+
 
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor(16016293)
