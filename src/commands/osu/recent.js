@@ -38,7 +38,7 @@ class Recent extends Command {
 
         if (mode === false) mode = 'std';
 
-        let getRecent = await kimiwaHelper.osuAPI(kimiwa, 'getRecent', name, mode, 1);
+        let getRecent = await kimiwaHelper.osuAPI(kimiwa, 'getRecent', name, kimiwaHelper.osuGetModeNumberByName(mode), 1);
         console.log(getRecent[0])
         let getBeatmap = await kimiwaHelper.osuAPI(kimiwa, 'getBeatpmapId', getRecent[0].beatmap_id);
         let renderBeatmapName = getBeatmap[0].artist + "-" + getBeatmap[0].title + "[" + getBeatmap[0].version + "]";
