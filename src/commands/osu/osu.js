@@ -23,8 +23,18 @@ class Osu extends Command {
             name = kimiwaHelper.flags(message.content, "--name");
             mode = kimiwaHelper.flags(message.content, "--mode");
         }
-        
-        if (name === false) return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks to asigne name to your command with --name [name of command]`));
+
+        if (name === false) {
+            name = args.splice(0).join(' ');
+            if (name === '') {
+                const osuName = await kimiwaHelper.preparedQuery(kimiwa.db, 'SELECT * FROM profile WHERE user_ID = ?', message.author.id);
+                name = osuName[0].osu_username;
+                if (name === '' || name === null) {
+                    return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks to asigne name to your command with --name [name of command] or just put your name if you search in std`));
+                }
+            }
+        }
+
         if (mode === false) mode = 'std';
         
         kimiwa.osu.user

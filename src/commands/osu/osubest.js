@@ -14,12 +14,25 @@ class OsuBest extends Command {
 
     async run(message, args, kimiwa, level, IA) { // eslint-disable-line no-unused-vars
         let name;
+        let mode;
 
         if (IA === true) {
             name = args[0];
         } else {
-            name = args.splice(0).join(' ');
+            name = kimiwaHelper.flags(message.content, "--name");
         }
+
+        if (name === false) {
+            name = args.splice(0).join(' ');
+            if (name === '') {
+                const osuName = await kimiwaHelper.preparedQuery(kimiwa.db, 'SELECT * FROM profile WHERE user_ID = ?', message.author.id);
+                name = osuName[0].osu_username;
+                if (name === '' || name === null) {
+                    return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks to asigne name to your command with --name [name of command] or just put your name if you search in std`));
+                }
+            }
+        }
+
         
         let embedBest = [];
         let getUserBestScore = await kimiwa.osu.user.getBest(name, 0, 5);
@@ -67,7 +80,7 @@ class OsuBest extends Command {
                             `**Total Hits:** ▸ ` +
                             `[${bestScore.count300 + "/" + bestScore.count100 + "/" + bestScore.count50 +"/" + bestScore.countmiss}]\n` +
                             `**Accuracy : ** ▸ ` +
-                            `${kimiwaHelper.osuGetAcu(bestScore.count300, bestScore.count100, bestScore.count50, bestScore.countmiss)}%`,
+                            `${kimiwaHelper.osuGetAcu(bestScore.count300, bestScore.count100, bestScore.count50, bestScore.countmiss).toFixed(2)}%`,
                         inline: true
                     },
                     {

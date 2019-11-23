@@ -117,6 +117,27 @@ class kimiwaHelper {
         return normalizeHours + normalizeMinutes + normalizeSeconds;
     }
 
+    normalizeSecToMin(s) {
+        return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
+    }
+
+    osuCompletion(beatmapdata, hitsGlobal) {
+        let beatmap = new ojsama.parser();
+        beatmap.feed(beatmapdata);
+        let parsebeatmap = beatmap.map;
+
+        let beatmapHitObjects = [];
+        let parseHit = (!hitsGlobal) ? parseInt(parsebeatmap.objects.length) : parseInt(hitsGlobal);
+
+        let globalCount = parseInt(parsebeatmap.objects.length);
+
+        parsebeatmap.objects.forEach(singleObject => beatmapHitObjects.push(parseInt(singleObject.time)));
+        const timing = parseInt(beatmapHitObjects[globalCount - 1]) - parseInt(beatmapHitObjects[0]);
+        const point = parseInt(beatmapHitObjects[parseHit - 1]) - parseInt(beatmapHitObjects[0]);
+
+        return (point / timing) * 100;
+    }
+
     osuGetModeNumberByName(mode) {
         switch (mode) {
             case 'standard' || 'std' || 'clasic':
@@ -156,7 +177,7 @@ class kimiwaHelper {
                 parseInt(hm)
             ) * 300)) * 100));
 
-        return parse.toFixed(2);
+        return parse;
     }
 
     secToMin(s) {
@@ -208,6 +229,23 @@ class kimiwaHelper {
                 }
             });
             return result;
+        }
+    }
+
+    async osuAPI (kimiwaCore, type, id, mode = null, limit = 5, lookup = undefined) {
+        mode = this.osuGetModeNumberByName(mode);
+        switch (type) {
+            case 'getUser' :
+                break;
+            case 'getBest':
+                // Probably use HTTP (native module of node.js
+                break;
+            case 'getBeatpmapId':
+                return kimiwaCore.osu.beatmaps.getByBeatmapId(id);
+            case 'getRecent':
+                return kimiwaCore.osu.user.getRecent(id, mode, limit, lookup);
+            default :
+                return console.log('Thanks to give good option.');
         }
     }
 
