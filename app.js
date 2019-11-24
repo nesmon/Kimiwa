@@ -110,7 +110,7 @@ class KimiwaCore extends Client {
     return permlvl;
   }
 
-  async _initKimiwaDB(connectionError) {
+  _initKimiwaDB(connectionError) {
     if (connectionError) {
       console.log(`DATABASE ERROR \nA connection error surfaced: ${connectionError}`);
     } else {
