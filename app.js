@@ -119,10 +119,10 @@ class KimiwaCore extends Client {
   }
 
   levelCache() {
-    this.client.levelCache = {};
-    for (let i = 0; i < this.client.config.permLevels.length; i++) {
-      const thisLevel = this.client.config.permLevels[i];
-      this.client.levelCache[thisLevel.name] = thisLevel.level;
+    this.levelCache = {};
+    for (let i = 0; i < this.config.permLevels.length; i++) {
+      const thisLevel = this.config.permLevels[i];
+      this.levelCache[thisLevel.name] = thisLevel.level;
     }
   }
 
