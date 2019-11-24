@@ -5,24 +5,17 @@ const kitsu = require('node-kitsu');
 class Kitsu extends Command {
     constructor(client) {
         super(client, {
-            name: "kitsu",
-            description: "Find anime or manga information",
-            category: "Anime and manga",
-            usage: "kitsu [Title]",
-            aliases: ["kitsu", "k", "kistu"]
+            name: 'kitsu',
+            description: 'Find anime or manga information',
+            category: 'Anime and manga',
+            usage: 'kitsu [Title]',
+            aliases: ['kitsu', 'k', 'kistu']
         });
     }
 
-    async run(message, args, kimiwa, level, IA) { // eslint-disable-line no-unused-vars
+    async run(message, args, kimiwa) { // eslint-disable-line no-unused-vars
 
-        let name;
-
-        if (IA === true) {
-            name = args[0];
-        } else {
-            name = args.splice(0).join(' ');
-        }
-
+        let name = args.splice(0).join(' ');
 
         if (!name) return message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor('RED')
@@ -47,7 +40,7 @@ class Kitsu extends Command {
                 syn.push(`${sin.split(".")[0]}.`);
             }
 
-            const myEmbeds = [];
+            let myEmbeds = [];
 
             for (let i = 0; i < 5; i++) {
                 myEmbeds.push(new kimiwaHelper.Embed()
@@ -67,7 +60,7 @@ class Kitsu extends Command {
 
             const filter = (m) => message.author.id === m.author.id;
             const waitingMesage = await message.channel.awaitMessages(filter, {
-                time: 60000,
+                time: 30000,
                 maxMatches: 1
             });
 
@@ -85,16 +78,11 @@ class Kitsu extends Command {
 
             if (select > syn.length || select < 1 || !select) {
                 e.delete();
-                return message.channel.createEmbed(new kimiwaHelper.Embed()
-                    .setColor('RED')
-                    .setTitle(`Please retry and send a numerical choice...`)
-                    .setTimestamp()
-                    .setFooter("\u200B")
-                );
+                return kimiwaHelper.flashMessage(message, 'Not numerical', 'Please retry and send a numerical choice...', 'RED', 5000);
             }
 
             e.delete();
-            kimiwa.deleteMessage(message.channel.id, message.channel.lastMessageID);
+            await kimiwa.deleteMessage(message.channel.id, message.channel.lastMessageID);
 
             message.channel.createEmbed(new kimiwaHelper.Embed()
                 .setColor('BLUE')
@@ -109,12 +97,12 @@ class Kitsu extends Command {
                 .addField('NSFW :', (animeSearch[select - 1].attributes.nsfw === true) ? "This anime is NSFW" : "This anime is not NSFW", true)
                 .setTimestamp()
                 .setFooter("\u200B")
-            )
+            );
 
-            kimiwaHelper.addPoint(animeSearch[select - 1].attributes.canonicalTitle, animeSearch[select - 1].id, `https://kitsu.io/anime/${animeSearch[select - 1].attributes.slug}`, kimiwa.db)
+            await kimiwaHelper.addPoint(animeSearch[select - 1].attributes.canonicalTitle, animeSearch[select - 1].id, `https://kitsu.io/anime/${animeSearch[select - 1].attributes.slug}`, kimiwa.db)
 
         } catch (error) {
-            search.edit({
+            await search.edit({
                 embed: new kimiwaHelper.Embed().setColor('RED').setTitle(`Find any anime with this title`).setTimestamp().setFooter("\u200B")
             });
         }

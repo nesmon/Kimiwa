@@ -17,7 +17,7 @@ class RandomAnime extends Command {
 
         try {
             const selectAnime = await kimiwaHelper.query(kimiwa.db, 'SELECT * FROM anime ORDER BY RAND() LIMIT 1');
-            let animeSearch = await kitsu.searchAnime(selectAnime[0].title.toLowerCase(), 0);
+            const  animeSearch = await kitsu.searchAnime(selectAnime[0].title.toLowerCase(), 0);
 
             message.channel.createEmbed(new kimiwaHelper.Embed()
                 .setColor('BLUE')
@@ -32,9 +32,9 @@ class RandomAnime extends Command {
                 .addField('NSFW :', (animeSearch[0].attributes.nsfw === true) ? "This anime is NSFW" : "This anime is not NSFW", true)
                 .setTimestamp()
                 .setFooter("\u200B")
-            )
+            );
 
-            kimiwaHelper.addPoint(animeSearch[0].attributes.canonicalTitle, animeSearch[0].id, `https://kitsu.io/anime/${animeSearch[0].attributes.slug}`, kimiwa.db)
+            await kimiwaHelper.addPoint(animeSearch[0].attributes.canonicalTitle, animeSearch[0].id, `https://kitsu.io/anime/${animeSearch[0].attributes.slug}`, kimiwa.db)
         } catch (error) {
             message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setTitle(`Sorry a error has been occured :/`).setTimestamp().setFooter("\u200B"));
             console.log(error)

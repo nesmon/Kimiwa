@@ -4,11 +4,11 @@ const kimiwaHelper = require('./../../kimiwaHelper');
 class Kitsuboard extends Command {
   constructor(client) {
     super(client, {
-      name: "kitsuboard",
-      description: "Scoreboard",
-      category: "Anime and manga",
-      usage: "kitsuboard",
-      aliases: ["kitsuboard", "kb"]
+      name: 'kitsuboard',
+      description: 'Scoreboard',
+      category: 'Anime and manga',
+      usage: 'kitsuboard',
+      aliases: ['kitsuboard', 'kb']
     });
   }
 
