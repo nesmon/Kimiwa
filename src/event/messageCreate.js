@@ -98,11 +98,7 @@ module.exports = class MessageCreate {
     // Perm level part
     const level = this.kimiwa._permlevel(message);
 
-    let levelCache = {};
-    for (let i = 0; i < this.kimiwa.config.permLevels.length; i++) {
-      const thisLevel = this.kimiwa.config.permLevels[i];
-      levelCache[thisLevel.name] = thisLevel.level;
-    }
+    let levelCache = this.kimiwa.levelCache();
 
     if (level < levelCache[cmd.conf.permLevel]) {
       return this.kimiwa.createMessage(message.channel.id, "You are not allowed to use his command :/")

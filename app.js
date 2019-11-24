@@ -27,24 +27,24 @@ class KimiwaCore extends Client {
     this._addEventListeners();
     this._registerCommands();
     this._catchUnhandledRejections();
-    console.log('1')
 
     this.connect();
   }
 
   async _addEventListeners() {
-    const evtFiles = await readdir("./src/event/");
+    const evtFiles = await readdir(`./src/event/`);
     console.log(`Loading a total of ${evtFiles.length} events.`);
     evtFiles.forEach(file => {
       const eventName = file.split(".")[0];
       const event = new(require(`./src/event/${file}`))(this);
+      console.log(`Loading Event : ${eventName} is now start`);
       this.modules.set(eventName, event);
       this.on(eventName, (...args) => event.run(...args));
     });
   }
 
   _registerCommands() {
-    klaw("./src/commands").on("data", (item) => {
+    klaw(`./src/commands`).on("data", (item) => {
       const cmdFile = path.parse(item.path);
       if (!cmdFile.ext || cmdFile.ext !== ".js") return;
       const response = this._loadCommand(cmdFile.dir, `${cmdFile.name}${cmdFile.ext}`);
@@ -55,7 +55,7 @@ class KimiwaCore extends Client {
   _loadCommand(commandPath, commandName) {
     try {
       const props = new(require(`${commandPath}${path.sep}${commandName}`))(this);
-      console.log(`Loading Command: ${props.help.name}.`, "log");
+      console.log(`Loading Command : ${props.help.name}.`, "log");
       props.conf.location = commandPath;
       if (props.init) {
         props.init(this);
@@ -66,7 +66,7 @@ class KimiwaCore extends Client {
       });
       return false;
     } catch (e) {
-      return `Unable to load command ${commandName}: ${e}`;
+      return console.log(`Unable to load command ${commandName} \nError : ${e}`);
     }
   }
 
@@ -77,7 +77,7 @@ class KimiwaCore extends Client {
     } else if (this.aliases.has(commandName)) {
       command = this.commands.get(this.aliases.get(commandName));
     }
-    if (!command) return `The command \`${commandName}\` doesn"t seem to exist, nor is it an alias. Try again!`;
+    if (!command) return `The command \`${commandName}\` doesn't seem to exist, nor is it an alias. Try again!`;
 
     if (command.shutdown) {
       await command.shutdown(this);

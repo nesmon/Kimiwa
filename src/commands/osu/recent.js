@@ -80,7 +80,6 @@ class Recent extends Command {
         let TimeRecentSecond = completion * getBeatmap[0].total_length / 100;
         TimeRecentSecond = parseInt(TimeRecentSecond);
 
-
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor(16016293)
             .setTitle(`${renderBeatmapName}${beatmapUsedMods}`)
