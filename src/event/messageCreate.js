@@ -12,21 +12,22 @@ module.exports = class MessageCreate {
 
     if (message.author.bot) return;
 
+    // Verify if user is ban. If it's not ban kimiwa add one point to send message (only use for stats)
     let user = await this.user.verifyUser(message);
 
     if (user === false) {
       return kimiwaHelper.flashMessage(message, 'You are ban :', 'Sorry but you are **ban** by an operator.\nYou can\'t use part of this bot.\nTry to contact an operator for unban or more information', 'RED', 10000);
     }
-
     await this.user.addMessage(message);
 
-    let id = message.channel.id;
-
+    // Verify if kimiwa can send message
     if (message.guild && !message.channel.memberHasPermission(this.kimiwa.user.id, "sendMessages")) return;
 
+
+    // Human part
     const prefixMention = new RegExp(`^<@!?${this.kimiwa.user.id}>( |)$`);
     if (message.content.match(prefixMention)) {
-      return this.kimiwa.createMessage(message.channel.id, `My prefix on this guild is \`${this.kimiwa.prefix}\``);
+      return kimiwaHelper.flashMessage(message, `Prefix : ${this.kimiwa.prefix}`, `For more help about bot : ${this.kimiwa.prefix}help or ${this.kimiwa.prefix}help [cmdname]`, 'PURPLE', 10000);
     }
 
     if (message.content.indexOf(`<@${this.kimiwa.user.id}>`) !== -1) {
@@ -68,9 +69,8 @@ module.exports = class MessageCreate {
 
     // Verify nsfw
     if (cmd.help.nsfw && !message.channel.nsfw) {
-      return this.kimiwa.createMessage(id, `Command **${cmd.help.name}** is only available in NSFW channels!`);
+      return kimiwaHelper.flashMessage(message, 'NSFW', 'This command can only use in NSFW channel', 'RED', 10000);
     }
-
 
     // Cooldown part :
     if (!this.cooldown.has(cmd.name)) {
@@ -86,7 +86,7 @@ module.exports = class MessageCreate {
 
       if (now < expirationTime) {
         const timeLeft = (expirationTime - now) / 1000;
-        return this.kimiwa.createMessage(id, `please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${cmd.name}\` command.`);
+        return kimiwaHelper.flashMessage(message, 'Cooldown',  `Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${cmd.name}\` command.`, 'BLUE', 10000);
       }
 
     }
@@ -103,12 +103,12 @@ module.exports = class MessageCreate {
     }
 
     if (level < levelCache[cmd.conf.permLevel]) {
-      return this.kimiwa.createMessage(message.channel.id, "You are not allowed to use his command :/")
+      return;
     }
 
     // Verify if commands is available on DM
     if (cmd && !message.guild && cmd.conf.guildOnly)
-      return this.kimiwa.createMessage(message.channel.id, "This command is unavailable via private message. Please run this command in a guild.");
+      return kimiwaHelper.flashMessage(message, 'Hum ...', "This command is unavailable via private message. Please run this command in a guild.", 'BLUE', 10000);
 
     message.flags = [];
     while (args[0] && args[0][0] === "-") {

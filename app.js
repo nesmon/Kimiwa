@@ -15,8 +15,10 @@ class KimiwaCore extends Client {
     this.commands = new Collection();
     this.aliases = new Collection();
     this.modules = new Collection();
+
     this.human = new kimiwaHuman(this);
     this.user = new kimiwaUser(this);
+
     this.config = KimiwaConfig;
 
     this.prefix = KimiwaConfig.prefix;
@@ -37,7 +39,7 @@ class KimiwaCore extends Client {
     evtFiles.forEach(file => {
       const eventName = file.split(".")[0];
       const event = new(require(`./src/event/${file}`))(this);
-      console.log(`Loading Event : ${eventName} is now start`);
+      console.log(`Loading Event : ${eventName} `);
       this.modules.set(eventName, event);
       this.on(eventName, (...args) => event.run(...args));
     });
@@ -110,29 +112,13 @@ class KimiwaCore extends Client {
     return permlvl;
   }
 
-  _initKimiwaDB(connectionError) {
+  async _initKimiwaDB(connectionError) {
     if (connectionError) {
       console.log(`DATABASE ERROR \nA connection error surfaced: ${connectionError}`);
     } else {
-      console.log("DATABASE CONNECTION \nSuccessfully connected to the database!");
+      console.log(`DATABASE CONNECTION \nSuccessfully connected to the database!`);
     }
   }
-
-  async clean(client, text) {
-    if (text && text.constructor.name == "Promise")
-      text = await text;
-    if (typeof evaled !== "string")
-      text = require("util").inspect(text, {
-        depth: 1
-      });
-
-    text = text
-      .replace(/`/g, "`" + String.fromCharCode(8203))
-      .replace(/@/g, "@" + String.fromCharCode(8203))
-      .replace(client.config.token, "mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0");
-
-    return text;
-  };
 }
 
 module.exports = new KimiwaCore();

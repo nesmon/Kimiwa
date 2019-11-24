@@ -1,4 +1,4 @@
-const kimiwaHelp = require('./../kimiwaHelper');
+const kimiwaHelper = require('./../kimiwaHelper');
 
 module.exports = class Ready {
     constructor(client) {
@@ -7,11 +7,11 @@ module.exports = class Ready {
 
     async run() {
         this.kimiwa.editStatus('online', {
-            name: "First beta : type k!help"
+            name: "Open beta | k!help"
         });
 
         // this.client.editSelf({
-        //     avatar: kimiwaHelp.pngToBase64URI('./src/assets/img/logo_kimiwa.png')
+        //     avatar: kimiwaHelper.pngToBase64URI('./src/assets/img/logo_kimiwa.png')
         // })
     }
 };
