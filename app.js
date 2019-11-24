@@ -118,14 +118,6 @@ class KimiwaCore extends Client {
     }
   }
 
-  levelCache() {
-    this.levelCache = {};
-    for (let i = 0; i < this.config.permLevels.length; i++) {
-      const thisLevel = this.config.permLevels[i];
-      this.levelCache[thisLevel.name] = thisLevel.level;
-    }
-  }
-
   async clean(client, text) {
     if (text && text.constructor.name == "Promise")
       text = await text;

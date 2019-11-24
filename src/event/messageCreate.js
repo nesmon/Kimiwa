@@ -12,11 +12,13 @@ module.exports = class MessageCreate {
 
     if (message.author.bot) return;
 
-
     let user = await this.user.verifyUser(message);
-    if (user !== false) {
-      this.user.addMessage(message);
+
+    if (user === false) {
+      return kimiwaHelper.flashMessage(message, 'You are ban :', 'Sorry but you are **ban** by an operator.\nYou can\'t use part of this bot.\nTry to contact an operator for unban or more information', 'RED', 10000);
     }
+
+    await this.user.addMessage(message);
 
     let id = message.channel.id;
 
@@ -46,10 +48,6 @@ module.exports = class MessageCreate {
     if (message.guild && !message.member) await message.guild.fetchMember(message.author);
 
     const cmd = this.kimiwa.commands.get(command) || this.kimiwa.commands.get(this.kimiwa.aliases.get(command));
-
-    if (user === false) {
-      return kimiwaHelper.flashMessage(message, 'You are ban :', 'Sorry but you are **ban** by an operator.\nYou can\'t use part of this bot.\nTry to contact an operator for unban or more information', 'RED', 10000);
-    }
 
     // If command not found, try find this command in custom command database
     if (!cmd) {
@@ -98,9 +96,13 @@ module.exports = class MessageCreate {
     // Perm level part
     const level = this.kimiwa._permlevel(message);
 
-    let cache = this.kimiwa.levelCache();
+    let levelCache = {};
+    for (let i = 0; i < this.kimiwa.config.permLevels.length; i++) {
+      const thisLevel = this.kimiwa.config.permLevels[i];
+      levelCache[thisLevel.name] = thisLevel.level;
+    }
 
-    if (level < cache[cmd.conf.permLevel]) {
+    if (level < levelCache[cmd.conf.permLevel]) {
       return this.kimiwa.createMessage(message.channel.id, "You are not allowed to use his command :/")
     }
 
