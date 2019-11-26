@@ -37,23 +37,23 @@ class Osu extends Command {
 
         if (mode === false) mode = 'std';
         
-        kimiwa.osu.user
-            .get(name, kimiwaHelper.osuGetModeNumberByName(mode))
-            .then(data => {
-                let country = data.country.toLowerCase();
-                message.channel.createEmbed(new kimiwaHelper.Embed()
-                    .setColor('#f463a5')
-                    .setAuthor(`Profil of ${data.username}`, `https://cdn.rawgit.com/hjnilsson/country-flags/master/png100px/${country}.png`, `https://osu.ppy.sh/users/${data.userid}`)
-                    .setThumbnail(`https://a.ppy.sh/${data.user_id}`)
-                    .setDescription(`**▸Join:** ${data.join_date}\n**▸Rank:** #${data.pp_rank || '0'}(${data.country}#${data.pp_country_rank || '0'})\n**▸Level:** ${Math.round(data.level*100)/100}\n**▸PP:** ${data.pp_raw || '0'}\n**▸Playing** ${kimiwaHelper.normalizeSecondsToHMS(data.total_seconds_played)}\n**▸Accuracy:** ${Math.round(data.accuracy*100)/100}%\n**▸Performance:** SSH: ${data.count_rank_ssh || '0'}, SH: ${data.count_rank_sh || '0'}, SS: ${data.count_rank_ss || '0'}, S: ${data.count_rank_s || '0'}\n**▸Playcount:** ${data.playcount || '0'}`)
-                    .setTimestamp()
-                    .setFooter('Made by nesmon', message.author.avatarURL)
-                )
-            }).catch((error) => {
-                message.channel.createMessage("Sorry a error has been find :/ Thanks to verify the usage command.");
-            })
-    };
-};
+        let osuUser = kimiwa.osu.user.get(name, kimiwaHelper.osuGetModeNumberByName(mode));
+
+        if (!osuUser) {
+            return kimiwaHelper.flashMessage(message, 'No user found', 'Sorry but I do not find anyone in osu!', '#f463a5', 10000);
+        }
+
+        let country = osuUser.country.toLowerCase();
+        message.channel.createEmbed(new kimiwaHelper.Embed()
+            .setColor('#f463a5')
+            .setAuthor(`Profil of ${osuUser.username}`, `https://cdn.rawgit.com/hjnilsson/country-flags/master/png100px/${country}.png`, `https://osu.ppy.sh/users/${osuUser.userid}`)
+            .setThumbnail(`https://a.ppy.sh/${osuUser.user_id}`)
+            .setDescription(`**▸Join:** ${osuUser.join_date}\n**▸Rank:** #${osuUser.pp_rank || '0'}(${osuUser.country}#${osuUser.pp_country_rank || '0'})\n**▸Level:** ${Math.round(osuUser.level*100)/100}\n**▸PP:** ${osuUser.pp_raw || '0'}\n**▸Playing** ${kimiwaHelper.normalizeSecondsToHMS(osuUser.total_seconds_played)}\n**▸Accuracy:** ${Math.round(osuUser.accuracy*100)/100}%\n**▸Performance:** SSH: ${osuUser.count_rank_ssh || '0'}, SH: ${osuUser.count_rank_sh || '0'}, SS: ${osuUser.count_rank_ss || '0'}, S: ${osuUser.count_rank_s || '0'}\n**▸Playcount:** ${osuUser.playcount || '0'}`)
+            .setTimestamp()
+            .setFooter('Made by nesmon', message.author.avatarURL)
+        );
+    }
+}
 
 
 
