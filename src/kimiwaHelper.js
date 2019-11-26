@@ -151,19 +151,6 @@ class kimiwaHelper {
         }
     }
 
-    osuGetModeNameByNumber(mode) {
-        switch (mode) {
-            case 0:
-                return "standard";
-            case 1:
-                return "taiko";
-            case 2:
-                return "ctb";
-            case 3:
-                return "mania";
-        }
-    }
-
     osuGetAcu(h300, h100, h50, hm) {
         let parse = parseFloat((((
                 (parseInt(h300) * 300) +
@@ -251,7 +238,7 @@ class kimiwaHelper {
 
     query(database, userQuery) {
         return new Promise((resolve, reject) => {
-            database.query(userQuery, (error, results, field) => {
+            database.query(userQuery, (error, results) => {
                 if (error) {
                     reject(error);
                 }
@@ -262,7 +249,7 @@ class kimiwaHelper {
 
     preparedQuery(database, userQuery, value) {
         return new Promise((resolve, reject) => {
-            database.query(userQuery, value, (error, results, field) => {
+            database.query(userQuery, value, (error, results) => {
                 if (error) {
                     reject(error);
                 }

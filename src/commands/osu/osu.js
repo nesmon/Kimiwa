@@ -24,8 +24,10 @@ class Osu extends Command {
             mode = kimiwaHelper.flags(message.content, "--mode");
         }
 
-        if (name === false) {
-            name = args.splice(0).join(' ');
+        if (name === false ) {
+            if (mode ===false) {
+                name = args.splice(0).join(' ');
+            }
             if (name === '') {
                 const osuName = await kimiwaHelper.preparedQuery(kimiwa.db, 'SELECT * FROM profile WHERE user_ID = ?', message.author.id);
                 name = osuName[0].osu_username;
@@ -42,7 +44,6 @@ class Osu extends Command {
         if (!osuUser) {
             return kimiwaHelper.flashMessage(message, 'No user found', 'Sorry but I do not find anyone in osu!', '#f463a5', 10000);
         }
-        console.log(osuUser);
 
         let country = osuUser.country.toLowerCase();
         message.channel.createEmbed(new kimiwaHelper.Embed()
