@@ -25,7 +25,7 @@ class Osu extends Command {
         }
 
         if (name === false ) {
-            if (mode ===false) {
+            if (mode === false) {
                 name = args.splice(0).join(' ');
             }
             if (name === '') {
