@@ -42,6 +42,7 @@ class Osu extends Command {
         if (!osuUser) {
             return kimiwaHelper.flashMessage(message, 'No user found', 'Sorry but I do not find anyone in osu!', '#f463a5', 10000);
         }
+        console.log(osuUser);
 
         let country = osuUser.country.toLowerCase();
         message.channel.createEmbed(new kimiwaHelper.Embed()
