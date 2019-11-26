@@ -138,13 +138,17 @@ class kimiwaHelper {
         return (point / timing) * 100;
     }
 
-    osuGetModeNumberByName(mode) {
-        switch (mode) {
-            case 'standard' || 'std' || 'clasic':
+    osuGetMode(mode) {
+        mode = mode.toLowerCase()
+;        switch (mode) {
+            case 'std':
+            case 'clasic':
+            case 'standard':
                 return mode = 0;
             case 'taiko':
                 return mode = 1;
-            case 'catch' || 'ctb':
+            case 'ctb':
+            case 'catch':
                 return mode = 2;
             case 'mania':
                 return mode = 3;

@@ -37,7 +37,7 @@ class Osu extends Command {
 
         if (mode === false) mode = 'std';
         
-        let osuUser = await kimiwa.osu.user.get(name, kimiwaHelper.osuGetModeNumberByName(mode));
+        let osuUser = await kimiwa.osu.user.get(name, kimiwaHelper.osuGetMode(mode));
 
         if (!osuUser) {
             return kimiwaHelper.flashMessage(message, 'No user found', 'Sorry but I do not find anyone in osu!', '#f463a5', 10000);
