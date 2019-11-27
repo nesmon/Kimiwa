@@ -50,7 +50,7 @@ class Osu extends Command {
             .setColor('#f463a5')
             .setAuthor(`Profil of ${osuUser.username}`, `https://cdn.rawgit.com/hjnilsson/country-flags/master/png100px/${country}.png`, `https://osu.ppy.sh/users/${osuUser.user_id}`)
             .setThumbnail(`https://a.ppy.sh/${osuUser.user_id}`)
-            .addField('Information :', )
+            .addField('Information :', 'nothing now')
             .setTimestamp()
             .setFooter('\u200B', message.author.avatarURL)
         );
