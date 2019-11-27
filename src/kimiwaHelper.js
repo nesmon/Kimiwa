@@ -121,6 +121,10 @@ class kimiwaHelper {
         return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
     }
 
+    betterNumber(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    }
+
     osuCompletion(beatmapdata, hitsGlobal) {
         let beatmap = new ojsama.parser();
         beatmap.feed(beatmapdata);

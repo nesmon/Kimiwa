@@ -42,19 +42,28 @@ class Osu extends Command {
         if (!osuUser) {
             return kimiwaHelper.flashMessage(message, 'No user found', 'Sorry but I do not find anyone in osu!', '#f463a5', 10000);
         }
-        console.log(osuUser);
+
+
 
         let country = osuUser.country.toLowerCase();
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor('#f463a5')
-            .setAuthor(`Profil of ${osuUser.username}`, `https://cdn.rawgit.com/hjnilsson/country-flags/master/png100px/${country}.png`, `https://osu.ppy.sh/users/${osuUser.userid}`)
+            .setAuthor(`Profil of ${osuUser.username}`, `https://cdn.rawgit.com/hjnilsson/country-flags/master/png100px/${country}.png`, `https://osu.ppy.sh/users/${osuUser.user_id}`)
             .setThumbnail(`https://a.ppy.sh/${osuUser.user_id}`)
-            .setDescription(`**▸Join:** ${osuUser.join_date}\n**▸Rank:** #${osuUser.pp_rank || '0'}(${osuUser.country}#${osuUser.pp_country_rank || '0'})\n**▸Level:** ${Math.round(osuUser.level*100)/100}\n**▸PP:** ${osuUser.pp_raw || '0'}\n**▸Playing** ${kimiwaHelper.normalizeSecondsToHMS(osuUser.total_seconds_played)}\n**▸Accuracy:** ${Math.round(osuUser.accuracy*100)/100}%\n**▸Performance:** SSH: ${osuUser.count_rank_ssh || '0'}, SH: ${osuUser.count_rank_sh || '0'}, SS: ${osuUser.count_rank_ss || '0'}, S: ${osuUser.count_rank_s || '0'}\n**▸Playcount:** ${osuUser.playcount || '0'}`)
+            .addField('Information :', )
             .setTimestamp()
-            .setFooter('Made by nesmon', message.author.avatarURL)
+            .setFooter('\u200B', message.author.avatarURL)
         );
     }
 }
+//.setDescription(`**▸Join:** ${osuUser.join_date}\n
+// **▸Rank:** #${osuUser.pp_rank || '0'}(${osuUser.country}#${osuUser.pp_country_rank || '0'})\n
+// **▸Level:** ${Math.round(osuUser.level*100)/100}\n
+// **▸PP:** ${osuUser.pp_raw || '0'}\n
+// **▸Playing** ${kimiwaHelper.normalizeSecondsToHMS(osuUser.total_seconds_played)}\n
+// **▸Accuracy:** ${Math.round(osuUser.accuracy*100)/100}%\n
+// **▸Performance:** SSH: ${osuUser.count_rank_ssh || '0'}, SH: ${osuUser.count_rank_sh || '0'}, SS: ${osuUser.count_rank_ss || '0'}, S: ${osuUser.count_rank_s || '0'}\n
+// **▸Playcount:** ${osuUser.playcount || '0'}`)
 
 
 
