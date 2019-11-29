@@ -6,7 +6,7 @@ class OsuHelper {
     }
 
     async getRangePP(osuUser, kimiwa) {
-        let getBest = await kimiwa.osu.user.getBest(osuUser.user_id, kimiwaHelper.osuGetMode(mode), 100, 'id');
+        let getBest = await new kimiwa.osu.user.getBest(osuUser.user_id, kimiwaHelper.osuGetMode(mode), 100, 'id');
         for (let i = 0; i < getBest.length; i++) {
             console.log(getBest[i].beatmap_id);
         }
