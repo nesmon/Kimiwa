@@ -50,13 +50,13 @@ class Osu extends Command {
             .setAuthor(`Profil of ${osuUser.username}`, `https://cdn.rawgit.com/hjnilsson/country-flags/master/png100px/${country}.png`, `https://osu.ppy.sh/users/${osuUser.user_id}`)
             .setThumbnail(`https://a.ppy.sh/${osuUser.user_id}`)
             .setDescription([
-                `**•Rank:** #${osuUser.pp_rank || '0'}(${osuUser.country}#${osuUser.pp_country_rank || '0'})\n` +
-                `**•Level:** ${Math.round(osuUser.level * 100) / 100}\n` +
-                `**•PP:** ${osuUser.pp_raw || '0'}\n` +
-                `**•Playing** ${kimiwaHelper.normalizeSecondsToHMS(osuUser.total_seconds_played)}\n` +
-                `**•Accuracy:** ${Math.round(osuUser.accuracy * 100) / 100}%\n` +
-                `**•Performance:** SSH: ${osuUser.count_rank_ssh || '0'}, SH: ${osuUser.count_rank_sh || '0'}, SS: ${osuUser.count_rank_ss || '0'}, S: ${osuUser.count_rank_s || '0'}\n` +
-                `**•Playcount:** ${osuUser.playcount || '0'}`
+                `**• Rank:** #${osuUser.pp_rank || '0'}(${osuUser.country}#${osuUser.pp_country_rank || '0'})\n` +
+                `**• Level:** ${Math.round(osuUser.level * 100) / 100}\n` +
+                `**• PP:** ${osuUser.pp_raw || '0'}\n` +
+                `**• Playing** ${kimiwaHelper.normalizeSecondsToHMS(osuUser.total_seconds_played)}\n` +
+                `**• Accuracy:** ${Math.round(osuUser.accuracy * 100) / 100}%\n` +
+                `**• Performance:** SSH: ${osuUser.count_rank_ssh || '0'}, SH: ${osuUser.count_rank_sh || '0'}, SS: ${osuUser.count_rank_ss || '0'}, S: ${osuUser.count_rank_s || '0'}\n` +
+                `**• Playcount:** ${osuUser.playcount || '0'}`
             ])
             .addField('Information :', 'nothing now')
             .setTimestamp()
