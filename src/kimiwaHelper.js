@@ -1,5 +1,4 @@
 const Embed = require('./extensions/Embed');
-const OsuHelper = require('./extensions/OsuHelper');
 const ReactionHandler = require('eris-reactions');
 const EmbedPaginator = require('eris-pagination');
 const fs = require('fs');
@@ -9,7 +8,6 @@ const fetch = require('node-fetch');
 class kimiwaHelper {
     constructor() {
         this.Embed = Embed;
-        this.osuHelper = OsuHelper;
         this.PaginationEmbed = EmbedPaginator;
         this.ReactionHandler = ReactionHandler;
         this.ojsama = ojsama;
@@ -127,6 +125,14 @@ class kimiwaHelper {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
 
+    async getRangePP(osuUser, kimiwa, mode) {
+        let getBest = await kimiwa.osu.user.getBest(osuUser.user_id, this.osuGetMode(mode), 100, 'id');
+        for (let i = 0; i < getBest.length; i++) {
+            console.log(getBest[i].beatmap_id);
+        }
+        return 'end'
+    }
+
     osuCompletion(beatmapdata, hitsGlobal) {
         let beatmap = new ojsama.parser();
         beatmap.feed(beatmapdata);
@@ -145,8 +151,8 @@ class kimiwaHelper {
     }
 
     osuGetMode(mode) {
-        mode = mode.toLowerCase()
-;        switch (mode) {
+        mode = mode.toLowerCase();
+        switch (mode) {
             case 'std':
             case 'clasic':
             case 'standard':
