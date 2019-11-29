@@ -50,7 +50,7 @@ class Osu extends Command {
             .setAuthor(`Profil of ${osuUser.username}`, `https://cdn.rawgit.com/hjnilsson/country-flags/master/png100px/${country}.png`, `https://osu.ppy.sh/users/${osuUser.user_id}`)
             .setThumbnail(`https://a.ppy.sh/${osuUser.user_id}`)
             .setDescription([
-                'test\n',
+                'test\n' +
                 'hello'
             ])
             .addField('Information :', 'nothing now')
