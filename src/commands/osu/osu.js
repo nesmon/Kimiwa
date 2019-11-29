@@ -43,7 +43,8 @@ class Osu extends Command {
             return kimiwaHelper.flashMessage(message, 'No user found', 'Sorry but I do not find anyone in osu!', '#f463a5', 10000);
         }
 
-        const getRangeAndGlobal = await kimiwaHelper.getRangeAndGlobalPP(osuUser, kimiwa, mode);
+        const getRangeOsuUser = await kimiwaHelper.getRangeOsuUser(osuUser, kimiwa, mode);
+
 
         let country = osuUser.country.toLowerCase();
         message.channel.createEmbed(new kimiwaHelper.Embed()
@@ -60,8 +61,9 @@ class Osu extends Command {
                 `**♪ Playcount:** ${osuUser.playcount || '0'}`
             ])
             .addField('Information :', [
-                `Global PP : ${getRangeAndGlobal[0]}\n` +
-                `Range PP in game : ${getRangeAndGlobal[1]}\n`
+                `Global PP : ${getRangeOsuUser[0]}\n` +
+                `Range PP in game : ${getRangeOsuUser[1]}\n` +
+                `Stars range : ${getRangeOsuUser[2]}`
             ])
             .setFooter('\u200B', message.author.avatarURL)
         );
@@ -71,8 +73,10 @@ class Osu extends Command {
 // Info I want :
 // Range pp *
 // Global pp in best 100 *
-// Range stars
+// Range stars *
 // Percentage mods played
+// Percentage of combo
+// Range time lenght of track played
 // Miss count every X combo
 // Get all 300/100/50/miss on every top 100best game
 

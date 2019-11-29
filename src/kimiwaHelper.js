@@ -125,10 +125,11 @@ class kimiwaHelper {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
 
-    async getRangeAndGlobalPP(osuUser, kimiwa, mode) {
+    async getRangeOsuUser(osuUser, kimiwa, mode) {
         let getBest = await kimiwa.osu.user.getBest(osuUser.user_id, this.osuGetMode(mode), 100, 'id');
         let PP = Number(0);
-        let returnPP = [];
+        let stars = Number(0);
+        let range = [];
 
         for (let i = 0; i < getBest.length; i++) {
             let beatmapData = await this.getOsuBeatmapCache(getBest[i].beatmap_id);
@@ -148,15 +149,19 @@ class kimiwaHelper {
             let beatmapPP = ojsama.ppv2({ stars: beatmapStars, combo: maxcomob, nmiss: miss, acc_percent: acc });
 
             let PPmin = beatmapPP.toString().split(" ", 1)[0];
+            PP = PP + Number(PPmin);
 
-            PP = PP + Number(PPmin)
+            let formattedStars = beatmapStars.toString().split(" ", 1)[0];
+            stars = stars + Number(formattedStars);
         }
 
-        returnPP.push(PP);
-        returnPP.push(PP / getBest.length);
+        range.push(PP);
+        range.push(PP / getBest.length);
+        range.push(stars / getBest.length);
 
-        return returnPP;
+        return range;
     }
+
 
     osuCompletion(beatmapdata, hitsGlobal) {
         let beatmap = new ojsama.parser();
