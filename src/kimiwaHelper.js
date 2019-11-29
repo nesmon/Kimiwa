@@ -128,7 +128,26 @@ class kimiwaHelper {
     async getRangePP(osuUser, kimiwa, mode) {
         let getBest = await kimiwa.osu.user.getBest(osuUser.user_id, this.osuGetMode(mode), 100, 'id');
         for (let i = 0; i < getBest.length; i++) {
-            console.log(getBest[i].beatmap_id);
+            let beatmapData = await this.getOsuBeatmapCache(getBest[i].beatmap_id);
+
+            let beatmap = new ojsama.parser();
+            beatmap.feed(beatmapData);
+            let parsebeatmap = beatmap.map;
+
+            let beatmapStars = new this.ojsama.diff().calc({
+                map: parsebeatmap,
+                mods: parseInt(getBest[i].enabled_mods)
+            });
+
+            let maxcomob = parseInt(getBest[i].maxcombo);
+            let miss = parseInt(getBest[i].countmiss);
+            let acc = this.osuGetAcu(getBest[i].count300, getBest[i].count100, getBest[i].count50, getBest[i].countmiss);
+            let beatmapPP = ojsama.ppv2({ stars: beatmapStars, combo: maxcomob, nmiss: miss, acc_percent: acc });
+
+            let PPmin = beatmapPP.toString().split(" ", 1)[0];
+
+            console.log(PPmin);
+
         }
         return 'end'
     }
