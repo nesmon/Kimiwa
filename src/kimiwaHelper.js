@@ -127,6 +127,8 @@ class kimiwaHelper {
 
     async getRangePP(osuUser, kimiwa, mode) {
         let getBest = await kimiwa.osu.user.getBest(osuUser.user_id, this.osuGetMode(mode), 100, 'id');
+        let PP = Number(0);
+
         for (let i = 0; i < getBest.length; i++) {
             let beatmapData = await this.getOsuBeatmapCache(getBest[i].beatmap_id);
 
@@ -146,9 +148,11 @@ class kimiwaHelper {
 
             let PPmin = beatmapPP.toString().split(" ", 1)[0];
 
-            console.log(PPmin);
-
+            PP = PP + Number(PPmin)
         }
+
+        console.log(PP);
+        console.log(PP / getBest.length);
         return 'end'
     }
 
