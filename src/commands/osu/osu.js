@@ -43,7 +43,7 @@ class Osu extends Command {
             return kimiwaHelper.flashMessage(message, 'No user found', 'Sorry but I do not find anyone in osu!', '#f463a5', 10000);
         }
 
-        const ppRange = await kimiwaHelper.osuHelper().getRangePP(osuUser, kimiwa);
+        const ppRange = await new kimiwaHelper.osuHelper().getRangePP(osuUser, kimiwa);
 
         console.log(ppRange);
 
