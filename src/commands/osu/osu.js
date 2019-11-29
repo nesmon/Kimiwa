@@ -61,7 +61,7 @@ class Osu extends Command {
                 `**♪ Performance:** SSH: ${osuUser.count_rank_ssh || '0'}, SH: ${osuUser.count_rank_sh || '0'}, SS: ${osuUser.count_rank_ss || '0'}, S: ${osuUser.count_rank_s || '0'}\n` +
                 `**♪ Playcount:** ${osuUser.playcount || '0'}`
             ])
-            .addField('Information :', )
+            .addField('Information :', 'fu')
             .setFooter('\u200B', message.author.avatarURL)
         );
     }
