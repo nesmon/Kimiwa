@@ -1,4 +1,5 @@
 const Embed = require('./extensions/Embed');
+const OsuHelper = require('./extensions/OsuHelper');
 const ReactionHandler = require('eris-reactions');
 const EmbedPaginator = require('eris-pagination');
 const fs = require('fs');
@@ -8,6 +9,7 @@ const fetch = require('node-fetch');
 class kimiwaHelper {
     constructor() {
         this.Embed = Embed;
+        this.osuHelper = OsuHelper;
         this.PaginationEmbed = EmbedPaginator;
         this.ReactionHandler = ReactionHandler;
         this.ojsama = ojsama;
