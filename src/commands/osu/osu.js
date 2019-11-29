@@ -44,6 +44,9 @@ class Osu extends Command {
         }
 
 
+        let getBest = await kimiwa.osu.user.getBest(osuUser.user_id, kimiwaHelper.osuGetMode(mode), 100, 'id');
+        console.log(getBest)
+
         let country = osuUser.country.toLowerCase();
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor('#f463a5')
@@ -58,21 +61,19 @@ class Osu extends Command {
                 `**♪ Performance:** SSH: ${osuUser.count_rank_ssh || '0'}, SH: ${osuUser.count_rank_sh || '0'}, SS: ${osuUser.count_rank_ss || '0'}, S: ${osuUser.count_rank_s || '0'}\n` +
                 `**♪ Playcount:** ${osuUser.playcount || '0'}`
             ])
-            .addField('Information :', 'nothing now')
+            .addField('Information :', )
             .setTimestamp()
             .setFooter('\u200B', message.author.avatarURL)
         );
     }
 }
-//.setDescription(`**▸Join:** ${osuUser.join_date}\n
-// **▸Rank:** #${osuUser.pp_rank || '0'}(${osuUser.country}#${osuUser.pp_country_rank || '0'})\n
-// **•Level:** ${Math.round(osuUser.level*100)/100}\n
-// **•PP:** ${osuUser.pp_raw || '0'}\n
-// **•Playing** ${kimiwaHelper.normalizeSecondsToHMS(osuUser.total_seconds_played)}\n
-// **•Accuracy:** ${Math.round(osuUser.accuracy*100)/100}%\n
-// **•Performance:** SSH: ${osuUser.count_rank_ssh || '0'}, SH: ${osuUser.count_rank_sh || '0'}, SS: ${osuUser.count_rank_ss || '0'}, S: ${osuUser.count_rank_s || '0'}\n
-// **•Playcount:** ${osuUser.playcount || '0'}`)
 
-
+// Info I want :
+// Range pp
+// Global pp in best 100
+// Range stars
+// Percentage mods played
+// Miss count every X combo
+// Get all 300/100/50/miss on every top 100best game
 
 module.exports = Osu;
