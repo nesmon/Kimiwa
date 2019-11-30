@@ -45,7 +45,6 @@ class Osu extends Command {
 
         const getRangeOsuUser = await kimiwaHelper.getRangeOsuUser(osuUser, kimiwa, mode);
 
-
         let country = osuUser.country.toLowerCase();
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor('#f463a5')
