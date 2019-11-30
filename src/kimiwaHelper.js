@@ -134,7 +134,7 @@ class kimiwaHelper {
         let range = [];
 
         for (let i = 0; i < getBest.length; i++) {
-            let getBeatmap = await kimiwa.osu.beatmaps.getByBeatmapId(getBest[i].beatmap_id);
+            //let getBeatmap = await kimiwa.osu.beatmaps.getByBeatmapId(getBest[i].beatmap_id);
             let beatmapData = await this.getOsuBeatmapCache(getBest[i].beatmap_id);
 
             let beatmap = new ojsama.parser();
@@ -159,14 +159,14 @@ class kimiwaHelper {
 
             combo = combo + Number(getBest[i].maxcombo);
 
-            mapTime = mapTime + Number(getBeatmap[0].total_length);
+           // mapTime = mapTime + Number(getBeatmap[0].total_length);
         }
 
         range.push(PP);
         range.push(PP / getBest.length);
         range.push(stars / getBest.length);
         range.push(combo / getBest.length);
-        range.push(this.normalizeSecToMin(mapTime / getBest.length));
+        //range.push(this.normalizeSecToMin(mapTime / getBest.length));
 
         console.log("test");
         return range;

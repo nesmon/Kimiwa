@@ -64,8 +64,8 @@ class Osu extends Command {
                 `Global PP : ${getRangeOsuUser[0]}\n` +
                 `Range PP in game : ${getRangeOsuUser[1]}\n` +
                 `Stars range : ${getRangeOsuUser[2]}\n` +
-                `Range max combo : ${getRangeOsuUser[3]}\n` +
-                `Range beatmap time : ${getRangeOsuUser[4].toFixed(0)}`
+                `Range max combo : ${getRangeOsuUser[3]}\n`
+                //`Range beatmap time : ${getRangeOsuUser[4].toFixed(0)}`
             ])
             .setFooter('\u200B', message.author.avatarURL)
         );
