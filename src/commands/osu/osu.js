@@ -44,9 +44,8 @@ class Osu extends Command {
         }
 
         const getRangeOsuUser = await kimiwaHelper.getRangeOsuUser(osuUser, kimiwa, mode);
-        console.log("2");
+
         let country = osuUser.country.toLowerCase();
-        console.log("3");
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor('#f463a5')
             .setAuthor(`Profil of ${osuUser.username}`, `https://cdn.rawgit.com/hjnilsson/country-flags/master/png100px/${country}.png`, `https://osu.ppy.sh/users/${osuUser.user_id}`)
@@ -69,7 +68,6 @@ class Osu extends Command {
             ])
             .setFooter('\u200B', message.author.avatarURL)
         );
-        console.log("4");
     }
 }
 
@@ -79,7 +77,7 @@ class Osu extends Command {
 // Range stars *
 // Percentage mods played
 // Range of combo *
-// Range time lenght of track played
+// Range time lenght of track played (rty know why this activated can't run the cmd)
 // Miss count every X combo
 // Get all 300/100/50/miss on global
 

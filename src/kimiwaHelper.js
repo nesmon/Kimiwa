@@ -130,7 +130,7 @@ class kimiwaHelper {
         let PP = Number(0);
         let stars = Number(0);
         let combo = Number(0);
-        let mapTime = Number(0);
+        //let mapTime = Number(0);
         let range = [];
 
         for (let i = 0; i < getBest.length; i++) {
