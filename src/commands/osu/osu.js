@@ -44,8 +44,9 @@ class Osu extends Command {
         }
 
         const getRangeOsuUser = await kimiwaHelper.getRangeOsuUser(osuUser, kimiwa, mode);
-
+        console.log("2");
         let country = osuUser.country.toLowerCase();
+        console.log("3");
         message.channel.createEmbed(new kimiwaHelper.Embed()
             .setColor('#f463a5')
             .setAuthor(`Profil of ${osuUser.username}`, `https://cdn.rawgit.com/hjnilsson/country-flags/master/png100px/${country}.png`, `https://osu.ppy.sh/users/${osuUser.user_id}`)
@@ -68,6 +69,7 @@ class Osu extends Command {
             ])
             .setFooter('\u200B', message.author.avatarURL)
         );
+        console.log("4");
     }
 }
 

@@ -135,7 +135,6 @@ class kimiwaHelper {
 
         for (let i = 0; i < getBest.length; i++) {
             let getBeatmap = await kimiwa.osu.beatmaps.getByBeatmapId(getBest[i].beatmap_id);
-            console.log(getBeatmap);
             let beatmapData = await this.getOsuBeatmapCache(getBest[i].beatmap_id);
 
             let beatmap = new ojsama.parser();
@@ -169,6 +168,7 @@ class kimiwaHelper {
         range.push(combo / getBest.length);
         range.push(this.normalizeSecToMin(mapTime / getBest.length));
 
+        console.log("test");
         return range;
     }
 
