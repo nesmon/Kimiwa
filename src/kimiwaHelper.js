@@ -166,7 +166,7 @@ class kimiwaHelper {
         range.push(PP / getBest.length);
         range.push(stars / getBest.length);
         range.push(combo / getBest.length);
-        range.push(mapTime / getBest.length)
+        range.push(this.normalizeSecToMin(mapTime / getBest.length));
 
         return range;
     }
