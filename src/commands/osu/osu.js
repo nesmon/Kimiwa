@@ -63,7 +63,8 @@ class Osu extends Command {
             .addField('Information :', [
                 `Global PP : ${getRangeOsuUser[0]}\n` +
                 `Range PP in game : ${getRangeOsuUser[1]}\n` +
-                `Stars range : ${getRangeOsuUser[2]}`
+                `Stars range : ${getRangeOsuUser[2]}\n` +
+                `Range max combo : ${getRangeOsuUser[3]}\n`
             ])
             .setFooter('\u200B', message.author.avatarURL)
         );
@@ -75,9 +76,9 @@ class Osu extends Command {
 // Global pp in best 100 *
 // Range stars *
 // Percentage mods played
-// Percentage of combo
+// Range of combo *
 // Range time lenght of track played
 // Miss count every X combo
-// Get all 300/100/50/miss on every top 100best game
+// Get all 300/100/50/miss on global
 
 module.exports = Osu;
