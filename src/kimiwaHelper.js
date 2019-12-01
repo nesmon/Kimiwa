@@ -292,16 +292,16 @@ class kimiwaHelper {
 
         const existingBeatmap = await this.preparedQuery(kimiwaCore.db, 'SELECT * FROM beatmaps WHERE beatmap_id = ?', beatmap[0].beatmap_id);
 
-        if (!existingBeatmap) {
-            try {
-                this.preparedQuery(kimiwaCore.db, 'INSERTE INTO beatmaps set ?', beatmapData);
-                return console.log('nice')
-            }catch(e){
-                return console.log(e)
-            }
+        if (existingBeatmap > 0) {
+            return existingBeatmap[0];
         }
 
-        return existingBeatmap[0];
+        try {
+            this.preparedQuery(kimiwaCore.db, 'INSERTE INTO beatmaps set ?', beatmapData);
+            return console.log('nice')
+        }catch(e){
+            return console.log(e)
+        }
     }
 
     async osuAPI (kimiwaCore, type, id, mode = null, limit = 5, lookup = undefined) {
