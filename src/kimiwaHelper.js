@@ -133,6 +133,7 @@ class kimiwaHelper {
         let range = [];
 
         for (let i = 0; i < getBest.length; i++) {
+            this.getOsuBeatmapData(kimiwa, getBest[i].beatmap_id);
             let beatmapData = await this.getOsuBeatmapCache(getBest[i].beatmap_id);
 
             let beatmap = new ojsama.parser();
@@ -267,6 +268,40 @@ class kimiwaHelper {
             });
             return result;
         }
+    }
+
+    async getOsuBeatmapData(kimiwaCore, beatmapID) {
+        let beatmap = await kimiwaCore.osu.beatmaps.getByBeatmapId(beatmapID);
+        let beatmapData = {
+            'beatmap_id': Number(beatmap[0].beatmap_id),
+            'beatmapset_id': Number(beatmap[0].beatmapset_id),
+            'approved': Number(beatmap[0].approved),
+            'bpm': beatmap[0].bpm,
+            'creator_id': beatmap[0].creator_id,
+            'mode': Number(beatmap[0].mode),
+            'cs': beatmap[0].diff_size,
+            'od': beatmap[0].diff_overall,
+            'ar': beatmap[0].diff_approach,
+            'hp': beatmap[0].diff_drain,
+            'max_combo': beatmap[0].max_combo,
+            'maptime': beatmap[0].total_length,
+            'title': beatmap[0].title,
+            'version': beatmap[0].version,
+            'artist': beatmap[0].artist
+        };
+
+        const existingBeatmap = await this.preparedQuery(kimiwaCore.db, 'SELECT * FROM beatmaps WHERE beatmap_id = ?', beatmap[0].beatmap_id);
+
+        if (!existingBeatmap) {
+            try {
+                this.preparedQuery(kimiwaCore.db, 'INSERTE INTO beatmaps set ?', beatmapData);
+                return console.log('nice')
+            }catch(e){
+                return console.log(e)
+            }
+        }
+
+        return existingBeatmap[0];
     }
 
     async osuAPI (kimiwaCore, type, id, mode = null, limit = 5, lookup = undefined) {

@@ -65,7 +65,6 @@ class Osu extends Command {
                 `Stars range : ${getRangeOsuUser[2].toFixed(2)}\n` +
                 `Range max combo : ${getRangeOsuUser[3].toFixed(0)}\n`
             ])
-            .setFooter('\u200B', message.author.avatarURL)
         );
     }
 }
@@ -76,8 +75,6 @@ class Osu extends Command {
 // Range stars *
 // Percentage mods played
 // Range of combo *
-// Range time lenght of track played (rty know why this activated can't run the cmd)
-// Miss count every X combo
 // Get all 300/100/50/miss on global
 
 module.exports = Osu;
