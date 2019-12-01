@@ -160,7 +160,6 @@ class kimiwaHelper {
             combo = combo + Number(getBest[i].maxcombo);
 
             mapTime = mapTime + Number(getBeatmap.maptime);
-            console.log(mapTime);
         }
 
         range.push(PP);
