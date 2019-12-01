@@ -64,7 +64,7 @@ class Osu extends Command {
                 `Range PP in game : ${getRangeOsuUser[1].toFixed(2)}\n` +
                 `Stars range : ${getRangeOsuUser[2].toFixed(2)}\n` +
                 `Range max combo : ${getRangeOsuUser[3].toFixed(0)}\n` +
-                `Range map time : ${getRangeOsuUser[4].toFixed(0)}\n`
+                `Range map time : ${getRangeOsuUser[4]}\n`
             ])
         );
     }

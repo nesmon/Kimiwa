@@ -162,6 +162,7 @@ class kimiwaHelper {
 
             mapTime = mapTime + beatmap.maptime;
         }
+
         range.push(PP);
         range.push(PP / getBest.length);
         range.push(stars / getBest.length);
