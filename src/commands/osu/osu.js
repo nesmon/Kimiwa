@@ -60,11 +60,10 @@ class Osu extends Command {
                 `**♪ Playcount:** ${osuUser.playcount || '0'}`
             ])
             .addField('Information :', [
-                `Global PP : ${getRangeOsuUser[0]}\n` +
-                `Range PP in game : ${getRangeOsuUser[1]}\n` +
-                `Stars range : ${getRangeOsuUser[2]}\n` +
-                `Range max combo : ${getRangeOsuUser[3]}\n`
-                //`Range beatmap time : ${getRangeOsuUser[4].toFixed(0)}`
+                `Global PP : ${getRangeOsuUser[0].toFixed(2)}\n` +
+                `Range PP in game : ${getRangeOsuUser[1].toFixed(2)}\n` +
+                `Stars range : ${getRangeOsuUser[2].toFixed(2)}\n` +
+                `Range max combo : ${getRangeOsuUser[3].toFixed(0)}\n`
             ])
             .setFooter('\u200B', message.author.avatarURL)
         );
