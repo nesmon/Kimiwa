@@ -279,6 +279,7 @@ class kimiwaHelper {
             'bpm': beatmap[0].bpm,
             'creator_id': beatmap[0].creator_id,
             'mode': Number(beatmap[0].mode),
+            'difficulty_rating': beatmap[0].difficultyrating,
             'cs': beatmap[0].diff_size,
             'od': beatmap[0].diff_overall,
             'ar': beatmap[0].diff_approach,
