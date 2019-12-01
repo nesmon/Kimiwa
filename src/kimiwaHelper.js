@@ -297,7 +297,7 @@ class kimiwaHelper {
         }
 
         try {
-            this.preparedQuery(kimiwaCore.db, 'INSERTE INTO beatmaps set ?', beatmapData);
+            this.preparedQuery(kimiwaCore.db, 'INSERT INTO beatmaps set ?', beatmapData);
             return console.log('nice')
         }catch(e){
             return console.log(e)
