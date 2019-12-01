@@ -296,7 +296,7 @@ class kimiwaHelper {
 
         const existingBeatmap = await this.preparedQuery(kimiwaCore.db, 'SELECT * FROM beatmaps WHERE beatmap_id = ?', beatmap[0].beatmap_id);
 
-        if (existingBeatmap > 0) {
+        if (existingBeatmap.length > 0) {
             return existingBeatmap[0];
         }
 
