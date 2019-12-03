@@ -43,7 +43,9 @@ class Osu extends Command {
             return kimiwaHelper.flashMessage(message, 'No user found', 'Sorry but I do not find anyone in osu!', '#f463a5', 10000);
         }
 
-        const getRangeOsuUser = await kimiwaHelper.getRangeOsuUser(osuUser, kimiwa, mode);
+        let getBest = await kimiwa.osu.user.getBest(osuUser.user_id, this.osuGetMode(mode), 100, 'id');
+
+        const getRangeOsuUser = await kimiwaHelper.getRangeOsuUser(getBest, kimiwa, mode);
 
         let country = osuUser.country.toLowerCase();
         message.channel.createEmbed(new kimiwaHelper.Embed()
@@ -63,8 +65,7 @@ class Osu extends Command {
                 `Global PP : ${getRangeOsuUser[0].toFixed(2)}\n` +
                 `Range PP in game : ${getRangeOsuUser[1].toFixed(2)}\n` +
                 `Stars range : ${getRangeOsuUser[2].toFixed(2)}\n` +
-                `Range max combo : ${getRangeOsuUser[3].toFixed(0)}\n` +
-                `Range map time : ${getRangeOsuUser[4].toFixed(0)}\n`
+                `Range max combo : ${getRangeOsuUser[3].toFixed(0)}\n`
             ])
         );
     }
