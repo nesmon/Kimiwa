@@ -140,6 +140,7 @@ class kimiwaHelper {
             let beatmap = new ojsama.parser();
             beatmap.feed(beatmapData);
             let parsebeatmap = beatmap.map;
+            console.log(parsebeatmap);
 
             let beatmapStars = new this.ojsama.diff().calc({
                 map: parsebeatmap,
