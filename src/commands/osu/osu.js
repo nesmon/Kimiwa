@@ -43,7 +43,7 @@ class Osu extends Command {
             return kimiwaHelper.flashMessage(message, 'No user found', 'Sorry but I do not find anyone in osu!', '#f463a5', 10000);
         }
 
-        let getBest = await kimiwa.osu.user.getBest(osuUser.user_id, this.osuGetMode(mode), 100, 'id');
+        let getBest = await kimiwa.osu.user.getBest(osuUser.user_id, kimiwaHelper.osuGetMode(mode), 100, 'id');
 
         const getRangeOsuUser = await kimiwaHelper.getRangeOsuUser(getBest, kimiwa, mode);
 
