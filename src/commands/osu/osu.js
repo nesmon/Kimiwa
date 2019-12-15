@@ -47,20 +47,12 @@ class Osu extends Command {
         let getBest = await kimiwa.osu.user.getBest(osuUser.user_id, kimiwaHelper.osuGetMode(mode), 100, 'id');
 
         const getRangeOsuUser = await kimiwaHelper.getRangeOsuUser(getBest, kimiwa, mode);
-        let speed = Number(0);
-        let aim = Number(0);
 
         for (let i = 0; i < getBest.length; i++) {
             let map = await kimiwa.osu.beatmaps.getByBeatmapId(getBest[i].beatmap_id);
 
-            console.log(map[0].diff_speed);
-
-            speed = speed + map[0].diff_speed;
-            aim = aim + map[0].diff_aim;
+            console.log(map)
         }
-
-        console.log("speed " + speed / getBest.length + "\naim " + aim / getBest.length);
-
         
         //let ppUser = ojsama.ppv2({});
 
