@@ -54,7 +54,7 @@ class Osu extends Command {
         let slider = Number(maxcombo * 35 / 100);
         let circle = Number(maxcombo - slider);
 
-        console.log({
+        await console.log({
             aim_stars: Number(2.30),
             speed_stars: Number(1.80),
             max_combo: maxcombo,
