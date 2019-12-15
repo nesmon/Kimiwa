@@ -48,7 +48,7 @@ class Osu extends Command {
 
         const getRangeOsuUser = await kimiwaHelper.getRangeOsuUser(getBest, kimiwa);
 
-        console.log(getRangeOsuUser[5]);
+        console.log(getRangeOsuUser);
 
         let maxcombo = getRangeOsuUser[5] + getRangeOsuUser[6] + getRangeOsuUser[7] + getRangeOsuUser[8];
         let slider = maxcombo * 35 / 100;
@@ -57,7 +57,7 @@ class Osu extends Command {
         await console.log({
             aim_stars: Number(2.30),
             speed_stars: Number(1.80),
-            max_combo: parseInt(maxcombo),
+            max_combo: maxcombo,
             nsliders: slider,
             ncircles: circle,
             nobjects: maxcombo,
