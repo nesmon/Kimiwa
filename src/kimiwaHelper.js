@@ -160,7 +160,8 @@ class kimiwaHelper {
             stars = stars + Number(formattedStars);
 
             combo = combo + Number(getBest[i].maxcombo);
-            c300 = c300 + Number(getBest[i].count100);
+            c300 = c300 + Number(getBest[i].count300);
+            c100 = c100 + Number(getBest[i].count100);
             c50 = c50 + Number(getBest[i].count50);
             cmiss = cmiss + Number(getBest[i].countmiss);
         }
