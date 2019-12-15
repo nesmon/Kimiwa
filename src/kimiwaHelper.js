@@ -125,7 +125,7 @@ class kimiwaHelper {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
 
-    async getRangeOsuUser(osuBest, kimiwa, mode) {
+    async getRangeOsuUser(osuBest, kimiwa) {
         let getBest = osuBest;
         let PP = Number(0);
         let stars = Number(0);

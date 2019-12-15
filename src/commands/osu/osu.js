@@ -46,8 +46,10 @@ class Osu extends Command {
 
         let getBest = await kimiwa.osu.user.getBest(osuUser.user_id, kimiwaHelper.osuGetMode(mode), 100, 'id');
 
-        const getRangeOsuUser = await kimiwaHelper.getRangeOsuUser(getBest, kimiwa, mode);
-        
+        const getRangeOsuUser = await kimiwaHelper.getRangeOsuUser(getBest, kimiwa);
+
+        console.log(getRangeOsuUser);
+
         let maxcombo = Number(getRangeOsuUser[5] + getRangeOsuUser[6] + getRangeOsuUser[7] + getRangeOsuUser[8]);
         let slider = Number(maxcombo * 35 / 100);
         let circle = Number(maxcombo - slider);
