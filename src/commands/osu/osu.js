@@ -53,6 +53,8 @@ class Osu extends Command {
         for (let i = 0; i < getBest.length; i++) {
             let map = await kimiwa.osu.beatmaps.getByBeatmapId(getBest[i].beatmap_id);
 
+            console.log(map[0].diff_speed);
+
             speed = speed + map[0].diff_speed;
             aim = aim + map[0].diff_aim;
         }
