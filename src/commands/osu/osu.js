@@ -95,12 +95,4 @@ class Osu extends Command {
     }
 }
 
-// Info I want :
-// Range pp *
-// Global pp in best 100 *
-// Range stars *
-// Percentage mods played
-// Range of combo *
-// Get all 300/100/50/miss on global
-
 module.exports = Osu;
