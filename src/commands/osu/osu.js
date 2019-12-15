@@ -51,6 +51,7 @@ class Osu extends Command {
         console.log(getRangeOsuUser);
 
         let maxcombo = getRangeOsuUser[5] + getRangeOsuUser[6] + getRangeOsuUser[7] + getRangeOsuUser[8];
+        console.log(maxcombo);
         let slider = Number(maxcombo * 35 / 100);
         let circle = Number(maxcombo - slider);
 
