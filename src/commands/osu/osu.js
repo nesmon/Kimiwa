@@ -1,5 +1,6 @@
 const Command = require("../../base/Command.js");
 const kimiwaHelper = require('../../kimiwaHelper');
+const ojsama = require('ojsama');
 
 class Osu extends Command {
     constructor(client) {
@@ -46,6 +47,10 @@ class Osu extends Command {
         let getBest = await kimiwa.osu.user.getBest(osuUser.user_id, kimiwaHelper.osuGetMode(mode), 100, 'id');
 
         const getRangeOsuUser = await kimiwaHelper.getRangeOsuUser(getBest, kimiwa, mode);
+
+        console.log(await kimiwa.osu.beatmaps.getByBeatmapId(1786960));
+        
+        //let ppUser = ojsama.ppv2({});
 
         let country = osuUser.country.toLowerCase();
         message.channel.createEmbed(new kimiwaHelper.Embed()
