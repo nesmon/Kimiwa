@@ -48,17 +48,29 @@ class Osu extends Command {
 
         const getRangeOsuUser = await kimiwaHelper.getRangeOsuUser(getBest, kimiwa, mode);
         
-        let maxcombo = getRangeOsuUser[5] + getRangeOsuUser[6] + getRangeOsuUser[7] + getRangeOsuUser[8];
-        let slider = maxcombo * 35 / 100;
-        let circle = maxcombo - slider;
+        let maxcombo = Number(getRangeOsuUser[5] + getRangeOsuUser[6] + getRangeOsuUser[7] + getRangeOsuUser[8]);
+        let slider = Number(maxcombo * 35 / 100);
+        let circle = Number(maxcombo - slider);
 
-        let ppUser = await ojsama.ppv2({
+        console.log({
             aim_stars: Number(2.30),
             speed_stars: Number(1.80),
             max_combo: maxcombo,
-            nsliders: Number(slider),
-            ncircles: Number(circle),
-            nobjects: Number(maxcombo),
+            nsliders: slider,
+            ncircles: circle,
+            nobjects: maxcombo,
+            base_ar: Number(8.5),
+            base_od: Number(8.5),
+            nmiss: Number(getRangeOsuUser[8])
+        });
+
+        let ppUser = ojsama.ppv2({
+            aim_stars: Number(2.30),
+            speed_stars: Number(1.80),
+            max_combo: maxcombo,
+            nsliders: slider,
+            ncircles: circle,
+            nobjects: maxcombo,
             base_ar: Number(8.5),
             base_od: Number(8.5),
             nmiss: Number(getRangeOsuUser[8])
