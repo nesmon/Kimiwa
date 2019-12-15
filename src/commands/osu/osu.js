@@ -66,8 +66,7 @@ class Osu extends Command {
             base_od: Number(8.5),
             n300: getRangeOsuUser[4],
             n100: getRangeOsuUser[5],
-            n50:getRangeOsuUser[6],
-            nmiss: Number(getRangeOsuUser[7])
+            n50:getRangeOsuUser[6]
         });
 
         console.log(ppUser);
