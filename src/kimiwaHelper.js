@@ -130,11 +130,13 @@ class kimiwaHelper {
         let PP = Number(0);
         let stars = Number(0);
         let combo = Number(0);
-        let mapTime = Number(0);
+        let c300 = Number(0);
+        let c100 = Number(0);
+        let c50 = Number(0);
+        let cmiss = Number(0);
         let range = [];
 
         for (let i = 0; i < getBest.length; i++) {
-            let getBeatmap = this.getOsuBeatmapData(kimiwa, getBest[i].beatmap_id);
             let beatmapData = await this.getOsuBeatmapCache(getBest[i].beatmap_id);
 
             let beatmap = new ojsama.parser();
@@ -158,13 +160,20 @@ class kimiwaHelper {
             stars = stars + Number(formattedStars);
 
             combo = combo + Number(getBest[i].maxcombo);
+            c300 = c300 + getBest[i].count300;
+            c100 = c100 + getBest[i].count100;
+            c50 = c50 + getBest[i].count50;
+            cmiss = cmiss + getBest[i].countmiss;
         }
 
         range.push(PP);
         range.push(PP / getBest.length);
         range.push(stars / getBest.length);
         range.push(combo / getBest.length);
-        //range.push(this.secToMin(mapTime / getBest.length));
+        range.push(c300);
+        range.push(c100);
+        range.push(c50);
+        range.push(cmiss);
 
         return range;
     }

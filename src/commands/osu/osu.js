@@ -47,14 +47,13 @@ class Osu extends Command {
         let getBest = await kimiwa.osu.user.getBest(osuUser.user_id, kimiwaHelper.osuGetMode(mode), 100, 'id');
 
         const getRangeOsuUser = await kimiwaHelper.getRangeOsuUser(getBest, kimiwa, mode);
-
-        for (let i = 0; i < getBest.length; i++) {
-            let map = await kimiwa.osu.beatmaps.getByBeatmapId(getBest[i].beatmap_id);
-
-            console.log(map)
-        }
         
-        //let ppUser = ojsama.ppv2({});
+        let maxcombo = getRangeOsuUser[5] + getRangeOsuUser[6] + getRangeOsuUser[7] + getRangeOsuUser[8];
+        let slider = maxcombo * 35 / 100;
+        let circle = maxcombo - slider;
+
+        let ppUser = ojsama.ppv2({aim_stars: Number(2.30), speed_stars: Number(1.80), max_combo: maxcombo, nsliders: slider, ncircles: circle, nobjects: maxcombo, base_ar: Number(8.5), base_od: Number(8.5), nmiss: getRangeOsuUser[8]});
+        console.log(ppUser);
 
         let country = osuUser.country.toLowerCase();
         message.channel.createEmbed(new kimiwaHelper.Embed()
