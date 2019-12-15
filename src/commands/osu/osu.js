@@ -58,7 +58,7 @@ class Osu extends Command {
             aim_stars: Number(2.30),
             speed_stars: Number(1.80),
             max_combo: Number(maxcombo),
-            combo: getRangeOsuUser[3].toFixed(0) * 4,
+            combo: getRangeOsuUser[3].toFixed(0) * 2,
             nsliders: slider,
             ncircles: circle,
             nobjects: maxcombo,
