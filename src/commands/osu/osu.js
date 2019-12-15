@@ -69,7 +69,7 @@ class Osu extends Command {
         let ppUser = ojsama.ppv2({
             aim_stars: Number(2.30),
             speed_stars: Number(1.80),
-            max_combo: maxcombo,
+            max_combo: Number(maxcombo),
             nsliders: slider,
             ncircles: circle,
             nobjects: maxcombo,
