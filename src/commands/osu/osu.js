@@ -54,18 +54,6 @@ class Osu extends Command {
         let slider = maxcombo * 35 / 100;
         let circle = maxcombo - slider;
 
-        await console.log({
-            aim_stars: Number(2.30),
-            speed_stars: Number(1.80),
-            max_combo: maxcombo,
-            nsliders: slider,
-            ncircles: circle,
-            nobjects: maxcombo,
-            base_ar: Number(8.5),
-            base_od: Number(8.5),
-            nmiss: getRangeOsuUser[7]
-        });
-
         let ppUser = ojsama.ppv2({
             aim_stars: Number(2.30),
             speed_stars: Number(1.80),
@@ -75,7 +63,10 @@ class Osu extends Command {
             nobjects: maxcombo,
             base_ar: Number(8.5),
             base_od: Number(8.5),
-            nmiss: Number(getRangeOsuUser[8])
+            n300: getRangeOsuUser[4],
+            n100: getRangeOsuUser[5],
+            n50:getRangeOsuUser[6],
+            nmiss: Number(getRangeOsuUser[7])
         });
 
         console.log(ppUser);
