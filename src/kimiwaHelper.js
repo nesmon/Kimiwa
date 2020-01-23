@@ -16,14 +16,14 @@ class kimiwaHelper {
     flags(value, key, limiter = "--") {
         let str = value;
 
-        if (str.indexOf(key) === -1) return false;
+        if (str.indexOf(key) === -1) return Boolean(false);
 
         str = str.split(key + ' ')[1];
-        if (str === void 0) return false;
+        if (str === void 0) return Boolean(false);
 
         str = str.split(limiter)[0];
 
-        if (str.trimEnd() === '') return false;
+        if (str.trimEnd() === '') return Boolean(false);
 
         return str.trimEnd();
     }
@@ -123,59 +123,6 @@ class kimiwaHelper {
 
     betterNumber(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    }
-
-    async getRangeOsuUser(osuBest, kimiwa) {
-        let getBest = osuBest;
-        let PP = Number(0);
-        let stars = Number(0);
-        let combo = Number(0);
-        let c300 = Number(0);
-        let c100 = Number(0);
-        let c50 = Number(0);
-        let cmiss = Number(0);
-        let range = [];
-
-        for (let i = 0; i < getBest.length; i++) {
-            let beatmapData = await this.getOsuBeatmapCache(getBest[i].beatmap_id);
-
-            let beatmap = new ojsama.parser();
-            beatmap.feed(beatmapData);
-            let parsebeatmap = beatmap.map;
-
-            let beatmapStars = new this.ojsama.diff().calc({
-                map: parsebeatmap,
-                mods: parseInt(getBest[i].enabled_mods)
-            });
-
-            let maxcomob = parseInt(getBest[i].maxcombo);
-            let miss = parseInt(getBest[i].countmiss);
-            let acc = this.osuGetAcu(getBest[i].count300, getBest[i].count100, getBest[i].count50, getBest[i].countmiss);
-            let beatmapPP = ojsama.ppv2({ stars: beatmapStars, combo: maxcomob, nmiss: miss, acc_percent: acc });
-
-            let PPmin = beatmapPP.toString().split(" ", 1)[0];
-            PP = PP + Number(PPmin);
-
-            let formattedStars = beatmapStars.toString().split(" ", 1)[0];
-            stars = stars + Number(formattedStars);
-
-            combo = combo + Number(getBest[i].maxcombo);
-            c300 = c300 + Number(getBest[i].count300);
-            c100 = c100 + Number(getBest[i].count100);
-            c50 = c50 + Number(getBest[i].count50);
-            cmiss = cmiss + Number(getBest[i].countmiss);
-        }
-
-        range.push(PP);
-        range.push(PP / getBest.length);
-        range.push(stars / getBest.length);
-        range.push(combo / getBest.length);
-        range.push(c300);
-        range.push(c100);
-        range.push(c50);
-        range.push(cmiss);
-
-        return range;
     }
 
 
@@ -282,37 +229,36 @@ class kimiwaHelper {
     }
 
     async getOsuBeatmapData(kimiwaCore, beatmapID) {
-        let beatmap = await kimiwaCore.osu.beatmaps.getByBeatmapId(beatmapID);
-        let beatmapData = {
-            'beatmap_id': Number(beatmap[0].beatmap_id),
-            'beatmapset_id': Number(beatmap[0].beatmapset_id),
-            'approved': Number(beatmap[0].approved),
-            'bpm': beatmap[0].bpm,
-            'creator_id': beatmap[0].creator_id,
-            'mode': Number(beatmap[0].mode),
-            'difficulty_rating': beatmap[0].difficultyrating,
-            'cs': beatmap[0].diff_size,
-            'od': beatmap[0].diff_overall,
-            'ar': beatmap[0].diff_approach,
-            'hp': beatmap[0].diff_drain,
-            'max_combo': beatmap[0].max_combo,
-            'maptime': beatmap[0].total_length,
-            'title': beatmap[0].title,
-            'version': beatmap[0].version,
-            'artist': beatmap[0].artist
-        };
+        const existingBeatmap = await this.preparedQuery(kimiwaCore.db, 'SELECT * FROM beatmaps WHERE beatmap_id = ?', beatmapID);
+        if (!existingBeatmap) {
+            let beatmap = await kimiwaCore.osu.beatmaps.getByBeatmapId(beatmapID);
+            let beatmapData = {
+                'beatmap_id': Number(beatmap[0].beatmap_id),
+                'beatmapset_id': Number(beatmap[0].beatmapset_id),
+                'approved': Number(beatmap[0].approved),
+                'bpm': beatmap[0].bpm,
+                'creator_id': beatmap[0].creator_id,
+                'mode': Number(beatmap[0].mode),
+                'difficulty_rating': beatmap[0].difficultyrating,
+                'cs': beatmap[0].diff_size,
+                'od': beatmap[0].diff_overall,
+                'ar': beatmap[0].diff_approach,
+                'hp': beatmap[0].diff_drain,
+                'max_combo': beatmap[0].max_combo,
+                'maptime': beatmap[0].total_length,
+                'title': beatmap[0].title,
+                'version': beatmap[0].version,
+                'artist': beatmap[0].artist
+            };
 
-        const existingBeatmap = await this.preparedQuery(kimiwaCore.db, 'SELECT * FROM beatmaps WHERE beatmap_id = ?', beatmap[0].beatmap_id);
-
-        if (existingBeatmap.length > 0) {
+            try {
+                this.preparedQuery(kimiwaCore.db, 'INSERT INTO beatmaps set ?', beatmapData);
+                return beatmapData
+            }catch(e){
+                return false;
+            }
+        } else {
             return existingBeatmap[0];
-        }
-
-        try {
-            this.preparedQuery(kimiwaCore.db, 'INSERT INTO beatmaps set ?', beatmapData);
-            return beatmapData
-        }catch(e){
-            return false;
         }
     }
 

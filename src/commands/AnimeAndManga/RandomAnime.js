@@ -17,7 +17,7 @@ class RandomAnime extends Command {
 
         try {
             const selectAnime = await kimiwaHelper.query(kimiwa.db, 'SELECT * FROM anime ORDER BY RAND() LIMIT 1');
-            const  animeSearch = await kitsu.searchAnime(selectAnime[0].title.toLowerCase(), 0);
+            const animeSearch = await kitsu.searchAnime(selectAnime[0].title.toLowerCase(), 0);
 
             message.channel.createEmbed(new kimiwaHelper.Embed()
                 .setColor('BLUE')
