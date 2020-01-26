@@ -32,9 +32,6 @@ class Osu extends Command {
 
         if (name === false) {
             if (name === false && mode !== false) {
-                const osuName = await kimiwaHelper.preparedQuery(kimiwa.db, 'SELECT * FROM profile WHERE user_ID = ?', message.author.id);
-                name = osuName[0].osu_username;
-            }else {
                 name = args.splice(0).join(' ');
 
                 if (name === '') {
@@ -45,7 +42,6 @@ class Osu extends Command {
                     }
                 }
             }
-
         }
 
         let osuUser = await kimiwa.osu.user.get(name, kimiwaHelper.osuGetMode(mode));
@@ -55,10 +51,7 @@ class Osu extends Command {
         }
 
         let getBest = await kimiwa.osu.user.getBest(osuUser.user_id, kimiwaHelper.osuGetMode(mode), 100, 'id');
-
         const getRangeOsuUser = await this.getRangeOsuUser(getBest, kimiwa);
-
-        console.log(getRangeOsuUser);
 
         let maxcombo = getRangeOsuUser[4] + getRangeOsuUser[5] + getRangeOsuUser[6] + getRangeOsuUser[7];
         let slider = maxcombo * 35 / 100;
@@ -98,9 +91,10 @@ class Osu extends Command {
                 `Global PP : ${getRangeOsuUser[0].toFixed(2)}\n` +
                 `Range PP in game : ${getRangeOsuUser[1].toFixed(2)}\n` +
                 `Stars range : ${getRangeOsuUser[2].toFixed(2)}\n` +
-                `Range max combo : ${getRangeOsuUser[3].toFixed(0)}\n`
+                `Range max combo : ${getRangeOsuUser[3].toFixed(0)}\n` +
+                `Range time : ${getRangeOsuUser[8]}`
             ])
-            .addField('Your own PP account :', ppUser)
+            .addField('PP for this account :', ppUser)
         );
     }
 
@@ -127,7 +121,7 @@ class Osu extends Command {
 
             let beatmapStars = new ojsama.diff().calc({
                 map: parsebeatmap,
-                mods: parseInt(getBest.enabled_mods)
+                mods: parseInt(getBest[i].enabled_mods)
             });
 
             let maxcomob = parseInt(getBest[i].maxcombo);
@@ -141,16 +135,17 @@ class Osu extends Command {
             let formattedStars = beatmapStars.toString().split(" ", 1)[0];
             stars = stars + Number(formattedStars);
 
-            console.log(getBeatmap)
-            mapTime = mapTime + Number(getBeatmap.maptime);
             combo = combo + Number(getBest[i].maxcombo);
             c300 = c300 + Number(getBest[i].count300);
             c100 = c100 + Number(getBest[i].count100);
             c50 = c50 + Number(getBest[i].count50);
             cmiss = cmiss + Number(getBest[i].countmiss);
-
+            mapTime = mapTime + Number(getBeatmap.maptime);
         }
-        console.log(kimiwaHelper.normalizeSecToMin(mapTime / getBest.length));
+
+        mapTime = mapTime / getBest.length;
+        mapTime = mapTime.toFixed(0);
+
         range.push(PP);
         range.push(PP / getBest.length);
         range.push(stars / getBest.length);
@@ -159,7 +154,7 @@ class Osu extends Command {
         range.push(c100);
         range.push(c50);
         range.push(cmiss);
-        range.push(kimiwaHelper.normalizeSecToMin(mapTime / getBest.length));
+        range.push(kimiwaHelper.normalizeSecToMin(mapTime));
 
 
         return range;

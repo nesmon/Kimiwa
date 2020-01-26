@@ -230,7 +230,7 @@ class kimiwaHelper {
 
     async getOsuBeatmapData(kimiwaCore, beatmapID) {
         const existingBeatmap = await this.preparedQuery(kimiwaCore.db, 'SELECT * FROM beatmaps WHERE beatmap_id = ?', beatmapID);
-        if (!existingBeatmap) {
+        if (existingBeatmap.length === 0) {
             let beatmap = await kimiwaCore.osu.beatmaps.getByBeatmapId(beatmapID);
             let beatmapData = {
                 'beatmap_id': Number(beatmap[0].beatmap_id),
@@ -251,8 +251,9 @@ class kimiwaHelper {
                 'artist': beatmap[0].artist
             };
 
+
             try {
-                this.preparedQuery(kimiwaCore.db, 'INSERT INTO beatmaps set ?', beatmapData);
+                await this.preparedQuery(kimiwaCore.db, 'INSERT INTO beatmaps set ?', beatmapData);
                 return beatmapData
             }catch(e){
                 return false;
