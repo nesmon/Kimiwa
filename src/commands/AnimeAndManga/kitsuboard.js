@@ -14,10 +14,10 @@ class Kitsuboard extends Command {
 
   async run(message, args, kimiwa) { // eslint-disable-line no-unused-vars
 
-    const getQuery = await kimiwaHelper.query(this.client.db, 'SELECT * FROM anime ORDER BY search_time DESC LIMIT 10')
+    const getQuery = await kimiwaHelper.query(this.client.db, 'SELECT * FROM anime ORDER BY search_time DESC LIMIT 5')
 
     const e = await new kimiwaHelper.Embed()
-      .setDescription(`Our top 10 of most searched anime`)
+      .setDescription(`Our top 5 of most searched anime`)
       .setColor(kimiwaHelper.getRandomColor())
 
     for (const data of await getQuery) {

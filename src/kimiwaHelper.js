@@ -251,7 +251,6 @@ class kimiwaHelper {
                 'artist': beatmap[0].artist
             };
 
-
             try {
                 await this.preparedQuery(kimiwaCore.db, 'INSERT INTO beatmaps set ?', beatmapData);
                 return beatmapData
