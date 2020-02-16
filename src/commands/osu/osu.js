@@ -32,7 +32,7 @@ class Osu extends Command {
 
         if (name === false) {
             if (name === false && mode !== false) {
-                name = args.splice(0).join(' ');
+                name = args.splice(" --mode ")[0];
 
                 if (name === '') {
                     const osuName = await kimiwaHelper.preparedQuery(kimiwa.db, 'SELECT * FROM profile WHERE user_ID = ?', message.author.id);
@@ -131,8 +131,11 @@ class Osu extends Command {
         let range = [];
 
         for (let i = 0; i < getBest.length; i++) {
+            console.log(1);
             let beatmapData = await kimiwaHelper.getOsuBeatmapCache(getBest[i].beatmap_id);
+            console.log(2);
             let getBeatmap = await kimiwaHelper.getOsuBeatmapData(kimiwa, getBest[i].beatmap_id);
+            console.log(3);
 
             let beatmap = new ojsama.parser();
             beatmap.feed(beatmapData);
@@ -165,21 +168,10 @@ class Osu extends Command {
         mapTime = mapTime / getBest.length;
         mapTime = mapTime.toFixed(0);
 
-        range.push(PP);
-        range.push(PP / getBest.length);
-        range.push(stars / getBest.length);
-        range.push(combo / getBest.length);
-        range.push(c300);
-        range.push(c100);
-        range.push(c50);
-        range.push(cmiss);
-        range.push(kimiwaHelper.normalizeSecToMin(mapTime));
-
+        range.push(PP, PP / getBest.length, stars / getBest.length, combo / getBest.length, c300, c100, c50, cmiss, kimiwaHelper.normalizeSecToMin(mapTime));
 
         return range;
     }
 }
-
-
 
 module.exports = Osu;
