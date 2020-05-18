@@ -15,10 +15,10 @@ class kimiwaHelper {
 
     flags(value, key, limiter = "--") {
         let str = value;
-
         if (str.indexOf(key) === -1) return Boolean(false);
 
         str = str.split(key + ' ')[1];
+
         if (str === void 0) return Boolean(false);
 
         str = str.split(limiter)[0];
@@ -244,19 +244,16 @@ class kimiwaHelper {
                 'od': beatmap[0].diff_overall,
                 'ar': beatmap[0].diff_approach,
                 'hp': beatmap[0].diff_drain,
-                'max_combo': beatmap[0].max_combo,
+                'max_combo': beatmap[0].max_combo || 'none',
                 'maptime': beatmap[0].total_length,
                 'title': beatmap[0].title,
                 'version': beatmap[0].version,
                 'artist': beatmap[0].artist
             };
 
-            try {
                 await this.preparedQuery(kimiwaCore.db, 'INSERT INTO beatmaps set ?', beatmapData);
                 return beatmapData
-            }catch(e){
-                return false;
-            }
+
         } else {
             return existingBeatmap[0];
         }

@@ -6,15 +6,14 @@ class OsuBest extends Command {
         super(client, {
             name: "osubest",
             category: "Osu",
-            description: "get best play of osu user",
+            description: "get best play of osu user (only std)",
             usage: "osubest [name of user]",
-            aliases: ["osubest", "Osubest", "osuBest", "ob"]
+            aliases: ["ob"]
         });
     }
 
     async run(message, args, kimiwa, level, IA) { // eslint-disable-line no-unused-vars
         let name;
-        let mode;
 
         if (IA === true) {
             name = args[0];
@@ -23,16 +22,17 @@ class OsuBest extends Command {
         }
 
         if (name === false) {
-            name = args.splice(0).join(' ');
-            if (name === '') {
+            name = message.content.split(" --mode ");
+            name = name[0].split(`${kimiwa.prefix}osubest`);
+            name = name[1].trim();
+            if (name === "") {
                 const osuName = await kimiwaHelper.preparedQuery(kimiwa.db, 'SELECT * FROM profile WHERE user_ID = ?', message.author.id);
                 name = osuName[0].osu_username;
-                if (name === '' || name === null) {
+                if (name === null) {
                     return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks to asigne name to your command with --name [name of command] or just put your name if you search in std`));
                 }
             }
         }
-
         
         let embedBest = [];
         let getUserBestScore = await kimiwa.osu.user.getBest(name, 0, 5);
