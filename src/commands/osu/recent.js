@@ -15,24 +15,55 @@ class Recent extends Command {
 
     async run(message, args, kimiwa, level, IA) { // eslint-disable-line no-unused-vars
         let name;
+        let mode;
 
         if (IA === true) {
             name = args[0];
+            mode = args[1] || 'std';
         } else {
             name = kimiwaHelper.flags(message.content, "--name");
-
+            mode = kimiwaHelper.flags(message.content, "--mode");
+            if (mode !== Boolean(false) && mode.split(" ").length > 0) {
+                if (mode.split(" ")[0].toLowerCase() === "std" || mode.split(" ")[0].toLowerCase() === "standard"){
+                    mode = "std"
+                } else if (mode.split(" ")[0].toLowerCase() === "ctb" || mode.split(" ")[0].toLowerCase() === "catch") {
+                    mode = "ctb"
+                } else if (mode.split(" ")[0].toLowerCase() === "mania") {
+                    mode = "mania"
+                } else if (mode.split(" ")[0].toLowerCase() === "taiko") {
+                    mode = "taiko"
+                } else {
+                    return kimiwaHelper.flashMessage(message, "Error", "Sorry but this mode dosn't exist please try again.\nMode allowed : std, mania, ctb, taiko", "RED", 10000)
+                }
+            } else if (mode === false) {
+                mode = 'std';
+            }
         }
 
         if (name === false) {
-            name = args.splice(0).join(' ');
-            if (name === '') {
+            name = message.content.split(" --mode ");
+            name = name[0].split(`${kimiwa.prefix}${"recent" || "rs"}`);
+            name = name[1].trim();
+            if (name === "") {
                 const osuName = await kimiwaHelper.preparedQuery(kimiwa.db, 'SELECT * FROM profile WHERE user_ID = ?', message.author.id);
                 name = osuName[0].osu_username;
-                if (name === '' || name === null) {
+                if (name === null) {
                     return message.channel.createEmbed(new kimiwaHelper.Embed().setColor('RED').setAuthor("ERROR", message.author.avatarURL).setDescription(`Thanks to asigne name to your command with --name [name of command] or just put your name if you search in std`));
                 }
             }
         }
+
+        
+        // HERE NEED FULL REWORK
+        // detect mode
+        // if mode !== std
+        //     make a version with support of ctb, mania and taiko (Find a way for get pp if map pass not possible now to get if don't pass)
+        //     make rescent request
+        //     parse data
+        //     if possible find way for get stars rating with mods
+        //     show data
+        // else
+        //      use this code (with some update)
 
         let getRecent = await kimiwaHelper.osuAPI(kimiwa, 'getRecent', name, 'std', 1);
         let getBeatmap = await kimiwaHelper.osuAPI(kimiwa, 'getBeatpmapId', getRecent[0].beatmap_id);

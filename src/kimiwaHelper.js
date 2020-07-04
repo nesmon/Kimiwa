@@ -259,23 +259,6 @@ class kimiwaHelper {
         }
     }
 
-    async osuAPI (kimiwaCore, type, id, mode = null, limit = 5, lookup = undefined) {
-        mode = this.osuGetModeNumberByName(mode);
-        switch (type) {
-            case 'getUser' :
-                break;
-            case 'getBest':
-                // Probably use HTTP (native module of node.js
-                break;
-            case 'getBeatpmapId':
-                return kimiwaCore.osu.beatmaps.getByBeatmapId(id);
-            case 'getRecent':
-                return kimiwaCore.osu.user.getRecent(id, mode, limit, lookup);
-            default :
-                return console.log('Thanks to give good option.');
-        }
-    }
-
     query(database, userQuery) {
         return new Promise((resolve, reject) => {
             database.query(userQuery, (error, results) => {
