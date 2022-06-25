@@ -13,7 +13,7 @@
     "klaw": "^3.0.0",
     "moment": "^2.24.0",
     "mysql": "^2.17.1",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "node-kitsu": "^1.1.1",
     "nodesu": "^0.7.1",
     "ojsama": "^1.2.1"
